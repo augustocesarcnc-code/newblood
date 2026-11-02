@@ -5,7 +5,24 @@ combate em tempo real e multiplayer autoritativo. Esta versão evolui o projeto
 Bloodmoon com a [especificação atual](docs/ESPECIFICACAO-ECLIPSE.md): **nível máximo 400,
 transformação no nível 10 e três personagens por conta**.
 
-**[Baixar o projeto jogável (ZIP)](https://github.com/augustocesarcnc-code/bloodmoon/blob/visual/eclipse-redesign/dist/Eclipse-Blood-Moon.zip)**
+**[Baixar o projeto jogável (ZIP)](https://github.com/augustocesarcnc-code/newblood/raw/refs/heads/main/dist/Eclipse-Blood-Moon.zip)**
+
+## Vertical slice atual: Vila + Floresta
+
+A geração de novas artes está suspensa. Esta etapa reutiliza os atlas existentes e
+concentra os encontros da Vila de Eclipse e da Floresta Amaldiçoada em Lobo Sombrio,
+Morcego Sangrento e Esqueleto. Outras regiões anteriores são preservadas, sem expansão.
+
+[Auditoria de assets](docs/ASSET_STATUS.md) ·
+[Capturas reais e validação](docs/previews/vertical-slice/README.md).
+
+O fluxo foi exercitado no Chromium: oito direções, corrida/stamina, NPC/compra,
+missão/XP/nível, combate/skill, drop/coleta, inventário/equipamento visível,
+portais nos dois sentidos, mapa/minimapa e relogin. Corrigida a colisão das cercas;
+acrescentados comparação de equipamentos, mapa ampliado, tracker de missão ativa,
+ambiente sonoro sintetizado por região e transparência de copas que ocultam o jogador.
+Nenhuma nova sprite foi gerada. Os testes visuais usam fixture DEV isolada, sem
+alterar saves normais. Arte final e trilha gravada ainda precisam de avaliação.
 
 ## Arte e interface integradas
 

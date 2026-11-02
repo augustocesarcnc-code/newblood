@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+  engineType = "client"
+}
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+model Account {
+  id            String @id
+  email         String @unique
+  password      Json
+  characterKeys Json
+  selectedKey   String?
+  role          String @default("player")
+  createdAt     BigInt
+  characters    Character[]
+}
+model Character {
+  id        String @id
+  key       String @unique
+  accountId String?
+  account   Account? @relation(fields: [accountId], references: [id], onDelete: SetNull)
+  name      String
+  kind      String
+  level     Int
+  xp        Int
+  gold      Int
+  map       String
+  x         Int
+  y         Int
+  state     Json
+  items     InventoryItem[]
+  @@index([map])
+}
+model InventoryItem {
+  id          String @id
+  characterId String
+  character   Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  slot        Int
+  base        String
+  rarity      String
+  quantity    Int @default(1)
+  upgrade     Int @default(0)
+  state       Json
+  @@index([characterId])
+}
+model Clan {
+  id       String @id
+  name     String
+  tag      String @unique
+  leaderId String
+  members  Json
+  state    Json
+}
+model MarketListing {
+  id       String @id
+  sellerId String
+  price    Int
+  item     Json
+  state    Json
+}
+model WorldRecord {
+  key     String @id
+  payload Json
+}

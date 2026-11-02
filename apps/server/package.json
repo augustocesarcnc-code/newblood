@@ -1,0 +1,1 @@
+{"name":"@eclipse/server","private":true,"type":"module","scripts":{"dev":"node src/main.ts","start":"node src/main.ts"}}

@@ -1,0 +1,27 @@
+{
+  "checks": [
+    "8 directions: actual keyboard movement and authoritative facing",
+    "run consumes stamina",
+    "collision keyboard: house",
+    "collision keyboard: tree",
+    "collision keyboard: wall",
+    "collision keyboard: water",
+    "collision keyboard: rock",
+    "collision keyboard: fence",
+    "NPC dialogue, accept/complete/claim quest; real XP levels hunter from 1 to 2",
+    "merchant UI purchase debits 80 gold and adds armor",
+    "40-slot inventory, real drag-to-equip, comparison, unequip/re-equip and public appearance",
+    "stack splitting/merging conserves quantity",
+    "walk through portal Village -> Forest",
+    "walk through portal Forest -> Village",
+    "wolf: real attack/death/XP/drop/pickup",
+    "bat: real attack/death/XP/drop/pickup",
+    "skeleton: real attack/death/XP/drop/pickup",
+    "audio opt-in and region ambience activated",
+    "reload/relogin preserves level, gold and equipment",
+    "no JavaScript errors or missing asset requests"
+  ],
+  "errors": [],
+  "missingAssets": [],
+  "fixture": "isolated DEV hunter; admin placement/reset/spawn only, normal gameplay rewards"
+}

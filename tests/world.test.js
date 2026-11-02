@@ -1,0 +1,4 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {create,move,safe,walkable,line,reward,maxHP} from '../mmo/world.js';
+test('movimento valida grade, velocidade, obstáculos e ocupação',()=>{const p=create('Teste','lobisomem');assert.equal(move(p,2,1,1000),false);assert.equal(move(p,1,0,1000),true);assert.equal(move(p,1,0,1100),false);assert.equal(move(p,1,0,1400,()=>true),false);p.x=19;p.y=17;assert.equal(move(p,1,0,1800),false);});
+test('cidade segura e paredes bloqueiam disparos',()=>{assert.ok(safe(9,16));assert.ok(!safe(25,16));assert.ok(!walkable(28,8));assert.equal(line({x:27,y:8},{x:30,y:8}),false);assert.equal(line({x:27,y:9},{x:30,y:9}),true);});
+test('experiência concede nível, vida e poções',()=>{const p=create('Teste','vampiro');p.hp=20;for(let i=0;i<5;i++)reward(p,{xp:12,gold:7});assert.equal(p.level,2);assert.equal(p.xp,25);assert.equal(p.hp,maxHP(p));assert.equal(p.gold,35);assert.equal(p.potions,4);});

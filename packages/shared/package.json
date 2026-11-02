@@ -1,0 +1,1 @@
+{"name":"@eclipse/shared","private":true,"type":"module","exports":{".":"./src/events.js","./types":"./src/types.ts"}}

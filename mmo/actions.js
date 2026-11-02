@@ -1,0 +1,2 @@
+export function weaponAction(p){const base=p.inventory?.find(i=>i.id===p.equipment?.weapon)?.base;return ['besta','arco'].includes(base)?'shoot':base==='cetro'?'cast':'swing';}
+export function markAction(p,state,now,target){if(state==='hit'){p.hitAt=now;return;}p.actionState=state;p.actionAt=now;p.actionDuration=state==='shoot'?600:state==='cast'?650:500;if(target){const x=Math.sign(target.x-p.x),y=Math.sign(target.y-p.y);if(x||y)p.facing=[x,y];}}

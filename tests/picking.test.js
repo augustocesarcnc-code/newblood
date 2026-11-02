@@ -1,0 +1,4 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {pickRenderedUnit} from '../mmo/picking.js';
+test('large character bodies can be selected above their foot tile',()=>{const boss={id:'boss',hp:6000,rect:[100,80,70,180]};assert.equal(pickRenderedUnit([boss],130,100,'self').id,'boss');assert.equal(pickRenderedUnit([boss],90,100,'self'),null);});
+test('overlapping actors select the last Y-sorted visible unit and ignore self/corpses',()=>{const units=[{id:'back',hp:10,rect:[0,0,100,150]},{id:'front',hp:10,rect:[0,50,100,150]},{id:'dead',hp:0,rect:[0,0,100,200]},{id:'self',hp:100,rect:[0,0,100,200]}];assert.equal(pickRenderedUnit(units,30,80,'self').id,'front');assert.equal(pickRenderedUnit(units,30,20,'self').id,'back');});
+test('NPC bodies remain interactive without combat HP',()=>{assert.equal(pickRenderedUnit([{id:'merchant',npc:true,rect:[20,20,30,70]}],30,30,'self').id,'merchant');});

@@ -1,0 +1,11 @@
+CREATE TABLE "Account" ("id" TEXT NOT NULL PRIMARY KEY,"email" TEXT NOT NULL,"password" JSONB NOT NULL,"characterKeys" JSONB NOT NULL,"selectedKey" TEXT,"role" TEXT NOT NULL DEFAULT 'player',"createdAt" BIGINT NOT NULL);
+CREATE UNIQUE INDEX "Account_email_key" ON "Account"("email");
+CREATE TABLE "Character" ("id" TEXT NOT NULL PRIMARY KEY,"key" TEXT NOT NULL,"accountId" TEXT,"name" TEXT NOT NULL,"kind" TEXT NOT NULL,"level" INTEGER NOT NULL,"xp" INTEGER NOT NULL,"gold" INTEGER NOT NULL,"map" TEXT NOT NULL,"x" INTEGER NOT NULL,"y" INTEGER NOT NULL,"state" JSONB NOT NULL,CONSTRAINT "Character_accountId_fkey" FOREIGN KEY ("accountId") REFERENCES "Account"("id") ON DELETE SET NULL ON UPDATE CASCADE);
+CREATE UNIQUE INDEX "Character_key_key" ON "Character"("key");
+CREATE INDEX "Character_map_idx" ON "Character"("map");
+CREATE TABLE "InventoryItem" ("id" TEXT NOT NULL PRIMARY KEY,"characterId" TEXT NOT NULL,"slot" INTEGER NOT NULL,"base" TEXT NOT NULL,"rarity" TEXT NOT NULL,"quantity" INTEGER NOT NULL DEFAULT 1,"upgrade" INTEGER NOT NULL DEFAULT 0,"state" JSONB NOT NULL,CONSTRAINT "InventoryItem_characterId_fkey" FOREIGN KEY ("characterId") REFERENCES "Character"("id") ON DELETE CASCADE ON UPDATE CASCADE);
+CREATE INDEX "InventoryItem_characterId_idx" ON "InventoryItem"("characterId");
+CREATE TABLE "Clan" ("id" TEXT NOT NULL PRIMARY KEY,"name" TEXT NOT NULL,"tag" TEXT NOT NULL,"leaderId" TEXT NOT NULL,"members" JSONB NOT NULL,"state" JSONB NOT NULL);
+CREATE UNIQUE INDEX "Clan_tag_key" ON "Clan"("tag");
+CREATE TABLE "MarketListing" ("id" TEXT NOT NULL PRIMARY KEY,"sellerId" TEXT NOT NULL,"price" INTEGER NOT NULL,"item" JSONB NOT NULL,"state" JSONB NOT NULL);
+CREATE TABLE "WorldRecord" ("key" TEXT NOT NULL PRIMARY KEY,"payload" JSONB NOT NULL);

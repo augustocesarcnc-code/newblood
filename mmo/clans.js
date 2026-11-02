@@ -1,0 +1,16 @@
+export function clanFor(data,p){return Object.values(data.clans||{}).find(c=>c.members.includes(p.id))||null;}
+export function clanView(data,p){const clan=clanFor(data,p);if(!clan)return null;return {...clan,members:clan.members.map(id=>{const player=Object.values(data.players).find(p=>p.id===id);return {id,name:player?.name||'Viajante',kind:player?.kind||'cacador',level:player?.level||1,leader:id===clan.leader,role:id===clan.leader?'Líder':clan.officers?.includes(id)?'Oficial':'Membro'};})};}
+export function createClan(data,p,name,tag,now=Date.now()){
+ if(clanFor(data,p))throw Error('Você já pertence a um clã.');
+ name=String(name||'').trim();tag=String(tag||'').trim().toUpperCase();
+ if(!/^[\p{L}\p{N}][\p{L}\p{N} _-]{2,23}$/u.test(name)||!/^[A-Z0-9]{2,4}$/.test(tag))throw Error('Nome: 3 a 24 caracteres. Sigla: 2 a 4 letras ou números.');
+ if(Object.values(data.clans||{}).some(c=>c.name.toLocaleLowerCase()===name.toLocaleLowerCase()||c.tag===tag))throw Error('Nome ou sigla de clã já em uso.');
+ if(p.level<5||p.gold<150)throw Error('Fundar um clã exige nível 5 e 150 de ouro.');
+ const clan={id:crypto.randomUUID(),name,tag,leader:p.id,officers:[],members:[p.id],createdAt:now};data.clans??={};data.clans[clan.id]=clan;p.gold-=150;return clan;
+}
+export function inviteClan(data,p,q,invites,now){const clan=clanFor(data,p);if(!clan||(clan.leader!==p.id&&!clan.officers?.includes(p.id)))throw Error('Somente líder ou oficial pode convidar.');if(!q||q.id===p.id||clanFor(data,q))throw Error('Jogador indisponível para convite.');if(clan.members.length>=20)throw Error('O clã atingiu 20 membros.');if([...invites.values()].some(i=>i.playerId===q.id&&i.clanId===clan.id&&i.expires>now))throw Error('Esse jogador já tem um convite pendente.');const invitation={id:crypto.randomUUID(),clanId:clan.id,playerId:q.id,expires:now+60000};invites.set(invitation.id,invitation);return invitation;}
+export function acceptClan(data,p,id,invites,now){const invitation=invites.get(id),clan=data.clans?.[invitation?.clanId];if(!invitation||invitation.playerId!==p.id||invitation.expires<=now||!clan)throw Error('Convite inválido ou expirado.');if(clanFor(data,p))throw Error('Você já pertence a um clã.');if(clan.members.length>=20)throw Error('O clã está cheio.');clan.members.push(p.id);for(const [key,value]of invites)if(value.playerId===p.id)invites.delete(key);return clan;}
+export function leaveClan(data,p){const clan=clanFor(data,p);if(!clan)throw Error('Você não pertence a um clã.');clan.members=clan.members.filter(id=>id!==p.id);clan.officers=(clan.officers||[]).filter(id=>id!==p.id);if(!clan.members.length)delete data.clans[clan.id];else if(clan.leader===p.id)clan.leader=clan.members[0];}
+export function kickClan(data,p,id){const clan=clanFor(data,p);if(!clan||clan.leader!==p.id||id===p.id||!clan.members.includes(id))throw Error('Não foi possível remover esse membro.');clan.members=clan.members.filter(value=>value!==id);}
+
+export function promoteClan(data,p,id,officer){const clan=clanFor(data,p);if(!clan||clan.leader!==p.id||id===p.id||!clan.members.includes(id)||typeof officer!=='boolean')throw Error('Somente o líder pode promover membros.');clan.officers=(clan.officers||[]).filter(value=>value!==id);if(officer)clan.officers.push(id);}

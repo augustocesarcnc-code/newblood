@@ -1,0 +1,138 @@
+import {environmentAt} from './environment.js';
+import {mapObjects} from './map-data.js';
+import {updateMonster} from './monster-ai.js';
+import {isAdmin,runAdmin} from './admin.js';
+import {partyFor,partyView,inviteParty,acceptParty,leaveParty,kickParty,experienceRecipients} from './parties.js';
+import {createChatMessage,visibleMessages} from './chat.js';
+import {questDefinitions,questView,acceptQuest,questEvent,claimQuest} from './quests.js';
+import {derivedStats} from './attributes.js';
+import {normalizeInventory,consumeItem,splitStack,moveItem,potionCount} from './inventory.js';
+import {spawnLoot,pickupLoot,dropItem} from './ground-loot.js';
+import {openWorldDatabase} from '../apps/server/src/database.ts';
+import {seedDevelopment} from '../apps/server/src/seed.ts';
+import {clanFor,clanView,createClan,inviteClan,acceptClan,leaveClan,kickClan,promoteClan} from './clans.js';
+import {jump} from './movement.js';
+import {weaponAction,markAction} from './actions.js';
+import {castSkill} from './combat-skills.js';
+import {botDefaults,configureBot,stopBot,planBot,combatArmor} from './automation.js';
+import {monsterFor,monsterTypes} from './bestiary.js';
+import {appearanceFor} from './appearance.js';
+import {createAuth} from './auth.js';
+import {MAX_LEVEL,xpToNext} from './progression.js';
+import {npcs,catalog,destinations,npcBuy,npcSell,forge,salvage} from './village.js';
+import {createPayments} from './payments.js';
+import {mkdir,readFile,writeFile,rename} from 'node:fs/promises';
+import {pathToFileURL,fileURLToPath} from 'node:url';
+import {resolve} from 'node:path';
+import {randomBytes} from 'node:crypto';
+import {classes,create,migrate,maps,portals,walkable,safe,distance,maxHP,line,move,reward,lunar,lunarBonus,damage,skills,transform,expireTransform} from './world.js';
+import {describe,equip,equipmentStats,rollLoot,INVENTORY_LIMIT,attackRange} from './items.js';
+import {listItem,buyItem,cancelListing,offer,commitTrade} from './economy.js';
+const dir=process.env.BLOODMOON_DATA_DIR?pathToFileURL(resolve(process.env.BLOODMOON_DATA_DIR)+'/'):new URL('../.data/',import.meta.url);
+const storage=await openWorldDatabase(fileURLToPath(dir));let data=await storage.load();
+for(const p of Object.values(data.players)){migrate(p);normalizeInventory(p);}
+const partyInvites=new Map(),clanInvites=new Map();
+const sessions=new Map(),streams=new Map(),trades=new Map(),monsters=[],messages=[],effects=[];let effectSequence=0;let writing=Promise.resolve(),closing=false;
+function persist(){const snapshot=JSON.parse(JSON.stringify(data));const next=writing.catch(()=>{}).then(()=>storage.save(snapshot));writing=next;return next;}
+await seedDevelopment(data,persist);
+const payments=createPayments({data,persist});
+const auth=createAuth({data,persist,makePlayer:(name,kind)=>{name=String(name||'').trim();if(!/^[\p{L}\p{N} _-]{3,18}$/u.test(name)||!Object.hasOwn(classes,kind))throw Error('Escolha um nome de personagem válido e uma classe.');if(Object.values(data.players).some(p=>p.name.toLocaleLowerCase()===name.toLocaleLowerCase()))throw Error('Nome de personagem já utilizado.');const p=migrate(create(name,kind));normalizeInventory(p);return p;},onRevoke:key=>{streams.get(key)?.end();streams.delete(key);const s=sessions.get(key);if(s){cancelTrade(s.p);stopBot(s.p,'Sessão encerrada.');}sessions.delete(key);}});
+function tell(name,text){messages.push({name,text});if(messages.length>30)messages.shift();}
+function publicPlayer(p){const {id,name,kind,x,y,hp,level,map,facing,pvp,vipUntil,lastMove,transformed,transformAt,transformUntil,transformCooldown,running,moveDuration,hitAt,actionAt,actionState,actionDuration,jumpAt,jumpUntil,jumpFrom}=p;return {id,name,kind,x,y,hp,level,map,facing,pvp,vip:vipUntil>Date.now(),lastMove,running,moveDuration,hitAt,actionAt,actionState,actionDuration,jumpAt,jumpUntil,jumpFrom,clanTag:clanFor(data,p)?.tag||null,appearance:appearanceFor(p),transformed,transformAt,buffUntil:p.buffUntil||0,furyUntil:p.furyUntil||0,transformUntil,transformCooldown,maxHP:maxHP(p)};}
+function privatePlayer(p){return {...publicPlayer(p),xp:p.xp,nextXP:xpToNext(p.level),maxLevel:MAX_LEVEL,shards:p.shards,gold:p.gold,kills:p.kills,potions:potionCount(p),inventoryLimit:INVENTORY_LIMIT,mana:p.mana,target:p.target,cooldowns:p.cooldowns,skillSlots:p.skillSlots,hotbarItems:p.hotbarItems||{},stamina:p.stamina??100,inventory:p.inventory.map(describe),equipment:p.equipment,stats:{...derivedStats(p),...equipmentStats(p),armor:combatArmor(p,Date.now()),damage:damage(p,lunar()),range:attackRange(p)},vipUntil:p.vipUntil,buffUntil:p.buffUntil||0,furyUntil:p.furyUntil||0,jumpCooldown:p.jumpCooldown||0,clan:clanView(data,p),party:partyView(data,p),quests:questView(p),admin:isAdmin(data,p),devAdmin:process.env.ECLIPSE_DEV==='1'&&isAdmin(data,p),lastDeathAt:p.lastDeathAt||0,bot:p.bot||botDefaults()};}
+function tradeFor(p){return [...trades.values()].find(t=>t.participants.includes(p.id));}
+function state(p){return {now:Date.now(),environment:environmentAt(),moon:lunar(),self:privatePlayer(p),players:[...sessions.values()].filter(s=>s.p.map===p.map).map(s=>publicPlayer(s.p)),online:sessions.size,monsters:monsters.filter(m=>m.map===p.map&&(m.hp>0||Date.now()-(m.deadAt||0)<800)).map(({id,name,x,y,hp,maxHP,map,facing,lastMove,lastAttack,species,moveMs,state,elite,boss,art,deadAt,hitAt,charging,specialAt})=>({id,name,x,y,hp,maxHP,map,facing,lastMove,lastAttack,species,moveDuration:moveMs,state,elite,boss,art,deadAt,hitAt,charging,specialAt})),groundLoot:(data.groundLoot||[]).filter(l=>l.map===p.map&&l.expires>Date.now()).map(l=>({...l,item:describe(l.item)})),messages:visibleMessages(messages,p),market:data.listings.map(l=>({...l,item:describe(l.item)})),trade:tradeView(p),vip:payments.info(),partyInvites:[...partyInvites.values()].filter(i=>i.playerId===p.id&&i.expires>Date.now()).map(i=>({...i,leaderName:Object.values(data.players).find(p=>p.id===data.parties?.[i.partyId]?.leader)?.name||'Grupo'})),clanInvites:[...clanInvites.values()].filter(i=>i.playerId===p.id&&i.expires>Date.now()&&data.clans?.[i.clanId]).map(i=>({...i,name:data.clans[i.clanId].name,tag:data.clans[i.clanId].tag})),effects:effects.filter(e=>e.map===p.map&&e.at>Date.now()-1000),npcs:npcs.filter(n=>n.map===p.map)};}
+function tradeView(p){const t=tradeFor(p);if(!t)return null;return {...t,offers:Object.fromEntries(Object.entries(t.offers).map(([id,o])=>{const owner=Object.values(data.players).find(p=>p.id===id);return [id,{...o,items:o.ids.map(i=>owner?.inventory.find(v=>v.id===i)).filter(Boolean).map(describe)}];}))};}
+function occupied(x,y,map,id){return npcs.some(n=>n.map===map&&n.x===x&&n.y===y)||[...sessions.values()].some(s=>s.p.id!==id&&s.p.map===map&&s.p.x===x&&s.p.y===y)||monsters.some(m=>m.map===map&&m.hp>0&&m.x===x&&m.y===y);}
+for(const map of Object.keys(maps))for(const [i,spawn]of mapObjects(map,'monsters').entries()){const type={species:spawn.species,...monsterTypes[spawn.species]};if(!type.hp)continue;let {x,y}=spawn,attempts=0;while((!walkable(x,y,map)||safe(x,y,map)||occupied(x,y,map))&&attempts++<500){x=(x+1)%38+1;y=(y+3)%28+1;}if(attempts>=500)continue;monsters.push({...type,id:map+i,map,x,y,homeX:x,homeY:y,maxHP:type.hp,deadUntil:0,lastAttack:0,lastMove:0,facing:[0,1],state:'IDLE'});}
+async function body(req){let text='';for await(const c of req){text+=c;if(text.length>4096)throw Error('Pedido grande demais.');}return JSON.parse(text||'{}');}
+function reply(res,status,data){res.writeHead(status,{'Content-Type':'application/json','Cache-Control':'no-store'});res.end(JSON.stringify(data));}
+function requireTown(p){if(!safe(p.x,p.y,p.map))throw Error('Use este serviço dentro da cidade segura.');}
+function cancelTrade(p){const t=tradeFor(p);if(t)trades.delete(t.id);}
+function tradePair(t){const pair=t.participants.map(id=>[...sessions.values()].find(s=>s.p.id===id)?.p);if(pair.some(p=>!p)||pair[0].map!==pair[1].map||distance(...pair)>3||!pair.every(p=>safe(p.x,p.y,p.map)))throw Error('A troca exige os dois jogadores próximos na cidade.');return pair;}
+function target(p){return monsters.find(m=>m.id===p.target&&m.hp>0&&m.map===p.map)||[...sessions.values()].map(s=>s.p).find(q=>q.id===p.target&&q.map===p.map&&q.id!==p.id);}
+function canAttack(p,t){return t&&p.map===t.map&&!safe(p.x,p.y,p.map)&&!safe(t.x,t.y,t.map)&&distance(p,t)<=attackRange(p)&&line(p,t)&&(!t.kind||(p.pvp&&t.pvp));}
+function respawn(p){effects.push({id:++effectSequence,type:'death',map:p.map,to:{x:p.x,y:p.y},player:publicPlayer(p),at:Date.now(),duration:800});if(effects.length>64)effects.shift();p.lastDeathAt=Date.now();p.xp=Math.floor(p.xp*.95);cancelTrade(p);stopBot(p,'Automação encerrada por derrota.');p.buffUntil=0;p.furyUntil=0;p.jumpUntil=0;p.actionAt=0;p.map='cinzaveu';p.x=9;p.y=16;p.hp=maxHP(p);p.mana=100;p.target=null;p.transformed=false;p.transformUntil=0;p.pvp=false;tell('Sistema',p.name+' retornou ao santuário.');}
+function damageText(t,amount,now,color='#f0c383',critical=false){effects.push({id:++effectSequence,type:'damage',map:t.map,to:{x:t.x,y:t.y},amount:Math.max(0,Math.round(amount)),at:now,duration:800,color,critical});if(effects.length>64)effects.shift();}
+function hit(p,t,amount){const stats=t.kind?derivedStats(t):null;if(stats&&Math.random()<stats.dodge){damageText(t,0,Date.now(),'#91c4ce');return;}const critical=Math.random()<derivedStats(p).critical;amount=Math.round(amount*(critical?1.5:1));const defense=t.kind?(p.kind==='vampiro'?stats.magicResist:combatArmor(t,Date.now())):(t.armor||0);const reduced=Math.max(1,amount-defense);damageText(t,Math.min(t.hp,reduced),Date.now(),critical?'#f0c383':'#ddbdba',critical);t.hp-=reduced;t.hitAt=Date.now();if(t.kind&&t.hp>0)markAction(t,'hit',Date.now());if(t.kind){t.combatUntil=Date.now()+10000;p.combatUntil=t.combatUntil;if(t.hp<=0)respawn(t);}else if(t.hp<=0){const recipients=experienceRecipients(data,p,[...sessions.values()].map(s=>s.p));for(const q of recipients){const beforeLevel=q.level;reward(q,{xp:Math.max(1,Math.floor(t.xp/recipients.length*(q.vipUntil>Date.now()?1.15:1))),gold:q.id===p.id?t.gold:0});questEvent(q,'kill',t.species);if(q.level>beforeLevel)effects.push({id:++effectSequence,type:'levelup',map:q.map,to:{x:q.x,y:q.y},at:Date.now(),duration:1000});} try{spawnLoot(data,t,t.boss?{id:crypto.randomUUID(),base:'espada',rarity:t.miniBoss?'raro':'lendario',quantity:1}:Math.random()<.65?rollLoot():{id:crypto.randomUUID(),base:'fragmento',rarity:'comum',quantity:1},recipients.map(q=>q.id));}catch{}t.deadAt=Date.now();t.state='DEAD';t.deadUntil=Date.now()+(t.respawnMs||12000);p.target=null;}}
+function requireService(p,npcId,now){const n=npcs.find(n=>n.id===npcId);if(!n||p.map!==n.map||distance(p,n)>2)throw Error('Aproxime-se de '+(n?.name||'um serviço da vila')+' (até duas casas).');requireTown(p);if(p.combatUntil>now)throw Error('Aguarde o fim do combate para usar os serviços.');if(tradeFor(p))throw Error('Finalize a troca antes de usar os serviços.');}
+function command(p,b,now){switch(b.type){
+ case 'bot-config':if(tradeFor(p))throw Error('Finalize a troca antes de iniciar a automação.');configureBot(p,b.settings,now);break;
+ case 'bot-stop':stopBot(p);p.target=null;break;
+ case 'party-invite':inviteParty(data,p,[...sessions.values()].find(s=>s.p.id===b.id)?.p,partyInvites,now);break;
+ case 'party-accept':acceptParty(data,p,b.id,partyInvites,now);break;
+ case 'party-leave':leaveParty(data,p);break;
+ case 'party-kick':kickParty(data,p,b.id);break;
+ case 'quest-accept':{const q=questDefinitions[b.id];if(!q)throw Error('Missão desconhecida.');requireService(p,q.npc,now);acceptQuest(p,b.id);break;}
+ case 'quest-claim':{const q=questDefinitions[b.id];if(!q)throw Error('Missão desconhecida.');requireService(p,q.npc,now);claimQuest(p,b.id);break;}
+ case 'npc-talk':requireService(p,b.id,now);questEvent(p,'talk',b.id);break;
+ case 'npc-heal':requireService(p,'healer',now);if(p.gold<20)throw Error('A cura custa 20 de ouro.');p.gold-=20;p.hp=maxHP(p);p.mana=100;p.stamina=100;break;
+ case 'clan-create':requireTown(p);if(tradeFor(p))throw Error('Finalize a troca.');createClan(data,p,b.name,b.tag,now);break;
+ case 'clan-invite':inviteClan(data,p,[...sessions.values()].find(s=>s.p.id===b.id)?.p,clanInvites,now);break;
+ case 'clan-accept':acceptClan(data,p,b.id,clanInvites,now);break;
+ case 'clan-leave':leaveClan(data,p);break;
+ case 'clan-promote':promoteClan(data,p,b.id,b.officer);break;
+ case 'clan-kick':kickClan(data,p,b.id);break;
+ case 'jump':jump(p,b.dx??p.facing[0],b.dy??p.facing[1],now,(x,y)=>occupied(x,y,p.map,p.id));stopBot(p,'Salto manual.');break;
+ case 'pickup':if(tradeFor(p))throw Error('Finalize a troca antes de coletar.');pickupLoot(data,p,b.id,now);break;
+ case 'drop':if(tradeFor(p))throw Error('Finalize a troca antes de dropar.');dropItem(data,p,b.id,b.quantity??1,now);break;
+ case 'inventory-move':if(tradeFor(p))throw Error('Finalize a troca.');moveItem(p,b.id,b.slot);break;
+ case 'inventory-split':if(tradeFor(p))throw Error('Finalize a troca.');splitStack(p,b.id,b.quantity);break;
+ case 'use-item':{if(tradeFor(p))throw Error('Finalize a troca antes de consumir itens.');const i=p.inventory.find(i=>i.id===b.id);if(!i)throw Error('Item não encontrado.');if(i.base==='pocao'){if(now-p.lastHeal<1500)throw Error('Poção em recarga.');consumeItem(p,i.id);p.hp=Math.min(maxHP(p),p.hp+65);p.lastHeal=now;}else if(i.base==='mana'){if(now-(p.lastManaHeal||0)<2000)throw Error('Poção em recarga.');consumeItem(p,i.id);p.mana=Math.min(100,p.mana+45);p.lastManaHeal=now;}else if(i.base==='racao'){consumeItem(p,i.id);p.stamina=Math.min(100,(p.stamina||0)+35);}else throw Error('Este item não pode ser usado.');break;}
+ case 'npc-buy':{const id=b.npc==='alchemist'?'alchemist':'merchant';requireService(p,id,now);if(id==='alchemist'&&!['pocao','mana','racao','fragmento'].includes(b.product))throw Error('Produto indisponível no alquimista.');npcBuy(p,b.product,b.quantity??1);break;}
+ case 'npc-sell':requireService(p,b.npc==='alchemist'?'alchemist':'merchant',now);npcSell(p,b.id);break;
+ case 'forge':requireService(p,'forge',now);forge(p,b.id);break;
+ case 'salvage':requireService(p,'forge',now);salvage(p,b.id);break;
+ case 'teleport':{requireService(p,'teleport',now);const d=destinations.find(d=>d.id===b.destination);if(!d)throw Error('Destino inválido.');if(p.level<d.level)throw Error('Este destino exige nível '+d.level+'.');if(p.gold<d.cost)throw Error('Ouro insuficiente.');let point=null;for(const [dx,dy] of [[0,0],[1,0],[-1,0],[0,-1],[0,1],[1,1],[-1,-1]]){const x=d.x+dx,y=d.y+dy;if(walkable(x,y,d.map)&&!portals.some(v=>v.map===d.map&&v.x===x&&v.y===y)&&!occupied(x,y,d.map,p.id)){point={x,y};break;}}if(!point)throw Error('Destino ocupado. Tente novamente.');p.gold-=d.cost;p.map=d.map;p.x=point.x;p.y=point.y;p.target=null;p.lastMove=now;break;}
+
+ case 'move':if(p.jumpUntil>now)throw Error('Aguarde a aterrissagem.');if(!b.automated&&p.bot?.enabled)stopBot(p,'Pausado pelo movimento manual.');if(portals.some(v=>v.map===p.map&&v.x===p.x+b.dx&&v.y===p.y+b.dy)&&p.combatUntil>now)throw Error('Espere 10 segundos fora de combate para atravessar.');if(move(p,b.dx,b.dy,now,(x,y)=>occupied(x,y,p.map,p.id),b.running===true)){if(tradeFor(p))cancelTrade(p);const portal=portals.find(v=>v.map===p.map&&v.x===p.x&&v.y===p.y);if(portal){if(p.combatUntil>now)throw Error('Espere 10 segundos fora de combate para atravessar.');if(!occupied(portal.tx,portal.ty,portal.to,p.id)){p.map=portal.to;p.x=portal.tx;p.y=portal.ty;p.target=null;}}}break;
+ case 'target':{const t=monsters.find(m=>m.id===b.id&&m.hp>0&&m.map===p.map)||[...sessions.values()].map(s=>s.p).find(q=>q.id===b.id&&q.id!==p.id&&q.map===p.map);p.target=t&&distance(p,t)<=10&&!safe(p.x,p.y,p.map)?t.id:null;break;}
+ case 'transform':transform(p,now);break;
+ case 'pvp':if((p.combatUntil||0)>now)throw Error('Não é possível mudar PvP durante combate.');p.pvp=!p.pvp;p.target=null;break;
+ case 'potion':if(tradeFor(p))throw Error('Finalize a troca antes de consumir itens.');if(potionCount(p)<1)throw Error('Sem poções.');if(now-p.lastHeal<1500)throw Error('Poção em recarga.');p.hp=Math.min(maxHP(p),p.hp+65);if(p.potions>0)p.potions--;else consumeItem(p,p.inventory.find(i=>i.base==='pocao').id);p.lastHeal=now;break;
+ case 'skill':{const effect=castSkill(p,b.index,now,{target:target(p),targets:[...monsters,...[...sessions.values()].map(s=>s.p)],hit});markAction(p,p.kind==='cacador'?(['strike','area'].includes(skills[p.kind][b.index].type)?weaponAction(p):'block'):p.kind==='vampiro'?'cast':'swing',now,effect.to);effects.push({...effect,id:++effectSequence});if(effects.length>64)effects.shift();break;}
+ case 'hotbar-item':if(!Number.isInteger(b.slot)||b.slot<0||b.slot>=9||!['pocao','mana','racao'].includes(b.base))throw Error('Atalho de item inválido.');if(b.base==='pocao'?potionCount(p)<1:!p.inventory.some(i=>i.base===b.base))throw Error('Você não possui esse item.');p.hotbarItems[b.slot]=b.base;break;
+ case 'skill-slot':{if(!Number.isInteger(b.slot)||b.slot<0||b.slot>=9||!Number.isInteger(b.index)||!skills[p.kind][b.index])throw Error('Atalho inválido.');if(p.level<skills[p.kind][b.index].level)throw Error('Habilidade ainda bloqueada por nível.');p.skillSlots[b.slot]=b.index;delete p.hotbarItems[b.slot];break;}
+ case 'equip':if(tradeFor(p))throw Error('Finalize a troca antes de alterar equipamentos.');equip(p,b.id);break;
+ case 'list':requireTown(p);if(tradeFor(p))throw Error('Finalize a troca antes de anunciar.');listItem(data,p,b.id,b.price);break;
+ case 'buy':requireTown(p);if(tradeFor(p))throw Error('Finalize a troca antes de comprar.');buyItem(data,p,b.id);break;
+ case 'unlist':requireTown(p);if(tradeFor(p))throw Error('Finalize a troca antes de retirar anúncios.');cancelListing(data,p,b.id);break;
+ case 'trade-invite':{requireTown(p);const q=[...sessions.values()].find(s=>s.p.id===b.id)?.p;if(!q||q.id===p.id||tradeFor(p)||tradeFor(q))throw Error('Jogador indisponível para troca.');const t={id:crypto.randomUUID(),participants:[p.id,q.id],names:{[p.id]:p.name,[q.id]:q.name},offers:{},accepted:[],revision:0,expires:now+120000};tradePair(t);trades.set(t.id,t);break;}
+ case 'trade-offer':{const t=tradeFor(p);if(!t)throw Error('Nenhuma troca ativa.');tradePair(t);offer(t,p,b.ids,b.gold);break;}
+ case 'trade-accept':{const t=tradeFor(p);if(!t)throw Error('Nenhuma troca ativa.');const pair=tradePair(t);if(b.revision!==t.revision)throw Error('A oferta mudou. Revise antes de confirmar.');if(!t.participants.every(id=>t.offers[id]))throw Error('Ambos devem enviar uma oferta.');if(!t.accepted.includes(p.id))t.accepted.push(p.id);if(t.accepted.length===2){commitTrade(t,...pair);trades.delete(t.id);tell('Sistema','Troca concluída entre '+pair.map(p=>p.name).join(' e ')+'.');}break;}
+ case 'trade-cancel':cancelTrade(p);break;
+ case 'admin':runAdmin(data,p,b.text,{online:[...sessions.values()].map(s=>s.p),monsters,occupied,kick:id=>{for(const [key,value]of sessions)if(value.p.id===id){streams.get(key)?.end();streams.delete(key);stopBot(value.p,'Removido do mundo.');sessions.delete(key);}}});break;
+ case 'chat':if(/^\/(kick|teleport|giveitem|givegold|spawn|setlevel|heal)(\s|$)/i.test(String(b.text||''))){runAdmin(data,p,b.text,{online:[...sessions.values()].map(s=>s.p),monsters,occupied,kick:id=>{for(const [key,value]of sessions)if(value.p.id===id){streams.get(key)?.end();sessions.delete(key);}}});break;}messages.push(createChatMessage(data,p,b,[...sessions.values()].map(s=>s.p),now));if(messages.length>60)messages.shift();break;
+ case 'vip-checkout':throw Error('Use o endpoint de checkout.');
+ default:throw Error('Ação desconhecida.');
+}}
+export async function api(req,res,path){
+ const origin=req.headers.origin,expectedOrigin=process.env.PUBLIC_BASE_URL||'http://'+req.headers.host;
+ if(req.method==='POST'&&path!=='/api/payments/mercadopago/webhook'&&origin&&origin!==expectedOrigin)return reply(res,403,{error:'Origem inválida.'});
+ if(path.startsWith('/api/auth/')){const identity=auth.resolve(req),operation=path.slice('/api/auth/'.length);if(operation==='me'&&req.method==='GET')return reply(res,identity?200:401,identity?{account:{email:identity.account.email,role:identity.account.role||'player'},player:identity.playerKey?publicPlayer(data.players[identity.playerKey]):null}:{error:'Entre na sua conta.'});if(operation==='characters'&&req.method==='GET'){try{return reply(res,200,{characters:auth.roster(req)});}catch(e){return reply(res,401,{error:e.message});}}if(req.method!=='POST')return reply(res,405,{error:'Use POST.'});const b=await body(req),ip=req.socket.remoteAddress||'local';try{let result;if(operation==='register')result=await auth.register(b,ip);else if(operation==='login')result=await auth.login(b,ip);else if(operation==='logout')result=await auth.logout(req);else if(operation==='forgot')result=await auth.forgot(b,ip);else if(operation==='reset')result=await auth.reset(b,ip);else if(operation==='character-create')result=await auth.createCharacter(req,b);else if(operation==='character-select')result=await auth.selectCharacter(req,b.id);else return reply(res,404,{error:'Rota inválida.'});if(result.cookie)res.setHeader('Set-Cookie',result.cookie);return reply(res,200,{ok:true,account:result.account,message:result.message,...(result.characters?{characters:result.characters}:{}),...(result.selected?{selected:result.selected}:{})});}catch(e){return reply(res,400,{error:e.message});}}
+ const identity=auth.resolve(req);
+ if(path==='/api/health')return reply(res,200,{ok:true,game:'ECLIPSE — Blood & Moon',database:'SQLite/Prisma',transport:'Socket.IO',tickMs:150});
+
+ if(path==='/api/vip'&&req.method==='GET')return reply(res,200,payments.info());
+ if(path==='/api/payments/mercadopago/webhook'){if(req.method!=='POST')return reply(res,405,{error:'Use POST.'});const event=await body(req),result=await payments.webhook(req.headers,new URL(req.url,'http://local'),event);const {status,...response}=result;return reply(res,status,response);}
+
+ if(path==='/api/join'&&req.method==='POST'){const b=await body(req);let token=b.token,p;if(identity)token=identity.playerKey;if(typeof token==='string'&&Object.hasOwn(data.players,token)&&(identity||!auth.claimed(token))){p=data.players[token];stopBot(p,'Inicie a automação nesta sessão.');p.target=null;}else return reply(res,401,{error:'Entre ou cadastre sua conta para jogar.'});
+ if(occupied(p.x,p.y,p.map,p.id)){let point=null;const origin={x:p.x,y:p.y},protectedZone=safe(p.x,p.y,p.map);for(let radius=1;radius<=8&&!point;radius++)for(let dx=-radius;dx<=radius&&!point;dx++)for(let dy=-radius;dy<=radius;dy++){if(Math.max(Math.abs(dx),Math.abs(dy))!==radius)continue;const x=origin.x+dx,y=origin.y+dy;if(walkable(x,y,p.map)&&safe(x,y,p.map)===protectedZone&&!portals.some(v=>v.map===p.map&&v.x===x&&v.y===y)&&!occupied(x,y,p.map,p.id)){point={x,y};break;}}if(!point)return reply(res,409,{error:'Área de entrada ocupada. Tente novamente.'});p.x=point.x;p.y=point.y;}
+ const previous=sessions.get(token);sessions.set(token,{p,seen:Date.now(),lastCommand:previous?.lastCommand||0});await persist();if(!previous)tell('Sistema',p.name+' atravessou os portões.');return reply(res,200,{...(identity?{}:{token}),player:privatePlayer(p)});}
+ const legacyToken=path==='/api/events'?new URL(req.url,'http://local').searchParams.get('token'):req.headers.authorization?.replace(/^Bearer /,'');const token=identity?.playerKey||(legacyToken&&!auth.claimed(legacyToken)?legacyToken:null);const s=sessions.get(token);if(!s)return reply(res,401,{error:'Entre novamente no mundo.'});s.seen=Date.now();
+ if(path==='/api/state'&&req.method==='GET')return reply(res,200,state(s.p));
+ if(path==='/api/events'&&req.method==='GET'){streams.get(token)?.end();res.writeHead(200,{'Content-Type':'text/event-stream','Cache-Control':'no-cache','Connection':'keep-alive','X-Accel-Buffering':'no'});streams.set(token,res);res.authRequest=identity?req:null;res.write('data: '+JSON.stringify(state(s.p))+'\n\n');req.on('close',()=>{if(streams.get(token)===res)streams.delete(token);persist().catch(e=>console.error('Falha ao salvar desconexão:',e.message));});return;}
+ if(path==='/api/action'&&req.method==='POST'){const b=await body(req),now=Date.now();if(now-s.lastCommand<65)return reply(res,429,{error:'Aguarde um instante.'});s.lastCommand=now;if(b.type==='vip-checkout'){try{const checkout=await payments.checkout(s.p);return reply(res,200,{ok:true,...checkout});}catch(e){return reply(res,503,{error:e.message});}}try{command(s.p,{...b,automated:false},now);normalizeInventory(s.p);}catch(e){return reply(res,400,{error:e.message});}if(!['move','target','chat'].includes(b.type))await persist();return reply(res,200,{ok:true,self:privatePlayer(s.p)});}
+ reply(res,404,{error:'Rota não encontrada.'});
+}
+let regen=0;
+setInterval(()=>{if(closing)return;const now=Date.now();regen++;
+ for(const [token,s] of sessions){if(streams.has(token)){const stream=streams.get(token);if(stream.authRequest&&!auth.resolve(stream.authRequest)){stopBot(s.p,'Sessão expirada.');stream.end();streams.delete(token);sessions.delete(token);continue;}s.seen=now;}if(now-s.seen>60000){cancelTrade(s.p);stopBot(s.p,'Sessão desconectada.');sessions.delete(token);continue;}const p=s.p;expireTransform(p,now);if(p.bot?.enabled){if(!streams.has(token))stopBot(p,'Conexão com o mundo encerrada.');else for(const action of planBot(p,{now,monsters,players:[...sessions.values()].map(v=>v.p),occupied:(x,y)=>occupied(x,y,p.map,p.id),trading:!!tradeFor(p)})){try{command(p,{...action,automated:true},now);}catch{p.bot.status='Aguardando recursos ou alcance.';}}}const t=target(p);if((!p.bot?.enabled||p.bot.autoAttack)&&canAttack(p,t)&&now-p.lastAttack>=derivedStats(p).attackMs){p.lastAttack=now;markAction(p,weaponAction(p),now,t);if(weaponAction(p)==='shoot'){effects.push({id:++effectSequence,kind:p.kind,index:0,map:p.map,from:{x:p.x,y:p.y},to:{x:t.x,y:t.y},at:now,duration:800});if(effects.length>64)effects.shift();}hit(p,t,damage(p,lunar()));if(p.kind==='vampiro')p.hp=Math.min(maxHP(p),p.hp+3);}if(regen%7===0){p.mana=Math.min(100,p.mana+3);p.stamina=Math.min(100,(p.stamina??100)+4);if(safe(p.x,p.y,p.map))p.hp=Math.min(maxHP(p),p.hp+5);}}
+ for(const m of monsters)updateMonster(m,[...sessions.values()].map(s=>s.p),now,{occupied,onHit:(p,damage,m)=>{if(Math.random()<derivedStats(p).dodge){damageText(p,0,now,'#91c4ce');return;}const amount=Math.max(1,Math.round(damage)-combatArmor(p,now));damageText(p,Math.min(p.hp,amount),now,'#ed718a');p.hp-=amount;if(p.hp>0)markAction(p,'hit',now);p.combatUntil=now+10000;if(p.hp<=0)respawn(p);},onWarning:(m,point)=>{effects.push({id:++effectSequence,type:'warning',map:m.map,to:{x:point.x,y:point.y},at:now,duration:900});if(effects.length>64)effects.shift();}});
+ for(const [id,invite]of partyInvites)if(invite.expires<=now)partyInvites.delete(id);
+ for(const [id,invite]of clanInvites)if(invite.expires<=now)clanInvites.delete(id);
+ for(const [id,t] of trades){try{tradePair(t);if(t.expires<now)trades.delete(id);}catch{trades.delete(id);}}
+ for(const [token,res] of streams){if(res.authRequest&&!auth.resolve(res.authRequest)){res.end();streams.delete(token);stopBot(sessions.get(token)?.p||{},'Sessão expirada.');sessions.delete(token);continue;}const s=sessions.get(token);if(s&&!res.destroyed)res.write('data: '+JSON.stringify(state(s.p))+'\n\n');}
+},150).unref();setInterval(()=>{if(!closing)persist().catch(e=>console.error('Falha ao salvar mundo:',e.message));},5000).unref();
+
+export async function shutdownWorld(){closing=true;await persist();await storage.close();}

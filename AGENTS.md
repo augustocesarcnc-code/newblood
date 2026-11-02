@@ -31,3 +31,12 @@ coordinates without regenerating and auditing. Run scripts/audit-eclipse-art.py
 after modifying PNGs; tests verify its checksums and zero clipping. Overlays can
 have a wider cell than bodies while sharing projected scale and foot alignment.
 Preserve Node 24 LTS restriction: Windows/Node 26 native SQLite failures were observed.
+
+## Current delivery constraint
+
+Stop art generation and expansion. The current user priority is one integrated vertical
+slice: Vila de Eclipse + Floresta Amaldiçoada, Hunter first, and only wolf/bat/skeleton
+encounters in those regions. Preserve other existing content without expanding it.
+Read docs/ASSET_STATUS.md. Measure gameplay integration and run
+`python3 tools/qa/vertical-slice.py` (Playwright/Chromium) for real screenshots.
+Do not execute art/tiles/map generation scripts to make more unused assets.

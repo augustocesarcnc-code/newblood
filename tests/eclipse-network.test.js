@@ -1,0 +1,48 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {mkdtemp,rm,readFile,writeFile} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {spawn} from 'node:child_process';
+import {once} from 'node:events';
+import {setTimeout as delay} from 'node:timers/promises';
+import net from 'node:net';
+import {io} from 'socket.io-client';
+import {EVENTS} from '../packages/shared/src/events.js';
+import {openWorldDatabase} from '../apps/server/src/database.ts';
+import {create,migrate} from '../mmo/world.js';
+import {item} from '../mmo/items.js';
+
+test('SQLite migration backs up legacy progress, persists normalized rows and rejects duplicate item IDs',async()=>{
+ const directory=await mkdtemp(join(tmpdir(),'eclipse-db-'));let db;
+ try{const p=migrate(create('Legacy','vampiro'));p.gold=77;p.inventory=[item('anel')];p.inventory[0].slot=4;const data={players:{legacy:p},listings:[],groundLoot:[]};await writeFile(join(directory,'world.json'),JSON.stringify(data));db=await openWorldDatabase(directory);assert.deepEqual(await db.load(),data);assert.deepEqual(JSON.parse(await readFile(join(directory,'world.pre-eclipse.json'),'utf8')),data);await db.save(data);assert.equal(await db.client.character.count(),1);assert.equal(await db.client.inventoryItem.count(),1);const bad=structuredClone(data);bad.players.other={...structuredClone(p),id:'other'};await assert.rejects(()=>db.save(bad));assert.equal((await db.load()).players.legacy.gold,77);await db.close();db=await openWorldDatabase(directory);assert.equal((await db.load()).players.legacy.inventory[0].slot,4);const migrations=await db.client.$queryRawUnsafe('SELECT * FROM _prisma_migrations');assert.equal(migrations.length,1);
+ }finally{await db?.close();await rm(directory,{recursive:true,force:true});}
+});
+
+test('Socket.IO: owned characters, real multiplayer, private chat, party, protected trade, loot and restart persistence',{timeout:40000},async()=>{
+ const directory=await mkdtemp(join(tmpdir(),'eclipse-network-')),sockets=[];const probe=net.createServer();probe.listen(0,'127.0.0.1');await once(probe,'listening');const port=probe.address().port;await new Promise(resolve=>probe.close(resolve));const base='http://127.0.0.1:'+port;let child,errors='';
+ async function start(){child=spawn(process.execPath,['server.js'],{cwd:new URL('../',import.meta.url),env:{...process.env,PORT:String(port),PUBLIC_BASE_URL:base,BLOODMOON_DATA_DIR:directory,ECLIPSE_DEV:'1'},stdio:['ignore','ignore','pipe']});child.stderr.on('data',chunk=>errors+=chunk);for(let n=0;n<120;n++){try{if((await fetch(base+'/api/health')).ok)return;}catch{}await delay(50);}throw Error('Startup failed: '+errors);}
+ async function stop(){for(const socket of sockets)socket.disconnect();const ended=once(child,'exit');child.kill();await ended;assert.equal(child.exitCode,0,errors);}
+ async function post(path,body,cookie,status=200){const response=await fetch(base+path,{method:'POST',headers:{'Content-Type':'application/json',Origin:base,...(cookie?{Cookie:cookie}:{})},body:JSON.stringify(body)});const data=await response.json();assert.equal(response.status,status,data.error);return {...data,cookie:response.headers.get('set-cookie')?.split(';')[0]};}
+ async function getState(cookie){const response=await fetch(base+'/api/state',{headers:{Cookie:cookie}});assert.equal(response.status,200);return response.json();}
+ async function connect(cookie){const socket=io(base,{extraHeaders:{Cookie:cookie,Origin:base},transports:['websocket'],autoConnect:false});sockets.push(socket);const connected=once(socket,'connect');socket.connect();await connected;const state=once(socket,EVENTS.STATE),result=await socket.timeout(5000).emitWithAck(EVENTS.JOIN,{});assert.equal(result.status,200,result.error);await state;return {socket,player:result.player};}
+ async function action(connection,body,status=200){await delay(85);const data=await connection.socket.timeout(5000).emitWithAck(EVENTS.ACTION,body);assert.equal(data.status,status,data.error);return data;}
+ try{await start();const adminLogin=await post('/api/auth/login',{email:'admin',password:'admin123'}),admin=await connect(adminLogin.cookie);const aReg=await post('/api/auth/register',{email:'socket-a@example.com',password:'Network-test-12345',role:'admin'}),bReg=await post('/api/auth/register',{email:'socket-b@example.com',password:'Network-test-12345'});
+ const roster=await(await fetch(base+'/api/auth/characters',{headers:{Cookie:aReg.cookie}})).json();assert.equal(roster.characters.length,0);await post('/api/join',{},aReg.cookie,401);
+ let aRoster;for(const [name,kind]of [['NetworkA','vampiro'],['WolfReserve','lobisomem'],['HunterReserve','cacador']])aRoster=await post('/api/auth/character-create',{name,kind},aReg.cookie);await post('/api/auth/character-create',{name:'Fourth','kind':'cacador'},aReg.cookie,400);const aID=aRoster.characters[0].id;
+ const bRoster=await post('/api/auth/character-create',{name:'NetworkB',kind:'cacador'},bReg.cookie);await post('/api/auth/character-select',{id:aID},bReg.cookie,400);await post('/api/auth/character-select',{id:aID},aReg.cookie);await post('/api/auth/character-select',{id:bRoster.characters[0].id},bReg.cookie);const a=await connect(aReg.cookie),b=await connect(bReg.cookie);
+ let state=await getState(aReg.cookie);assert.equal(state.players.length,3);assert.ok(state.players.every(p=>!('inventory'in p)&&!('gold'in p)&&!('password'in p)));assert.equal(state.self.admin,false);await action(a,{type:'admin',text:'/givegold 100'},400);await action(a,{type:'transform'},400);
+ const before={x:a.player.x,y:a.player.y};const impossible=await action(a,{type:'move',dx:99,dy:0,gold:999999});assert.equal(impossible.self.x,before.x);assert.equal(impossible.self.y,before.y);assert.equal(impossible.self.gold,0);
+ await action(admin,{type:'admin',text:'/giveitem NetworkA pocao 5'});await action(admin,{type:'admin',text:'/giveitem NetworkA espada 1 raro'});
+ const inventory=(await getState(aReg.cookie)).self.inventory,sword=inventory.find(i=>i.base==='espada'),potion=inventory.find(i=>i.base==='pocao');await action(a,{type:'equip',id:sword.id});await action(a,{type:'drop',id:sword.id},400);await action(a,{type:'equip',id:sword.id});
+ await action(a,{type:'trade-invite',id:b.player.id});await action(a,{type:'trade-offer',ids:[potion.id],gold:0});await action(b,{type:'trade-offer',ids:[],gold:0});await action(a,{type:'use-item',id:potion.id},400);await action(a,{type:'potion'},400);await action(a,{type:'drop',id:potion.id},400);await action(a,{type:'trade-cancel'});
+ await action(a,{type:'drop',id:potion.id,quantity:2});state=await getState(aReg.cookie);const loot=state.groundLoot[0];assert.equal(loot.item.quantity,2);await action(b,{type:'pickup',id:loot.id},400);await action(a,{type:'pickup',id:loot.id});await action(a,{type:'pickup',id:loot.id},400);assert.equal((await getState(aReg.cookie)).self.inventory.find(i=>i.base==='pocao').quantity,5);
+ await action(a,{type:'party-invite',id:b.player.id});state=await getState(bReg.cookie);await action(b,{type:'party-accept',id:state.partyInvites[0].id});assert.equal((await getState(aReg.cookie)).self.party.members.length,2);
+ await action(a,{type:'chat',text:'/w NetworkB segredo-rede'});assert.ok((await getState(bReg.cookie)).messages.some(m=>m.text==='segredo-rede'));assert.ok(!(await getState(adminLogin.cookie)).messages.some(m=>m.text==='segredo-rede'));
+ await action(admin,{type:'admin',text:'/givegold NetworkA 123'});await action(admin,{type:'admin',text:'/setlevel NetworkA 10'});await action(a,{type:'transform'});assert.equal((await getState(bReg.cookie)).players.find(p=>p.id===aID).transformed,true);await action(a,{type:'transform'});
+ await action(admin,{type:'admin',text:'/teleport floresta 3 15'});await action(admin,{type:'admin',text:'/setlevel 1'});await action(admin,{type:'admin',text:'/giveitem arco 1 mitico'});const bow=(await getState(adminLogin.cookie)).self.inventory.find(i=>i.base==='arco'&&i.rarity==='mitico');await action(admin,{type:'equip',id:bow.id});
+ for(let kill=0;kill<5;kill++){await action(admin,{type:'admin',text:'/spawn rat'});const target=(await getState(adminLogin.cookie)).monsters.find(m=>m.id.startsWith('dev-')&&m.hp>0);assert.ok(target);await action(admin,{type:'target',id:target.id});let slain=false;for(let tick=0;tick<30;tick++){state=await getState(adminLogin.cookie);if(!state.monsters.some(m=>m.id===target.id&&m.hp>0)){slain=true;break;}await delay(100);}assert.ok(slain,'real server combat kills the spawned rat');const drop=state.groundLoot.find(l=>l.x===target.x&&l.y===target.y);assert.ok(drop,'killed creature leaves physical loot');await action(admin,{type:'pickup',id:drop.id});}
+ const leveled=(await getState(adminLogin.cookie)).self;assert.equal(leveled.kills,5);assert.ok(leveled.level>=2,'server XP raises the character level');assert.ok(leveled.gold>1000);assert.ok(leveled.inventory.length>=4);
+ await action(a,{type:'move',dx:0,dy:1});const saved=await getState(aReg.cookie);await post('/api/auth/logout',{},aReg.cookie);await delay(100);assert.equal(a.socket.connected,false);await stop();await start();const again=await post('/api/auth/login',{email:'socket-a@example.com',password:'Network-test-12345'}),restored=await connect(again.cookie);assert.equal(restored.player.gold,123);assert.equal(restored.player.x,saved.self.x);assert.equal(restored.player.y,saved.self.y);assert.equal(restored.player.level,10);assert.equal(restored.player.inventory.find(i=>i.id===potion.id).quantity,5);assert.equal(restored.player.party.members.length,2);
+ }finally{if(child?.exitCode===null)await stop();await rm(directory,{recursive:true,force:true});}
+});

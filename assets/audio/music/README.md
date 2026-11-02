@@ -1,0 +1,1 @@
+Áudio substituível do ECLIPSE. Adicione arquivos licenciados .ogg, .wav ou .mp3. Para efeitos, indique a URL em `file` no manifesto de áudio. Nesta versão os efeitos usam síntese original; não há trilha ou ambiente gravado.

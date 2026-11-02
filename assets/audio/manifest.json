@@ -1,0 +1,1 @@
+{"events":{"attack":{"frequency":190,"endFrequency":90,"wave":"triangle"},"hit":{"frequency":100,"endFrequency":50,"wave":"triangle"},"death":{"frequency":160,"endFrequency":40},"loot":{"frequency":500,"endFrequency":800},"levelup":{"frequency":440,"endFrequency":880},"transform":{"frequency":90,"endFrequency":280,"wave":"triangle"},"ui":{"frequency":350,"endFrequency":300}}}

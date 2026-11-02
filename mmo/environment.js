@@ -1,0 +1,1 @@
+export function environmentAt(now=Date.now()){const phase=Math.floor(now/180000)%4,weather=Math.floor(now/240000)%4;return {phase:['DIA','ENTARDECER','NOITE','AMANHECER'][phase],weather:['NORMAL','CHUVA','NÉVOA','TEMPESTADE'][weather],nextPhaseAt:(Math.floor(now/180000)+1)*180000};}

@@ -1,0 +1,205 @@
+{
+  "cell": [
+    128,
+    128
+  ],
+  "frames": 8,
+  "frameMs": 100,
+  "classes": {
+    "cacador": {
+      "image": "cacador-effects.png",
+      "rows": [
+        {
+          "row": 0,
+          "id": "silver-shot",
+          "name": "Disparo de prata",
+          "effect": "bolt"
+        },
+        {
+          "row": 1,
+          "id": "first-aid",
+          "name": "Primeiros socorros",
+          "effect": "heal"
+        },
+        {
+          "row": 2,
+          "id": "crossbow-volley",
+          "name": "Rajada da sentinela",
+          "effect": "volley"
+        },
+        {
+          "row": 3,
+          "id": "silver-rain",
+          "name": "Chuva de prata",
+          "effect": "rain"
+        },
+        {
+          "row": 4,
+          "id": "hunter-oath",
+          "name": "Postura do predador",
+          "effect": "rune"
+        },
+        {
+          "row": 5,
+          "id": "restoration",
+          "name": "Elixir do guardião",
+          "effect": "cross"
+        },
+        {
+          "row": 6,
+          "id": "sacred-ward",
+          "name": "Guarda de aço",
+          "effect": "shield"
+        },
+        {
+          "row": 7,
+          "id": "consecration",
+          "name": "Corte circular",
+          "effect": "slash"
+        },
+        {
+          "row": 8,
+          "id": "judgement",
+          "name": "Golpe executor",
+          "effect": "slash"
+        },
+        {
+          "row": 9,
+          "id": "silver-requiem",
+          "name": "Salva perfurante",
+          "effect": "rain"
+        }
+      ]
+    },
+    "vampiro": {
+      "image": "vampiro-effects.png",
+      "rows": [
+        {
+          "row": 0,
+          "id": "blood-pact",
+          "name": "Pacto de sangue",
+          "effect": "drain"
+        },
+        {
+          "row": 1,
+          "id": "red-mist",
+          "name": "Névoa rubra",
+          "effect": "mist"
+        },
+        {
+          "row": 2,
+          "id": "night-spear",
+          "name": "Lança noturna",
+          "effect": "lance"
+        },
+        {
+          "row": 3,
+          "id": "bat-swarm",
+          "name": "Enxame de morcegos",
+          "effect": "bats"
+        },
+        {
+          "row": 4,
+          "id": "ancient-thirst",
+          "name": "Sede ancestral",
+          "effect": "rune"
+        },
+        {
+          "row": 5,
+          "id": "transfusion",
+          "name": "Transfusão vital",
+          "effect": "heart"
+        },
+        {
+          "row": 6,
+          "id": "grave-veil",
+          "name": "Véu tumular",
+          "effect": "shield"
+        },
+        {
+          "row": 7,
+          "id": "blood-rosary",
+          "name": "Rosário carmesim",
+          "effect": "orbs"
+        },
+        {
+          "row": 8,
+          "id": "abyss-kiss",
+          "name": "Beijo do abismo",
+          "effect": "fangs"
+        },
+        {
+          "row": 9,
+          "id": "scarlet-eclipse",
+          "name": "Eclipse escarlate",
+          "effect": "eclipse"
+        }
+      ]
+    },
+    "lobisomem": {
+      "image": "lobisomem-effects.png",
+      "rows": [
+        {
+          "row": 0,
+          "id": "rend",
+          "name": "Dilacerar",
+          "effect": "claws"
+        },
+        {
+          "row": 1,
+          "id": "ancestral-howl",
+          "name": "Uivo ancestral",
+          "effect": "howl"
+        },
+        {
+          "row": 2,
+          "id": "cutting-roar",
+          "name": "Rugido cortante",
+          "effect": "wave"
+        },
+        {
+          "row": 3,
+          "id": "whirlwind",
+          "name": "Turbilhão de garras",
+          "effect": "whirl"
+        },
+        {
+          "row": 4,
+          "id": "moon-rage",
+          "name": "Fúria da lua",
+          "effect": "rune"
+        },
+        {
+          "row": 5,
+          "id": "wild-recovery",
+          "name": "Regeneração selvagem",
+          "effect": "leaves"
+        },
+        {
+          "row": 6,
+          "id": "iron-hide",
+          "name": "Pele de ferro",
+          "effect": "shield"
+        },
+        {
+          "row": 7,
+          "id": "pack-wrath",
+          "name": "Ira da alcateia",
+          "effect": "wolves"
+        },
+        {
+          "row": 8,
+          "id": "predator-bite",
+          "name": "Mordida do predador",
+          "effect": "fangs"
+        },
+        {
+          "row": 9,
+          "id": "fullmoon-ruin",
+          "name": "Ruína da lua cheia",
+          "effect": "moonburst"
+        }
+      ]
+    }
+  }
+}
