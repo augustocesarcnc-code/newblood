@@ -1,0 +1,120 @@
+{
+  "version": 4,
+  "gifSHA256": "a5a3a8560da283263f2caef2a1dfd70df876e4cc02d485895e9e2043687b1a33",
+  "scope": "Targeted visual inspection of the reported NE/NW back-three-quarter to profile drift. Not full anatomy, gait, costume or gameplay certification.",
+  "method": "Author inspection of all 16 frames extracted from the final GIF. These are manual observations, not automatic camera-angle classification.",
+  "directions": {
+    "NE": {
+      "sourceSHA256": "9c00c9b176adc2b8b56c2807d21e9c3f2868f97bab9ba70f9c8ea542b7b9dfbe",
+      "evidence": "v4-frames-NE.png",
+      "contactComparison": "v4-NE-frames-1-5.png",
+      "frames": [
+        {
+          "frame": 1,
+          "backYokeRemainsVisible": true,
+          "backThreeQuarterFacingMaintained": true,
+          "profileSwitchObserved": false
+        },
+        {
+          "frame": 2,
+          "backYokeRemainsVisible": true,
+          "backThreeQuarterFacingMaintained": true,
+          "profileSwitchObserved": false
+        },
+        {
+          "frame": 3,
+          "backYokeRemainsVisible": true,
+          "backThreeQuarterFacingMaintained": true,
+          "profileSwitchObserved": false
+        },
+        {
+          "frame": 4,
+          "backYokeRemainsVisible": true,
+          "backThreeQuarterFacingMaintained": true,
+          "profileSwitchObserved": false
+        },
+        {
+          "frame": 5,
+          "backYokeRemainsVisible": true,
+          "backThreeQuarterFacingMaintained": true,
+          "profileSwitchObserved": false
+        },
+        {
+          "frame": 6,
+          "backYokeRemainsVisible": true,
+          "backThreeQuarterFacingMaintained": true,
+          "profileSwitchObserved": false
+        },
+        {
+          "frame": 7,
+          "backYokeRemainsVisible": true,
+          "backThreeQuarterFacingMaintained": true,
+          "profileSwitchObserved": false
+        },
+        {
+          "frame": 8,
+          "backYokeRemainsVisible": true,
+          "backThreeQuarterFacingMaintained": true,
+          "profileSwitchObserved": false
+        }
+      ],
+      "result": "PASS_TARGETED_ORIENTATION"
+    },
+    "NW": {
+      "sourceSHA256": "fdcbfa50e53c8d0c7af92d608596aa8bce446f228cd44283cf0512bc63f8f19d",
+      "evidence": "v4-frames-NW.png",
+      "contactComparison": "v4-NW-frames-1-5.png",
+      "frames": [
+        {
+          "frame": 1,
+          "backYokeRemainsVisible": true,
+          "backThreeQuarterFacingMaintained": true,
+          "profileSwitchObserved": false
+        },
+        {
+          "frame": 2,
+          "backYokeRemainsVisible": true,
+          "backThreeQuarterFacingMaintained": true,
+          "profileSwitchObserved": false
+        },
+        {
+          "frame": 3,
+          "backYokeRemainsVisible": true,
+          "backThreeQuarterFacingMaintained": true,
+          "profileSwitchObserved": false
+        },
+        {
+          "frame": 4,
+          "backYokeRemainsVisible": true,
+          "backThreeQuarterFacingMaintained": true,
+          "profileSwitchObserved": false
+        },
+        {
+          "frame": 5,
+          "backYokeRemainsVisible": true,
+          "backThreeQuarterFacingMaintained": true,
+          "profileSwitchObserved": false
+        },
+        {
+          "frame": 6,
+          "backYokeRemainsVisible": true,
+          "backThreeQuarterFacingMaintained": true,
+          "profileSwitchObserved": false
+        },
+        {
+          "frame": 7,
+          "backYokeRemainsVisible": true,
+          "backThreeQuarterFacingMaintained": true,
+          "profileSwitchObserved": false
+        },
+        {
+          "frame": 8,
+          "backYokeRemainsVisible": true,
+          "backThreeQuarterFacingMaintained": true,
+          "profileSwitchObserved": false
+        }
+      ],
+      "result": "PASS_TARGETED_ORIENTATION"
+    }
+  }
+}

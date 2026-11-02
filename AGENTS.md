@@ -38,10 +38,14 @@ Read docs/DIRECAO-DEFINITIVA.md. It supersedes conflicting visual instructions.
 The previous human miniatures/rig are REJECTED. Do not refine them or use that body
 as the base for new art. Preserve gameplay systems, maps and HUD.
 
-Phase A Hunter Master was explicitly approved by the user. Current task is Phase B:
-Idle, Walk, Run with real frames and eight-direction GIF audits. Stop for approval
-after these GIFs. No attack, other classes, NPCs, maps or HUD work yet.
-The approved reference is assets/characters/hunter/sprite-master.png. Never use
-archived rigs as its base. Keep the approved design and gameplay unchanged.
-Commit the accepted Phase A before animation work. Phase B remains review material
-until explicit approval; do not promote it as final art.
+The current Hunter DESIGN is explicitly approved and FROZEN by the user.
+Current scope is WALK ONLY: correct 8 frames in all 8 directions, fixed perspective,
+normal low foot lift, stable body axis, same coat and anatomically attached gear.
+Do not redesign, change outfit/hat/palette or create another character. Preserve
+N/S readability; E/W remain profile and all four diagonals keep fixed 3/4.
+No RUN, ATTACK, additional IDLE, other classes, NPCs, map or HUD changes.
+Deliver 8 individual GIFs, simultaneous 8-direction GIF, complete WALK spritesheet,
+and preview screenshots in existing village at real gameplay scale: HUD off/on,
+door, NPC, tree. No permanent gameplay integration; STOP for WALK approval.
+Frozen references/checksums: docs/reviews/hunter-walk-final/design-lock.json.
+Never reuse rejected rigs. Preserve the approved source artwork and gameplay.

@@ -1,10 +1,12 @@
 # ECLIPSE — Blood & Moon
 
-> **Revisão atual: Fase A, DEV, aguardando aprovação.** O padrão humano anterior foi
-> reprovado. Só o novo Caçador Sprite Master está em avaliação, sem novas animações.
-> Veja [as oito direções e a escala na Vila](docs/reviews/hunter-master/README.md).
-> Não avançar para outras classes, NPCs, mapas ou UI antes da aprovação explícita.
-> Os relatórios e o ZIP da versão anterior não representam aprovação deste candidato.
+> **Revisão atual: Sprite Master aprovada; caminhada v4 em auditoria.**
+> A caminhada refeita possui oito frames em oito direções, com testes do GIF exportado.
+> Veja o [GIF e o relatório da caminhada](docs/reviews/hunter-motion/README.md) e
+> a [Master aprovada na Vila](docs/reviews/hunter-master/README.md).
+> A caminhada ainda não está integrada no gameplay. Não avançar para outras classes,
+> NPCs, mapas ou UI antes da aprovação explícita da etapa.
+> O ZIP antigo não contém esta revisão.
 
 
 MMORPG 2D dark fantasy para navegador. Três classes humanas equipáveis, transformações,

@@ -1,0 +1,53 @@
+{
+  "gifSHA256": "81221765e3429a0a0877c8d35f82de7ec04005ecad4f10bf605b870e5b57aa42",
+  "scope": "Author QA of the reported gait defects using the eight decoded frame strips; NOT user art approval or certification of anatomical detail.",
+  "evidence": {
+    "N": "frames-N.png",
+    "NE": "frames-NE.png",
+    "E": "frames-E.png",
+    "S": "frames-S.png",
+    "SE": "frames-SE.png",
+    "SW": "frames-SW.png",
+    "W": "frames-W.png",
+    "NW": "frames-NW.png"
+  },
+  "directions": {
+    "N": {
+      "result": "PASS",
+      "observation": "Sequência reordenada pelas poses observadas: fonte 2,4,7,8,5,1,3,6. Os apoios e as solas visíveis mudam de lado; braços têm amplitude discreta."
+    },
+    "NE": {
+      "result": "PASS",
+      "observation": "Poses de passagem e apoio distintas nas duas metades. Perna de apoio refeita na fonte após reprovar a primeira exportação por altura."
+    },
+    "E": {
+      "result": "PASS",
+      "observation": "Braço próximo recua no primeiro contato e avança no contato oposto; joelhos de passagem diferentes nos frames 3/7."
+    },
+    "S": {
+      "result": "PASS",
+      "observation": "Pé direito anatômico (esquerda do observador) à frente no frame 1; pé esquerdo (direita do observador) à frente no frame 5. Regressão confirmada também nos pixels do GIF."
+    },
+    "SE": {
+      "result": "PASS",
+      "observation": "Duas metades com braços em oposição e poses de joelho distintas; transição de fechamento sem salto excessivo na métrica de pixels."
+    },
+    "SW": {
+      "result": "PASS",
+      "observation": "Alternância das poses de apoio/passagem e mudança do braço à frente entre metades; câmera permanece no quadrante frontal esquerdo."
+    },
+    "W": {
+      "result": "PASS",
+      "observation": "Braço próximo alterna entre atrás e à frente; poses de joelho e recorte do sobretudo distinguem as duas metades."
+    },
+    "NW": {
+      "result": "PASS",
+      "observation": "Perna de apoio refeita; poses de passagem e mudança dos braços verificadas nas duas metades; sem redução de escala por frame."
+    }
+  },
+  "remainingReview": [
+    "User visual approval is pending.",
+    "Detailed costume/accessory continuity, subtle head/shoulder yaw and cloth motion still need final art review.",
+    "No in-world stride-to-speed or equipment-layer validation has been performed; no gameplay integration in Phase B."
+  ]
+}

@@ -1,0 +1,3330 @@
+{
+  "status": "DEV_AWAITING_GAIT_TEST",
+  "approvedMaster": "3d7119a54901a13bf3c278910786ae37e21bf7cb09d563573ef0e5cbaf640a18",
+  "directions": [
+    "N",
+    "NE",
+    "E",
+    "SE",
+    "S",
+    "SW",
+    "W",
+    "NW"
+  ],
+  "clips": {
+    "idle": {
+      "asset": "/assets/characters/hunter/animation-review/idle.png",
+      "sourceSHA256": "0bf20d8ca771775eb989892552354c43e3551a472a25c617130fd520a156f04b",
+      "imageSize": [
+        1774,
+        887
+      ],
+      "frameCount": 4,
+      "fps": 3,
+      "layout": "directions-in-columns",
+      "rowEdges": [
+        0,
+        224,
+        445,
+        667,
+        887
+      ],
+      "views": {
+        "N": [
+          {
+            "rect": [
+              0,
+              0,
+              222,
+              224
+            ],
+            "bodyBounds": [
+              104,
+              6,
+              187,
+              221
+            ],
+            "pivot": [
+              145.5,
+              221
+            ],
+            "bodyHeight": 215,
+            "sha256": "4cb56682edf74c6728c1951189dd0183ab503dcc9bccafbb653570f2ade320f9"
+          },
+          {
+            "rect": [
+              0,
+              224,
+              222,
+              221
+            ],
+            "bodyBounds": [
+              104,
+              228,
+              187,
+              441
+            ],
+            "pivot": [
+              145.5,
+              217
+            ],
+            "bodyHeight": 213,
+            "sha256": "1dece323e33d2e97b1004b9c3d52bdd981bcfa23b9e5c9e26302c7e544c2a565"
+          },
+          {
+            "rect": [
+              0,
+              445,
+              222,
+              222
+            ],
+            "bodyBounds": [
+              101,
+              450,
+              190,
+              663
+            ],
+            "pivot": [
+              145.5,
+              218
+            ],
+            "bodyHeight": 213,
+            "sha256": "18de26b8a8fbec63087f82e9481faa030877717590f3cd9ef8a7f8a11efd9fcb"
+          },
+          {
+            "rect": [
+              0,
+              667,
+              222,
+              220
+            ],
+            "bodyBounds": [
+              104,
+              671,
+              187,
+              886
+            ],
+            "pivot": [
+              145.5,
+              219
+            ],
+            "bodyHeight": 215,
+            "sha256": "6887bb11360aca97cb89a6979faaeb5da5c1ee9eee7cd7b5ff8477f184c6dc75"
+          }
+        ],
+        "NE": [
+          {
+            "rect": [
+              222,
+              0,
+              222,
+              224
+            ],
+            "bodyBounds": [
+              325,
+              5,
+              403,
+              221
+            ],
+            "pivot": [
+              142.0,
+              221
+            ],
+            "bodyHeight": 216,
+            "sha256": "0b6213adc89dc851ca1130602bbd0008edb7ae3eb7043a044a6f5dce5d24b595"
+          },
+          {
+            "rect": [
+              222,
+              224,
+              222,
+              221
+            ],
+            "bodyBounds": [
+              324,
+              227,
+              403,
+              442
+            ],
+            "pivot": [
+              141.5,
+              218
+            ],
+            "bodyHeight": 215,
+            "sha256": "31c2c0f4e9c61bfe7b62abc847288212cf8e3b0b738aa4d267ea99d0ed0998e6"
+          },
+          {
+            "rect": [
+              222,
+              445,
+              222,
+              222
+            ],
+            "bodyBounds": [
+              323,
+              449,
+              406,
+              664
+            ],
+            "pivot": [
+              142.5,
+              219
+            ],
+            "bodyHeight": 215,
+            "sha256": "cb995e48d4ec0d424bc1043ee688e075ed29c0893615372bc67e8698c4be78a4"
+          },
+          {
+            "rect": [
+              222,
+              667,
+              222,
+              220
+            ],
+            "bodyBounds": [
+              324,
+              671,
+              403,
+              886
+            ],
+            "pivot": [
+              141.5,
+              219
+            ],
+            "bodyHeight": 215,
+            "sha256": "568adf0f6c242323e8502b36e939041975b04b5418a170dd8e37bd11b7f7207b"
+          }
+        ],
+        "E": [
+          {
+            "rect": [
+              444,
+              0,
+              221,
+              224
+            ],
+            "bodyBounds": [
+              544,
+              5,
+              609,
+              221
+            ],
+            "pivot": [
+              132.5,
+              221
+            ],
+            "bodyHeight": 216,
+            "sha256": "5937370cb2813c384d560ef7d7a601d63b68523e14d79a6be3907f4e41ef8d0c"
+          },
+          {
+            "rect": [
+              444,
+              224,
+              221,
+              221
+            ],
+            "bodyBounds": [
+              542,
+              227,
+              612,
+              442
+            ],
+            "pivot": [
+              133.0,
+              218
+            ],
+            "bodyHeight": 215,
+            "sha256": "3c82306b5512079d7734cf1bcb8679d0d5543cf27d599e1e2371c2b4517f44a6"
+          },
+          {
+            "rect": [
+              444,
+              445,
+              221,
+              222
+            ],
+            "bodyBounds": [
+              539,
+              449,
+              615,
+              664
+            ],
+            "pivot": [
+              133.0,
+              219
+            ],
+            "bodyHeight": 215,
+            "sha256": "016981463c6ef18112f3ff87fe5ec7e9b5e9e4552a905c09927a8b3c1ba7ad5f"
+          },
+          {
+            "rect": [
+              444,
+              667,
+              221,
+              220
+            ],
+            "bodyBounds": [
+              544,
+              671,
+              609,
+              886
+            ],
+            "pivot": [
+              132.5,
+              219
+            ],
+            "bodyHeight": 215,
+            "sha256": "1a573884d3abd6e64f6450decaab97d173686d95c6f3248e3c479d5ea873682c"
+          }
+        ],
+        "SE": [
+          {
+            "rect": [
+              665,
+              0,
+              222,
+              224
+            ],
+            "bodyBounds": [
+              753,
+              5,
+              832,
+              221
+            ],
+            "pivot": [
+              127.5,
+              221
+            ],
+            "bodyHeight": 216,
+            "sha256": "de7096b6f9bbaa87cb3afa6c7836c3727b4827e165a693fc884a0f3893df540f"
+          },
+          {
+            "rect": [
+              665,
+              224,
+              222,
+              221
+            ],
+            "bodyBounds": [
+              751,
+              227,
+              832,
+              442
+            ],
+            "pivot": [
+              126.5,
+              218
+            ],
+            "bodyHeight": 215,
+            "sha256": "1bee8c36a8ac5204c3957e184e93acd90b16a5ff2d92b9c3e5b74b0681049ff1"
+          },
+          {
+            "rect": [
+              665,
+              445,
+              222,
+              222
+            ],
+            "bodyBounds": [
+              748,
+              449,
+              836,
+              663
+            ],
+            "pivot": [
+              127.0,
+              218
+            ],
+            "bodyHeight": 214,
+            "sha256": "e1ba271379e57060e762b56ebb4c450cbcb5177e3737940b503c5dce748e6687"
+          },
+          {
+            "rect": [
+              665,
+              667,
+              222,
+              220
+            ],
+            "bodyBounds": [
+              753,
+              671,
+              832,
+              886
+            ],
+            "pivot": [
+              127.5,
+              219
+            ],
+            "bodyHeight": 215,
+            "sha256": "064bc6fab5fe3cb6a451ff6e22eb9918363a8215f126b44df0fd3a90736c5b9d"
+          }
+        ],
+        "S": [
+          {
+            "rect": [
+              887,
+              0,
+              222,
+              224
+            ],
+            "bodyBounds": [
+              958,
+              5,
+              1056,
+              221
+            ],
+            "pivot": [
+              120.0,
+              221
+            ],
+            "bodyHeight": 216,
+            "sha256": "e8d1c090e591e5245674157d6fe71c48d21a5d7342bd22c561f7b1c49c8b08f0"
+          },
+          {
+            "rect": [
+              887,
+              224,
+              222,
+              221
+            ],
+            "bodyBounds": [
+              958,
+              228,
+              1055,
+              442
+            ],
+            "pivot": [
+              119.5,
+              218
+            ],
+            "bodyHeight": 214,
+            "sha256": "bc03fd3dbd09e6dd74f20ad7650580c9ed18f445d2e2b6e65dc64e53bd276a0f"
+          },
+          {
+            "rect": [
+              887,
+              445,
+              222,
+              222
+            ],
+            "bodyBounds": [
+              956,
+              449,
+              1058,
+              663
+            ],
+            "pivot": [
+              120.0,
+              218
+            ],
+            "bodyHeight": 214,
+            "sha256": "18e4628af7ecfd8541ab2ec0196417b8a22b35e8db10f6b99ae9f5d6fbefe96a"
+          },
+          {
+            "rect": [
+              887,
+              667,
+              222,
+              220
+            ],
+            "bodyBounds": [
+              958,
+              671,
+              1055,
+              886
+            ],
+            "pivot": [
+              119.5,
+              219
+            ],
+            "bodyHeight": 215,
+            "sha256": "78be63f19ae007df2a0601399dd08ef3a5a3cdd39ec36ecc607d208ed9a2f0dd"
+          }
+        ],
+        "SW": [
+          {
+            "rect": [
+              1109,
+              0,
+              221,
+              224
+            ],
+            "bodyBounds": [
+              1177,
+              6,
+              1258,
+              221
+            ],
+            "pivot": [
+              108.5,
+              221
+            ],
+            "bodyHeight": 215,
+            "sha256": "3017c7c47f194eb99e5bb837b3fcfe959ecb51bdb63e7d6980e43448de20a3be"
+          },
+          {
+            "rect": [
+              1109,
+              224,
+              221,
+              221
+            ],
+            "bodyBounds": [
+              1175,
+              228,
+              1260,
+              442
+            ],
+            "pivot": [
+              108.5,
+              218
+            ],
+            "bodyHeight": 214,
+            "sha256": "2d5152076b28a64b47dcce11a8fb9884b46404c69cf17226af7ab3b67d50eb03"
+          },
+          {
+            "rect": [
+              1109,
+              445,
+              221,
+              222
+            ],
+            "bodyBounds": [
+              1173,
+              449,
+              1262,
+              663
+            ],
+            "pivot": [
+              108.5,
+              218
+            ],
+            "bodyHeight": 214,
+            "sha256": "d1aeb899a90221175e19fbede806cf07695abcce4bdef3a860dfda8a1e3a5b6a"
+          },
+          {
+            "rect": [
+              1109,
+              667,
+              221,
+              220
+            ],
+            "bodyBounds": [
+              1178,
+              671,
+              1259,
+              886
+            ],
+            "pivot": [
+              109.5,
+              219
+            ],
+            "bodyHeight": 215,
+            "sha256": "5d5fab0e15152779d8b7239fd89ca6585e0324cd88b593055a590cb8938efb24"
+          }
+        ],
+        "W": [
+          {
+            "rect": [
+              1330,
+              0,
+              222,
+              224
+            ],
+            "bodyBounds": [
+              1392,
+              5,
+              1459,
+              221
+            ],
+            "pivot": [
+              95.5,
+              221
+            ],
+            "bodyHeight": 216,
+            "sha256": "09595b0c3552a6b406c567338afa631cd7c6421845e3759f0c987f988c931c79"
+          },
+          {
+            "rect": [
+              1330,
+              224,
+              222,
+              221
+            ],
+            "bodyBounds": [
+              1391,
+              227,
+              1461,
+              442
+            ],
+            "pivot": [
+              96.0,
+              218
+            ],
+            "bodyHeight": 215,
+            "sha256": "82828b5d1d3158212762856da80385fddeef6c247645bd6f499d438386945e96"
+          },
+          {
+            "rect": [
+              1330,
+              445,
+              222,
+              222
+            ],
+            "bodyBounds": [
+              1388,
+              449,
+              1463,
+              664
+            ],
+            "pivot": [
+              95.5,
+              219
+            ],
+            "bodyHeight": 215,
+            "sha256": "49fb2424d176b4fbbd908c31cde4a4657ee47ed711331c75038d789f20fb5e7e"
+          },
+          {
+            "rect": [
+              1330,
+              667,
+              222,
+              220
+            ],
+            "bodyBounds": [
+              1393,
+              671,
+              1459,
+              887
+            ],
+            "pivot": [
+              96.0,
+              220
+            ],
+            "bodyHeight": 216,
+            "sha256": "55bd1b1f2fdf02f3ff7c968217b1d9f3d4fc8915fe2310dc93a53983eea63b11"
+          }
+        ],
+        "NW": [
+          {
+            "rect": [
+              1552,
+              0,
+              222,
+              224
+            ],
+            "bodyBounds": [
+              1585,
+              6,
+              1670,
+              221
+            ],
+            "pivot": [
+              75.5,
+              221
+            ],
+            "bodyHeight": 215,
+            "sha256": "53819d420223e473a6feba2814eae27f203ed0c8c8a4106537f2e8163d651d2f"
+          },
+          {
+            "rect": [
+              1552,
+              224,
+              222,
+              221
+            ],
+            "bodyBounds": [
+              1585,
+              228,
+              1670,
+              442
+            ],
+            "pivot": [
+              75.5,
+              218
+            ],
+            "bodyHeight": 214,
+            "sha256": "4da08ceb38b83402422e2241bd72d9056842d50738f2d14b677d4ff056edd8cd"
+          },
+          {
+            "rect": [
+              1552,
+              445,
+              222,
+              222
+            ],
+            "bodyBounds": [
+              1582,
+              449,
+              1672,
+              663
+            ],
+            "pivot": [
+              75.0,
+              218
+            ],
+            "bodyHeight": 214,
+            "sha256": "ff7b787869277bf57fdcf57dc6d2f8dc6b80062a33e09524512413e21ebc35f0"
+          },
+          {
+            "rect": [
+              1552,
+              667,
+              222,
+              220
+            ],
+            "bodyBounds": [
+              1585,
+              671,
+              1669,
+              887
+            ],
+            "pivot": [
+              75.0,
+              220
+            ],
+            "bodyHeight": 216,
+            "sha256": "4d65cb728de122b5e201e0af0a912ca103dde1f8546c47e5401a2fe3f38be333"
+          }
+        ]
+      },
+      "issues": [
+        "N frame 3: less than 2px alpha margin; inspect clipping",
+        "NE frame 3: less than 2px alpha margin; inspect clipping",
+        "E frame 3: less than 2px alpha margin; inspect clipping",
+        "SE frame 3: less than 2px alpha margin; inspect clipping",
+        "S frame 3: less than 2px alpha margin; inspect clipping",
+        "SW frame 3: less than 2px alpha margin; inspect clipping",
+        "W frame 3: less than 2px alpha margin; inspect clipping",
+        "NW frame 3: less than 2px alpha margin; inspect clipping"
+      ]
+    },
+    "walk": {
+      "asset": "/assets/characters/hunter/animation-review/walk-v3/S.png",
+      "assets": {
+        "N": "/assets/characters/hunter/animation-review/walk-v3/N.png",
+        "NE": "/assets/characters/hunter/animation-review/walk-v4/NE.png",
+        "E": "/assets/characters/hunter/animation-review/walk-v3/E.png",
+        "SE": "/assets/characters/hunter/animation-review/walk-v3/SE.png",
+        "S": "/assets/characters/hunter/animation-review/walk-v3/S.png",
+        "SW": "/assets/characters/hunter/animation-review/walk-v3/SW.png",
+        "W": "/assets/characters/hunter/animation-review/walk-v3/W.png",
+        "NW": "/assets/characters/hunter/animation-review/walk-v4/NW.png"
+      },
+      "sources": {
+        "N": {
+          "sha256": "db942f553d812dc33606eaa13c1f37f64f1096bedb2c77b87e66b7b6d732aa0d",
+          "imageSize": [
+            1430,
+            1100
+          ],
+          "heightSpreadPx": 7,
+          "relativeHeightSpread": 0.014314928425357865,
+          "fixedDirectionScale": 0.4154002026342452,
+          "headBandWidths": [
+            104,
+            106,
+            110,
+            112,
+            109,
+            107,
+            108,
+            111
+          ]
+        },
+        "NE": {
+          "sha256": "9c00c9b176adc2b8b56c2807d21e9c3f2868f97bab9ba70f9c8ea542b7b9dfbe",
+          "imageSize": [
+            1430,
+            1100
+          ],
+          "heightSpreadPx": 13,
+          "relativeHeightSpread": 0.026694045174537884,
+          "fixedDirectionScale": 0.4154002026342452,
+          "headBandWidths": [
+            94,
+            93,
+            90,
+            94,
+            99,
+            99,
+            97,
+            100
+          ]
+        },
+        "E": {
+          "sha256": "88a2b247eeddb5189c615f4daa0cfb89491a959adc12e8e3fe8358d90bbd1706",
+          "imageSize": [
+            1430,
+            1100
+          ],
+          "heightSpreadPx": 5,
+          "relativeHeightSpread": 0.010706638115631772,
+          "fixedDirectionScale": 0.4375667022411953,
+          "headBandWidths": [
+            87,
+            86,
+            87,
+            86,
+            87,
+            86,
+            87,
+            86
+          ]
+        },
+        "SE": {
+          "sha256": "debcb003befbe4098975f12b7e4babf84e0bae996d5590891476f9c3d9ab5d14",
+          "imageSize": [
+            1536,
+            1024
+          ],
+          "heightSpreadPx": 8,
+          "relativeHeightSpread": 0.01716738197424883,
+          "fixedDirectionScale": 0.43710021321961623,
+          "headBandWidths": [
+            93,
+            94,
+            92,
+            89,
+            89,
+            89,
+            85,
+            93
+          ]
+        },
+        "S": {
+          "sha256": "e3b8bd5d440af4e6b969184ffcb19afda90f7658e5cc6ce6c5dce88a553327d6",
+          "imageSize": [
+            1536,
+            1024
+          ],
+          "heightSpreadPx": 18,
+          "relativeHeightSpread": 0.0388768898488121,
+          "fixedDirectionScale": 0.4320337197049526,
+          "headBandWidths": [
+            105,
+            105,
+            106,
+            107,
+            111,
+            108,
+            106,
+            109
+          ]
+        },
+        "SW": {
+          "sha256": "34e6ac07eef77604a7df13af4f56e2a01b6f76978eb563c4af0ab04cd81ff774",
+          "imageSize": [
+            1430,
+            1100
+          ],
+          "heightSpreadPx": 14,
+          "relativeHeightSpread": 0.02947368421052632,
+          "fixedDirectionScale": 0.42752867570385816,
+          "headBandWidths": [
+            100,
+            99,
+            98,
+            98,
+            101,
+            102,
+            100,
+            94
+          ]
+        },
+        "W": {
+          "sha256": "00bff7a9ab11525f853af30c79d8166b67cc1d713985a205e2bc6ef075f32a54",
+          "imageSize": [
+            1430,
+            1100
+          ],
+          "heightSpreadPx": 9,
+          "relativeHeightSpread": 0.0189473684210526,
+          "fixedDirectionScale": 0.4279749478079332,
+          "headBandWidths": [
+            84,
+            83,
+            84,
+            84,
+            84,
+            83,
+            84,
+            83
+          ]
+        },
+        "NW": {
+          "sha256": "fdcbfa50e53c8d0c7af92d608596aa8bce446f228cd44283cf0512bc63f8f19d",
+          "imageSize": [
+            1430,
+            1100
+          ],
+          "heightSpreadPx": 1,
+          "relativeHeightSpread": 0.002016129032258007,
+          "fixedDirectionScale": 0.41330645161290325,
+          "headBandWidths": [
+            88,
+            89,
+            89,
+            89,
+            90,
+            89,
+            90,
+            91
+          ]
+        }
+      },
+      "scaleByDirection": {
+        "N": 0.4154002026342452,
+        "NE": 0.4154002026342452,
+        "E": 0.4375667022411953,
+        "SE": 0.43710021321961623,
+        "S": 0.4320337197049526,
+        "SW": 0.42752867570385816,
+        "W": 0.4279749478079332,
+        "NW": 0.41330645161290325
+      },
+      "frameCount": 8,
+      "fps": 8,
+      "views": {
+        "N": [
+          {
+            "sourceFrame": 2,
+            "rect": [
+              358,
+              0,
+              357,
+              550
+            ],
+            "bodyBounds": [
+              446,
+              23,
+              626,
+              512
+            ],
+            "pivot": [
+              182.0,
+              520
+            ],
+            "bodyHeight": 489,
+            "headBandWidth": 104,
+            "sha256": "492786992026f392417b2414fc5000b93268d576510b445cb87d25074d125f55"
+          },
+          {
+            "sourceFrame": 4,
+            "rect": [
+              1072,
+              0,
+              358,
+              550
+            ],
+            "bodyBounds": [
+              1157,
+              23,
+              1360,
+              512
+            ],
+            "pivot": [
+              182.25,
+              520
+            ],
+            "bodyHeight": 489,
+            "headBandWidth": 106,
+            "sha256": "dba4030586818dbd0223313722a67b479382a3380af92d40db87f823cb899a5c"
+          },
+          {
+            "sourceFrame": 7,
+            "rect": [
+              715,
+              550,
+              357,
+              550
+            ],
+            "bodyBounds": [
+              794,
+              575,
+              988,
+              1070
+            ],
+            "pivot": [
+              177.5,
+              520
+            ],
+            "bodyHeight": 495,
+            "headBandWidth": 110,
+            "sha256": "6a52a468935e2241952c0cf677338bb058def9b9ca53ce547503dcf0902dc8cc"
+          },
+          {
+            "sourceFrame": 8,
+            "rect": [
+              1072,
+              550,
+              358,
+              550
+            ],
+            "bodyBounds": [
+              1155,
+              575,
+              1360,
+              1067
+            ],
+            "pivot": [
+              180.0,
+              520
+            ],
+            "bodyHeight": 492,
+            "headBandWidth": 112,
+            "sha256": "2b69fbe8ca7faff988b999a68e8f62f56558fdc726d661ff39897157f2b90475"
+          },
+          {
+            "sourceFrame": 5,
+            "rect": [
+              0,
+              550,
+              358,
+              550
+            ],
+            "bodyBounds": [
+              86,
+              574,
+              271,
+              1070
+            ],
+            "pivot": [
+              175.0,
+              520
+            ],
+            "bodyHeight": 496,
+            "headBandWidth": 109,
+            "sha256": "53784b9c731e3175cf09b6f0b5c3474c24dc35c5db581441a374e3c0dad6cb5e"
+          },
+          {
+            "sourceFrame": 1,
+            "rect": [
+              0,
+              0,
+              358,
+              550
+            ],
+            "bodyBounds": [
+              80,
+              23,
+              271,
+              518
+            ],
+            "pivot": [
+              179.5,
+              520
+            ],
+            "bodyHeight": 495,
+            "headBandWidth": 107,
+            "sha256": "2f8c9a27fe95f729280851df4937d248e1b355d8687092fdabd07429be9a9b02"
+          },
+          {
+            "sourceFrame": 3,
+            "rect": [
+              715,
+              0,
+              357,
+              550
+            ],
+            "bodyBounds": [
+              804,
+              23,
+              999,
+              513
+            ],
+            "pivot": [
+              185.0,
+              520
+            ],
+            "bodyHeight": 490,
+            "headBandWidth": 108,
+            "sha256": "91b1f971141206b148e7d440e0df05e1b191fe745ab5503aa687c86806f92991"
+          },
+          {
+            "sourceFrame": 6,
+            "rect": [
+              358,
+              550,
+              357,
+              550
+            ],
+            "bodyBounds": [
+              441,
+              575,
+              626,
+              1070
+            ],
+            "pivot": [
+              177.5,
+              520
+            ],
+            "bodyHeight": 495,
+            "headBandWidth": 111,
+            "sha256": "79f3d94f1d565f210d26a70ec2e31ea41f3708dc9baf3747d4081a02733fe6c2"
+          }
+        ],
+        "NE": [
+          {
+            "sourceFrame": 1,
+            "rect": [
+              0,
+              0,
+              358,
+              550
+            ],
+            "bodyBounds": [
+              56,
+              15,
+              288,
+              502
+            ],
+            "pivot": [
+              175.0,
+              515
+            ],
+            "bodyHeight": 487,
+            "headBandWidth": 94,
+            "sha256": "48f426ad6611082ceb0923c95516cc58f2954505c9a5b58294a5e13a42a33a6a"
+          },
+          {
+            "sourceFrame": 2,
+            "rect": [
+              358,
+              0,
+              357,
+              550
+            ],
+            "bodyBounds": [
+              417,
+              15,
+              597,
+              502
+            ],
+            "pivot": [
+              147.5,
+              515
+            ],
+            "bodyHeight": 487,
+            "headBandWidth": 93,
+            "sha256": "97fe98612eddb631d02558f1d3507cc7793ca65aec19338bec99522f9f2e7bb3"
+          },
+          {
+            "sourceFrame": 3,
+            "rect": [
+              715,
+              0,
+              357,
+              550
+            ],
+            "bodyBounds": [
+              766,
+              14,
+              961,
+              502
+            ],
+            "pivot": [
+              145.5,
+              515
+            ],
+            "bodyHeight": 488,
+            "headBandWidth": 90,
+            "sha256": "0baa70a32a2b9dcfee83b1e0db8edb9284d38ec6aa8e2552b446dc9a4954ffa3"
+          },
+          {
+            "sourceFrame": 4,
+            "rect": [
+              1072,
+              0,
+              358,
+              550
+            ],
+            "bodyBounds": [
+              1117,
+              15,
+              1334,
+              502
+            ],
+            "pivot": [
+              145.0,
+              515
+            ],
+            "bodyHeight": 487,
+            "headBandWidth": 94,
+            "sha256": "636b18c264dd27cac0ccf6d9a8d9839f789670bfdaf60fe11ab9ad3aaabb2ff8"
+          },
+          {
+            "sourceFrame": 5,
+            "rect": [
+              0,
+              550,
+              358,
+              550
+            ],
+            "bodyBounds": [
+              65,
+              566,
+              291,
+              1065
+            ],
+            "pivot": [
+              177.0,
+              515
+            ],
+            "bodyHeight": 499,
+            "headBandWidth": 99,
+            "sha256": "d8667c78b77389d1b17dcd69c5c81b6b73c0fa71767c0b8c99c41f9fd3a6592a"
+          },
+          {
+            "sourceFrame": 6,
+            "rect": [
+              358,
+              550,
+              357,
+              550
+            ],
+            "bodyBounds": [
+              421,
+              566,
+              611,
+              1065
+            ],
+            "pivot": [
+              150.0,
+              515
+            ],
+            "bodyHeight": 499,
+            "headBandWidth": 99,
+            "sha256": "03d726bc10d6b868bf42f72045046ad052f4aac834eed7d80fdd6ceea59f7a30"
+          },
+          {
+            "sourceFrame": 7,
+            "rect": [
+              715,
+              550,
+              357,
+              550
+            ],
+            "bodyBounds": [
+              776,
+              565,
+              952,
+              1065
+            ],
+            "pivot": [
+              150.5,
+              515
+            ],
+            "bodyHeight": 500,
+            "headBandWidth": 97,
+            "sha256": "3e019e9613ccd3315c65b8dbc1fc4658ce87d3dbb4af964457f993aea118bdde"
+          },
+          {
+            "sourceFrame": 8,
+            "rect": [
+              1072,
+              550,
+              358,
+              550
+            ],
+            "bodyBounds": [
+              1122,
+              566,
+              1349,
+              1065
+            ],
+            "pivot": [
+              151.5,
+              515
+            ],
+            "bodyHeight": 499,
+            "headBandWidth": 100,
+            "sha256": "573ce39f769bbe81db172bb5a374332a1f4d1122b466ecb40d2e082f1454b9d9"
+          }
+        ],
+        "E": [
+          {
+            "sourceFrame": 1,
+            "rect": [
+              0,
+              0,
+              358,
+              550
+            ],
+            "bodyBounds": [
+              82,
+              33,
+              301,
+              500
+            ],
+            "pivot": [
+              181.5,
+              505
+            ],
+            "bodyHeight": 467,
+            "headBandWidth": 87,
+            "sha256": "b9d0391a687012d10645b3580e918ee272db00329f6effbd2d7a0b6349dc1fd2"
+          },
+          {
+            "sourceFrame": 2,
+            "rect": [
+              358,
+              0,
+              357,
+              550
+            ],
+            "bodyBounds": [
+              450,
+              33,
+              606,
+              500
+            ],
+            "pivot": [
+              181.5,
+              505
+            ],
+            "bodyHeight": 467,
+            "headBandWidth": 86,
+            "sha256": "7e88615d697e6bfbc8c2ba4a9568825e4b6591b1d9a8ac3b41ec7732c785c4f0"
+          },
+          {
+            "sourceFrame": 3,
+            "rect": [
+              715,
+              0,
+              357,
+              550
+            ],
+            "bodyBounds": [
+              842,
+              33,
+              973,
+              501
+            ],
+            "pivot": [
+              182.5,
+              505
+            ],
+            "bodyHeight": 468,
+            "headBandWidth": 87,
+            "sha256": "55798b04d581460bfd56121f26b359ca60c6b0d411c20cc14d90982709925b22"
+          },
+          {
+            "sourceFrame": 4,
+            "rect": [
+              1072,
+              0,
+              358,
+              550
+            ],
+            "bodyBounds": [
+              1183,
+              33,
+              1342,
+              502
+            ],
+            "pivot": [
+              184.0,
+              505
+            ],
+            "bodyHeight": 469,
+            "headBandWidth": 86,
+            "sha256": "f15b8af5422245d431d5e07ae279a60d7f9e227ec57909d6bd88f0a8514f2fc6"
+          },
+          {
+            "sourceFrame": 5,
+            "rect": [
+              0,
+              550,
+              358,
+              550
+            ],
+            "bodyBounds": [
+              71,
+              583,
+              319,
+              1055
+            ],
+            "pivot": [
+              179.0,
+              505
+            ],
+            "bodyHeight": 472,
+            "headBandWidth": 87,
+            "sha256": "777551599537e68dfa2898f9f126fc80bcb4fb163999a1f4fb045c485b2e95d7"
+          },
+          {
+            "sourceFrame": 6,
+            "rect": [
+              358,
+              550,
+              357,
+              550
+            ],
+            "bodyBounds": [
+              458,
+              583,
+              614,
+              1051
+            ],
+            "pivot": [
+              180.5,
+              505
+            ],
+            "bodyHeight": 468,
+            "headBandWidth": 86,
+            "sha256": "3c3263db859f3a41bba771bc2700a8a286f30d0c87cbf6ff958fec846f493d0b"
+          },
+          {
+            "sourceFrame": 7,
+            "rect": [
+              715,
+              550,
+              357,
+              550
+            ],
+            "bodyBounds": [
+              851,
+              583,
+              975,
+              1052
+            ],
+            "pivot": [
+              183.5,
+              505
+            ],
+            "bodyHeight": 469,
+            "headBandWidth": 87,
+            "sha256": "5cf0fec65156df14b76b7d170c219e407cdc04a13e0bfe3d4dee0ac7e215b06c"
+          },
+          {
+            "sourceFrame": 8,
+            "rect": [
+              1072,
+              550,
+              358,
+              550
+            ],
+            "bodyBounds": [
+              1175,
+              583,
+              1352,
+              1052
+            ],
+            "pivot": [
+              180.75,
+              505
+            ],
+            "bodyHeight": 469,
+            "headBandWidth": 86,
+            "sha256": "1b84e96151d08b2b8364c2f0e877d09ca0b628064ab451f33141ce551335f0f8"
+          }
+        ],
+        "SE": [
+          {
+            "sourceFrame": 1,
+            "rect": [
+              0,
+              0,
+              384,
+              512
+            ],
+            "bodyBounds": [
+              116,
+              16,
+              328,
+              483
+            ],
+            "pivot": [
+              218.0,
+              491
+            ],
+            "bodyHeight": 467,
+            "headBandWidth": 93,
+            "sha256": "8699faae0dd33990df84e2f1a5d67a3e451b77490869d63d8868839807e1aa72"
+          },
+          {
+            "sourceFrame": 2,
+            "rect": [
+              384,
+              0,
+              384,
+              512
+            ],
+            "bodyBounds": [
+              491,
+              16,
+              694,
+              484
+            ],
+            "pivot": [
+              202.5,
+              491
+            ],
+            "bodyHeight": 468,
+            "headBandWidth": 94,
+            "sha256": "ddd0084e5c11fc9594cd9b8888d4f0e8523de454ddcde326c32f093e52ba07b6"
+          },
+          {
+            "sourceFrame": 3,
+            "rect": [
+              768,
+              0,
+              384,
+              512
+            ],
+            "bodyBounds": [
+              847,
+              16,
+              1022,
+              482
+            ],
+            "pivot": [
+              176.5,
+              491
+            ],
+            "bodyHeight": 466,
+            "headBandWidth": 92,
+            "sha256": "bfa6ccacfe2a5f1dc4d1f10c695eb8a63540441fec42db7918eb3bd7475dd93f"
+          },
+          {
+            "sourceFrame": 4,
+            "rect": [
+              1152,
+              0,
+              384,
+              512
+            ],
+            "bodyBounds": [
+              1208,
+              16,
+              1435,
+              486
+            ],
+            "pivot": [
+              165.0,
+              491
+            ],
+            "bodyHeight": 470,
+            "headBandWidth": 89,
+            "sha256": "a672e75ca519492cd6150829eafef191dafb2af7946405e3f2402f9cb0f364db"
+          },
+          {
+            "sourceFrame": 5,
+            "rect": [
+              0,
+              512,
+              384,
+              512
+            ],
+            "bodyBounds": [
+              114,
+              529,
+              340,
+              1003
+            ],
+            "pivot": [
+              223.0,
+              491
+            ],
+            "bodyHeight": 474,
+            "headBandWidth": 89,
+            "sha256": "3eb6af84673d3003a88ceb7a686fe3767daa9b3b9c82e77ab4ed4f8740a4290b"
+          },
+          {
+            "sourceFrame": 6,
+            "rect": [
+              384,
+              512,
+              384,
+              512
+            ],
+            "bodyBounds": [
+              479,
+              529,
+              663,
+              1001
+            ],
+            "pivot": [
+              205.5,
+              491
+            ],
+            "bodyHeight": 472,
+            "headBandWidth": 89,
+            "sha256": "a2d3275cd0c2a10851aeabf5ae764e0ce724e3e5add9ab31ba1f5f2c459e9295"
+          },
+          {
+            "sourceFrame": 7,
+            "rect": [
+              768,
+              512,
+              384,
+              512
+            ],
+            "bodyBounds": [
+              848,
+              529,
+              1024,
+              995
+            ],
+            "pivot": [
+              185.0,
+              491
+            ],
+            "bodyHeight": 466,
+            "headBandWidth": 85,
+            "sha256": "fdde6ec71aa850478ade0aed3c03413482faf24b8cdeecb31483aa685d61cd2b"
+          },
+          {
+            "sourceFrame": 8,
+            "rect": [
+              1152,
+              512,
+              384,
+              512
+            ],
+            "bodyBounds": [
+              1221,
+              529,
+              1436,
+              1001
+            ],
+            "pivot": [
+              161.5,
+              491
+            ],
+            "bodyHeight": 472,
+            "headBandWidth": 93,
+            "sha256": "904af0dbb546dfd19d94d0cc2546a40c046225137b29dee05f6d9f81f4733b04"
+          }
+        ],
+        "S": [
+          {
+            "sourceFrame": 1,
+            "rect": [
+              0,
+              0,
+              384,
+              512
+            ],
+            "bodyBounds": [
+              107,
+              14,
+              276,
+              493
+            ],
+            "pivot": [
+              192.5,
+              495
+            ],
+            "bodyHeight": 479,
+            "headBandWidth": 105,
+            "sha256": "3c33ceb04b251ed1a300a415017c9e6affb2e4dc40afced131ee007930c9d7c5"
+          },
+          {
+            "sourceFrame": 2,
+            "rect": [
+              384,
+              0,
+              384,
+              512
+            ],
+            "bodyBounds": [
+              491,
+              14,
+              659,
+              483
+            ],
+            "pivot": [
+              191.5,
+              495
+            ],
+            "bodyHeight": 469,
+            "headBandWidth": 105,
+            "sha256": "ade630e54436d9b537d75ef61f88f3a2dba93659f90b0b58c19cfdbb7327a015"
+          },
+          {
+            "sourceFrame": 3,
+            "rect": [
+              768,
+              0,
+              384,
+              512
+            ],
+            "bodyBounds": [
+              875,
+              14,
+              1053,
+              483
+            ],
+            "pivot": [
+              191.0,
+              495
+            ],
+            "bodyHeight": 469,
+            "headBandWidth": 106,
+            "sha256": "e60e23c1f9f44d1ccbeeb449c1a178a88cf5ef7e757c14446f25c74f8054b403"
+          },
+          {
+            "sourceFrame": 4,
+            "rect": [
+              1152,
+              0,
+              384,
+              512
+            ],
+            "bodyBounds": [
+              1256,
+              14,
+              1428,
+              490
+            ],
+            "pivot": [
+              186.5,
+              495
+            ],
+            "bodyHeight": 476,
+            "headBandWidth": 107,
+            "sha256": "ea7bd8f079bd3d15e55ae93bca6a268e294db61e517b5ee80d6743f3992e7a2c"
+          },
+          {
+            "sourceFrame": 5,
+            "rect": [
+              0,
+              512,
+              384,
+              512
+            ],
+            "bodyBounds": [
+              106,
+              526,
+              278,
+              1005
+            ],
+            "pivot": [
+              188.0,
+              495
+            ],
+            "bodyHeight": 479,
+            "headBandWidth": 111,
+            "sha256": "38a8cf14aafeebdaf882ae5637e4ff79db3a54aae7f06c69c9fcb31856afedde"
+          },
+          {
+            "sourceFrame": 6,
+            "rect": [
+              384,
+              512,
+              384,
+              512
+            ],
+            "bodyBounds": [
+              490,
+              526,
+              661,
+              999
+            ],
+            "pivot": [
+              190.0,
+              495
+            ],
+            "bodyHeight": 473,
+            "headBandWidth": 108,
+            "sha256": "c6242520489d50757d64e8aad614ff7218e06374fcff3b4f618292758e170b87"
+          },
+          {
+            "sourceFrame": 7,
+            "rect": [
+              768,
+              512,
+              384,
+              512
+            ],
+            "bodyBounds": [
+              875,
+              526,
+              1044,
+              989
+            ],
+            "pivot": [
+              190.5,
+              495
+            ],
+            "bodyHeight": 463,
+            "headBandWidth": 106,
+            "sha256": "a46cbf2f94bba380eefa9fff8f434eb8e9f39b147cdaacc7fbb43c055f97d97d"
+          },
+          {
+            "sourceFrame": 8,
+            "rect": [
+              1152,
+              512,
+              384,
+              512
+            ],
+            "bodyBounds": [
+              1256,
+              526,
+              1431,
+              1007
+            ],
+            "pivot": [
+              195.0,
+              495
+            ],
+            "bodyHeight": 481,
+            "headBandWidth": 109,
+            "sha256": "4bda8e431bd443f219e5ec55994f2e908f264db96d8f13b6d9b05a9005fe05e6"
+          }
+        ],
+        "SW": [
+          {
+            "sourceFrame": 1,
+            "rect": [
+              0,
+              0,
+              358,
+              550
+            ],
+            "bodyBounds": [
+              71,
+              34,
+              289,
+              509
+            ],
+            "pivot": [
+              204.0,
+              521
+            ],
+            "bodyHeight": 475,
+            "headBandWidth": 100,
+            "sha256": "791463560154102c26dca4611bf0d5251e1ae58d2c5107e4ce7338209b9f1975"
+          },
+          {
+            "sourceFrame": 2,
+            "rect": [
+              358,
+              0,
+              357,
+              550
+            ],
+            "bodyBounds": [
+              466,
+              34,
+              626,
+              511
+            ],
+            "pivot": [
+              190.5,
+              521
+            ],
+            "bodyHeight": 477,
+            "headBandWidth": 99,
+            "sha256": "1c929fa21889a037fa811dffcd76f98a38d2cdacbc3c1467f3be3a5e3e3b8bc6"
+          },
+          {
+            "sourceFrame": 3,
+            "rect": [
+              715,
+              0,
+              357,
+              550
+            ],
+            "bodyBounds": [
+              825,
+              33,
+              989,
+              508
+            ],
+            "pivot": [
+              185.0,
+              521
+            ],
+            "bodyHeight": 475,
+            "headBandWidth": 98,
+            "sha256": "af881f6bf2db109c58a35e214bb063032b8c5a11e4e15a7d557caa1dc0c9149b"
+          },
+          {
+            "sourceFrame": 4,
+            "rect": [
+              1072,
+              0,
+              358,
+              550
+            ],
+            "bodyBounds": [
+              1155,
+              33,
+              1343,
+              508
+            ],
+            "pivot": [
+              178.5,
+              521
+            ],
+            "bodyHeight": 475,
+            "headBandWidth": 98,
+            "sha256": "928fd869ec7f79a91ff33de6143db35dca9e7e91e23cff054a754c7581c20ae6"
+          },
+          {
+            "sourceFrame": 5,
+            "rect": [
+              0,
+              550,
+              358,
+              550
+            ],
+            "bodyBounds": [
+              95,
+              582,
+              293,
+              1071
+            ],
+            "pivot": [
+              194.0,
+              521
+            ],
+            "bodyHeight": 489,
+            "headBandWidth": 101,
+            "sha256": "a650770bff6a0aa16c94b1bd5be8a790410b3a76c05b4a61e8dfa9e4b6052310"
+          },
+          {
+            "sourceFrame": 6,
+            "rect": [
+              358,
+              550,
+              357,
+              550
+            ],
+            "bodyBounds": [
+              450,
+              583,
+              631,
+              1065
+            ],
+            "pivot": [
+              183.5,
+              521
+            ],
+            "bodyHeight": 482,
+            "headBandWidth": 102,
+            "sha256": "c8221d2c5d6a53cc7525e76b2d9f7c3e4edbc649574df0e4e1b51fae36fefaaf"
+          },
+          {
+            "sourceFrame": 7,
+            "rect": [
+              715,
+              550,
+              357,
+              550
+            ],
+            "bodyBounds": [
+              803,
+              583,
+              994,
+              1065
+            ],
+            "pivot": [
+              186.0,
+              521
+            ],
+            "bodyHeight": 482,
+            "headBandWidth": 100,
+            "sha256": "c37118e3edb4c75a27a26bc0fa524c345bb8c9c42751ad3906e70a29eebd2202"
+          },
+          {
+            "sourceFrame": 8,
+            "rect": [
+              1072,
+              550,
+              358,
+              550
+            ],
+            "bodyBounds": [
+              1137,
+              583,
+              1352,
+              1067
+            ],
+            "pivot": [
+              185.5,
+              521
+            ],
+            "bodyHeight": 484,
+            "headBandWidth": 94,
+            "sha256": "7fe185c06c1dfd4340f3a384420815fa98ea698409219bb432053d172bc81df0"
+          }
+        ],
+        "W": [
+          {
+            "sourceFrame": 1,
+            "rect": [
+              0,
+              0,
+              358,
+              550
+            ],
+            "bodyBounds": [
+              55,
+              24,
+              289,
+              502
+            ],
+            "pivot": [
+              191.0,
+              509
+            ],
+            "bodyHeight": 478,
+            "headBandWidth": 84,
+            "sha256": "cf110baea2805c2314953301c8a839ac5addc579a8b77a00f47e2767a9a7785b"
+          },
+          {
+            "sourceFrame": 2,
+            "rect": [
+              358,
+              0,
+              357,
+              550
+            ],
+            "bodyBounds": [
+              449,
+              25,
+              596,
+              502
+            ],
+            "pivot": [
+              182.5,
+              509
+            ],
+            "bodyHeight": 477,
+            "headBandWidth": 83,
+            "sha256": "1e381464a2c0bf500f4262a5352b601f94f2d6a882e7fa83c09f3a1221a905ea"
+          },
+          {
+            "sourceFrame": 3,
+            "rect": [
+              715,
+              0,
+              357,
+              550
+            ],
+            "bodyBounds": [
+              821,
+              26,
+              943,
+              502
+            ],
+            "pivot": [
+              183.5,
+              509
+            ],
+            "bodyHeight": 476,
+            "headBandWidth": 84,
+            "sha256": "e879e2d67c8af3a6903ef4c25185bcb99b6ef7c08fef62bd4e1caf549b58afae"
+          },
+          {
+            "sourceFrame": 4,
+            "rect": [
+              1072,
+              0,
+              358,
+              550
+            ],
+            "bodyBounds": [
+              1141,
+              27,
+              1362,
+              502
+            ],
+            "pivot": [
+              184.0,
+              509
+            ],
+            "bodyHeight": 475,
+            "headBandWidth": 84,
+            "sha256": "a6dc114acb50900478c168ca2a9493e9bf83eb56c5e75146696eda826274f4b2"
+          },
+          {
+            "sourceFrame": 5,
+            "rect": [
+              0,
+              550,
+              358,
+              550
+            ],
+            "bodyBounds": [
+              67,
+              576,
+              294,
+              1059
+            ],
+            "pivot": [
+              184.5,
+              509
+            ],
+            "bodyHeight": 483,
+            "headBandWidth": 84,
+            "sha256": "43f64076137683fa885680b183887173b7a1c04d07a0fe34c35987385e87196b"
+          },
+          {
+            "sourceFrame": 6,
+            "rect": [
+              358,
+              550,
+              357,
+              550
+            ],
+            "bodyBounds": [
+              459,
+              575,
+              594,
+              1059
+            ],
+            "pivot": [
+              183.5,
+              509
+            ],
+            "bodyHeight": 484,
+            "headBandWidth": 83,
+            "sha256": "5371791eee5243abd1ff963902796ad3170b52b3f2dca6420e72a308e4e93e98"
+          },
+          {
+            "sourceFrame": 7,
+            "rect": [
+              715,
+              550,
+              357,
+              550
+            ],
+            "bodyBounds": [
+              816,
+              577,
+              942,
+              1057
+            ],
+            "pivot": [
+              183.5,
+              509
+            ],
+            "bodyHeight": 480,
+            "headBandWidth": 84,
+            "sha256": "b8465720477b248e53485fbf03719f245891c283a488038042eab86c3b906861"
+          },
+          {
+            "sourceFrame": 8,
+            "rect": [
+              1072,
+              550,
+              358,
+              550
+            ],
+            "bodyBounds": [
+              1138,
+              577,
+              1370,
+              1057
+            ],
+            "pivot": [
+              187.5,
+              509
+            ],
+            "bodyHeight": 480,
+            "headBandWidth": 83,
+            "sha256": "529c5d45aefbbe15eb19fe50a1684a531e63c308e6950814297e3932c0d0d69b"
+          }
+        ],
+        "NW": [
+          {
+            "sourceFrame": 1,
+            "rect": [
+              0,
+              0,
+              358,
+              550
+            ],
+            "bodyBounds": [
+              82,
+              27,
+              286,
+              523
+            ],
+            "pivot": [
+              187.5,
+              524
+            ],
+            "bodyHeight": 496,
+            "headBandWidth": 88,
+            "sha256": "b24c212472dc5b6ce866f09e9cf7c33ae3981fcc22821e876ea3ad98ca7d6275"
+          },
+          {
+            "sourceFrame": 2,
+            "rect": [
+              358,
+              0,
+              357,
+              550
+            ],
+            "bodyBounds": [
+              438,
+              27,
+              634,
+              523
+            ],
+            "pivot": [
+              186.5,
+              524
+            ],
+            "bodyHeight": 496,
+            "headBandWidth": 89,
+            "sha256": "814270d5c9463abfb82b1b7d3f7ba315351e5f5a220db0dfd396309ddf13bf95"
+          },
+          {
+            "sourceFrame": 3,
+            "rect": [
+              715,
+              0,
+              357,
+              550
+            ],
+            "bodyBounds": [
+              789,
+              27,
+              987,
+              523
+            ],
+            "pivot": [
+              187.0,
+              524
+            ],
+            "bodyHeight": 496,
+            "headBandWidth": 89,
+            "sha256": "3bb90dacdca7d0e3bb0b1920cd75cf712f94d341ff71c89c06c0f85b0a8e671b"
+          },
+          {
+            "sourceFrame": 4,
+            "rect": [
+              1072,
+              0,
+              358,
+              550
+            ],
+            "bodyBounds": [
+              1133,
+              27,
+              1362,
+              524
+            ],
+            "pivot": [
+              190.5,
+              524
+            ],
+            "bodyHeight": 497,
+            "headBandWidth": 89,
+            "sha256": "3a8089654c758fe19ed03044c5c8deccbf80b33756be587b3d7e9c103360079e"
+          },
+          {
+            "sourceFrame": 5,
+            "rect": [
+              0,
+              550,
+              358,
+              550
+            ],
+            "bodyBounds": [
+              76,
+              577,
+              292,
+              1074
+            ],
+            "pivot": [
+              190.5,
+              524
+            ],
+            "bodyHeight": 497,
+            "headBandWidth": 90,
+            "sha256": "7e5af63a2c81daa2cffda6828af9c13a417138df9204ed28b61ba05e39e1327a"
+          },
+          {
+            "sourceFrame": 6,
+            "rect": [
+              358,
+              550,
+              357,
+              550
+            ],
+            "bodyBounds": [
+              437,
+              577,
+              626,
+              1073
+            ],
+            "pivot": [
+              188.5,
+              524
+            ],
+            "bodyHeight": 496,
+            "headBandWidth": 89,
+            "sha256": "35a79796ed384ac77e65d40eada2fe7d8a7fbc4bd918929a845d08cbdc36824c"
+          },
+          {
+            "sourceFrame": 7,
+            "rect": [
+              715,
+              550,
+              357,
+              550
+            ],
+            "bodyBounds": [
+              802,
+              577,
+              992,
+              1073
+            ],
+            "pivot": [
+              189.75,
+              524
+            ],
+            "bodyHeight": 496,
+            "headBandWidth": 90,
+            "sha256": "bf1c7974eb12d87c6514fde06acaa1a8f70223128c5cbd6ff032745ba845dc54"
+          },
+          {
+            "sourceFrame": 8,
+            "rect": [
+              1072,
+              550,
+              358,
+              550
+            ],
+            "bodyBounds": [
+              1147,
+              577,
+              1364,
+              1074
+            ],
+            "pivot": [
+              185.0,
+              524
+            ],
+            "bodyHeight": 497,
+            "headBandWidth": 91,
+            "sha256": "55350f39fe06355635a4772ef6dc070ee6a6d16500a5317a0563ed520b207eab"
+          }
+        ]
+      },
+      "issues": [],
+      "version": 4,
+      "layout": "Separate direction sheets, 4 columns x 2 rows, row-major.",
+      "scalePolicy": "Fixed scale per authored direction sheet; same value for all its frames.",
+      "pivotPolicy": "Measured torso center x; shared contact baseline per direction."
+    },
+    "run": {
+      "asset": "/assets/characters/hunter/animation-review/run.png",
+      "sourceSHA256": "ba46a2e6c2dedf20d2c7dd86d1835bd840f6f518b1a74d890e6907a0d5b60102",
+      "imageSize": [
+        1536,
+        1024
+      ],
+      "frameCount": 6,
+      "fps": 12,
+      "layout": "directions-in-columns",
+      "rowEdges": [
+        0,
+        173,
+        340,
+        510,
+        677,
+        846,
+        1024
+      ],
+      "views": {
+        "N": [
+          {
+            "rect": [
+              0,
+              0,
+              192,
+              173
+            ],
+            "bodyBounds": [
+              55,
+              6,
+              161,
+              169
+            ],
+            "pivot": [
+              108.0,
+              169
+            ],
+            "bodyHeight": 163,
+            "sha256": "f3f18ecb4a9346d9979643b8e573abea70a230dece171e78d60ef71aa506aafd"
+          },
+          {
+            "rect": [
+              0,
+              173,
+              192,
+              167
+            ],
+            "bodyBounds": [
+              58,
+              178,
+              163,
+              336
+            ],
+            "pivot": [
+              110.5,
+              163
+            ],
+            "bodyHeight": 158,
+            "sha256": "beff8d18ca7ecf0dd607d16743e257f7514c7bcee7deb42ee26c5922f698f9ef"
+          },
+          {
+            "rect": [
+              0,
+              340,
+              192,
+              170
+            ],
+            "bodyBounds": [
+              49,
+              346,
+              170,
+              504
+            ],
+            "pivot": [
+              109.5,
+              164
+            ],
+            "bodyHeight": 158,
+            "sha256": "2bc8ba61baddefea7fb71300091aea66a1130ec60a7bf170925be78b058cdd56"
+          },
+          {
+            "rect": [
+              0,
+              510,
+              192,
+              167
+            ],
+            "bodyBounds": [
+              52,
+              520,
+              159,
+              672
+            ],
+            "pivot": [
+              105.5,
+              162
+            ],
+            "bodyHeight": 152,
+            "sha256": "de597b8664c4c6d0591a290663251b710309c6ef712ab01e416ce9801167a25d"
+          },
+          {
+            "rect": [
+              0,
+              677,
+              192,
+              169
+            ],
+            "bodyBounds": [
+              57,
+              685,
+              155,
+              841
+            ],
+            "pivot": [
+              106.0,
+              164
+            ],
+            "bodyHeight": 156,
+            "sha256": "b0d5a78381d148b90f1cfb8364f39ef2f6a466f8223fa854aab40f2d56fb786e"
+          },
+          {
+            "rect": [
+              0,
+              846,
+              192,
+              178
+            ],
+            "bodyBounds": [
+              42,
+              856,
+              166,
+              1005
+            ],
+            "pivot": [
+              104.0,
+              159
+            ],
+            "bodyHeight": 149,
+            "sha256": "16cb13e628b2adcf5831466eb406a656375a50a1831192c6d7191d14c87a48cf"
+          }
+        ],
+        "NE": [
+          {
+            "rect": [
+              192,
+              0,
+              192,
+              173
+            ],
+            "bodyBounds": [
+              228,
+              7,
+              358,
+              168
+            ],
+            "pivot": [
+              101.0,
+              168
+            ],
+            "bodyHeight": 161,
+            "sha256": "0bf557ad93cfaa2af4cd91fb447f2481cbf699108c4dbd96ef7cee600a4366c0"
+          },
+          {
+            "rect": [
+              192,
+              173,
+              192,
+              167
+            ],
+            "bodyBounds": [
+              228,
+              178,
+              361,
+              336
+            ],
+            "pivot": [
+              102.5,
+              163
+            ],
+            "bodyHeight": 158,
+            "sha256": "b3cbaf43431408c58c86f1534d251426689352e544fec6d9c1cd5c05789a86a6"
+          },
+          {
+            "rect": [
+              192,
+              340,
+              192,
+              170
+            ],
+            "bodyBounds": [
+              223,
+              346,
+              362,
+              489
+            ],
+            "pivot": [
+              100.5,
+              149
+            ],
+            "bodyHeight": 143,
+            "sha256": "0577a98e4e00f1c9bb0db06889b454fb8c9db657fe827dc610bf746f61f3c6df"
+          },
+          {
+            "rect": [
+              192,
+              510,
+              192,
+              167
+            ],
+            "bodyBounds": [
+              224,
+              517,
+              359,
+              670
+            ],
+            "pivot": [
+              99.5,
+              160
+            ],
+            "bodyHeight": 153,
+            "sha256": "f135173dd347d623812fe89dddce232e57ea133172dd57153bffa0b59a4c5490"
+          },
+          {
+            "rect": [
+              192,
+              677,
+              192,
+              169
+            ],
+            "bodyBounds": [
+              219,
+              683,
+              357,
+              840
+            ],
+            "pivot": [
+              96.0,
+              163
+            ],
+            "bodyHeight": 157,
+            "sha256": "6ed4fd617f4a15020b9d1ba63f1f9f49d37721e86cc0d2a6dd2d5b053c14802c"
+          },
+          {
+            "rect": [
+              192,
+              846,
+              192,
+              178
+            ],
+            "bodyBounds": [
+              220,
+              856,
+              360,
+              1009
+            ],
+            "pivot": [
+              98.0,
+              163
+            ],
+            "bodyHeight": 153,
+            "sha256": "97ece7ab9f69526616ec5397ad3acb6f158e2b8e86b0a5916a039a2ebbc1ba10"
+          }
+        ],
+        "E": [
+          {
+            "rect": [
+              384,
+              0,
+              192,
+              173
+            ],
+            "bodyBounds": [
+              411,
+              9,
+              557,
+              168
+            ],
+            "pivot": [
+              100.0,
+              168
+            ],
+            "bodyHeight": 159,
+            "sha256": "a11eaa0daef8df0e2cad09a94ef8de98d2b5427bf89c890d9a91e5897df1825d"
+          },
+          {
+            "rect": [
+              384,
+              173,
+              192,
+              167
+            ],
+            "bodyBounds": [
+              411,
+              182,
+              563,
+              335
+            ],
+            "pivot": [
+              103.0,
+              162
+            ],
+            "bodyHeight": 153,
+            "sha256": "c4342aabafa7c4ae07476eba111e319a6b9d57dde222516bc61e45548acb04a5"
+          },
+          {
+            "rect": [
+              384,
+              340,
+              192,
+              170
+            ],
+            "bodyBounds": [
+              410,
+              348,
+              567,
+              501
+            ],
+            "pivot": [
+              104.5,
+              161
+            ],
+            "bodyHeight": 153,
+            "sha256": "97453de72e58df51092a115e6ed4a17a3d43101bb9e4adb82aef0d92a4214499"
+          },
+          {
+            "rect": [
+              384,
+              510,
+              192,
+              167
+            ],
+            "bodyBounds": [
+              411,
+              520,
+              565,
+              671
+            ],
+            "pivot": [
+              104.0,
+              161
+            ],
+            "bodyHeight": 151,
+            "sha256": "058f97b5f1dcf7aa8a3e40bb7b4788d362dd8d5e1c50b0f2b17d498f2d7283f6"
+          },
+          {
+            "rect": [
+              384,
+              677,
+              192,
+              169
+            ],
+            "bodyBounds": [
+              411,
+              685,
+              557,
+              839
+            ],
+            "pivot": [
+              100.0,
+              162
+            ],
+            "bodyHeight": 154,
+            "sha256": "543569feb5e7a6aebabdfc7b84509ab27951f925d03240353cf75b1c6a49305d"
+          },
+          {
+            "rect": [
+              384,
+              846,
+              192,
+              178
+            ],
+            "bodyBounds": [
+              408,
+              858,
+              565,
+              1006
+            ],
+            "pivot": [
+              102.5,
+              160
+            ],
+            "bodyHeight": 148,
+            "sha256": "7f5d8523424f883b2253094c59545141c656c1bbdedb4bd688967c40677e8334"
+          }
+        ],
+        "SE": [
+          {
+            "rect": [
+              576,
+              0,
+              192,
+              173
+            ],
+            "bodyBounds": [
+              611,
+              9,
+              746,
+              168
+            ],
+            "pivot": [
+              102.5,
+              168
+            ],
+            "bodyHeight": 159,
+            "sha256": "76aed2dcf6d86ced65c2141e70765a7cbb14b95421a3b91a8cc87ef140880de9"
+          },
+          {
+            "rect": [
+              576,
+              173,
+              192,
+              167
+            ],
+            "bodyBounds": [
+              608,
+              180,
+              748,
+              336
+            ],
+            "pivot": [
+              102.0,
+              163
+            ],
+            "bodyHeight": 156,
+            "sha256": "9c2c7a0cd5bbc30399a1d21bbcfba05fb76c44e3c71b2631936494224d15401c"
+          },
+          {
+            "rect": [
+              576,
+              340,
+              192,
+              170
+            ],
+            "bodyBounds": [
+              605,
+              348,
+              752,
+              501
+            ],
+            "pivot": [
+              102.5,
+              161
+            ],
+            "bodyHeight": 153,
+            "sha256": "20aa0399fca4d2598da6e4b5dba2826aea3e0b1a7988c522fff04b01d54cd71e"
+          },
+          {
+            "rect": [
+              576,
+              510,
+              192,
+              167
+            ],
+            "bodyBounds": [
+              606,
+              521,
+              753,
+              671
+            ],
+            "pivot": [
+              103.5,
+              161
+            ],
+            "bodyHeight": 150,
+            "sha256": "f9eebbf7f735881f921f8bca15e5d441222af9f6c04ca046f9b005f12e62c21e"
+          },
+          {
+            "rect": [
+              576,
+              677,
+              192,
+              169
+            ],
+            "bodyBounds": [
+              612,
+              686,
+              750,
+              839
+            ],
+            "pivot": [
+              105.0,
+              162
+            ],
+            "bodyHeight": 153,
+            "sha256": "783e2b07ce2eeeb9e071bb7b94b7419f14b9d991f489c088850c31452dfbfe24"
+          },
+          {
+            "rect": [
+              576,
+              846,
+              192,
+              178
+            ],
+            "bodyBounds": [
+              602,
+              857,
+              753,
+              1003
+            ],
+            "pivot": [
+              101.5,
+              157
+            ],
+            "bodyHeight": 146,
+            "sha256": "b55bdded10d6690323809deca9e33b77cfe99b2aa41985b7d15cd1baad7dc19d"
+          }
+        ],
+        "S": [
+          {
+            "rect": [
+              768,
+              0,
+              192,
+              173
+            ],
+            "bodyBounds": [
+              822,
+              7,
+              928,
+              169
+            ],
+            "pivot": [
+              107.0,
+              169
+            ],
+            "bodyHeight": 162,
+            "sha256": "999a6cef9482e498d70b88a084e9a652e5c9c02e7328db1b3b3f54789d667b1a"
+          },
+          {
+            "rect": [
+              768,
+              173,
+              192,
+              167
+            ],
+            "bodyBounds": [
+              825,
+              178,
+              927,
+              336
+            ],
+            "pivot": [
+              108.0,
+              163
+            ],
+            "bodyHeight": 158,
+            "sha256": "3bf5c16b24350927c6425596fe6c29c49c3eb7ccd66542026f54473276db5fdc"
+          },
+          {
+            "rect": [
+              768,
+              340,
+              192,
+              170
+            ],
+            "bodyBounds": [
+              816,
+              346,
+              930,
+              502
+            ],
+            "pivot": [
+              105.0,
+              162
+            ],
+            "bodyHeight": 156,
+            "sha256": "9d092d023ef733f4b5d96cdd9c9c85e99bba2042f6f408298dade9ca24dbcebc"
+          },
+          {
+            "rect": [
+              768,
+              510,
+              192,
+              167
+            ],
+            "bodyBounds": [
+              809,
+              518,
+              927,
+              672
+            ],
+            "pivot": [
+              100.0,
+              162
+            ],
+            "bodyHeight": 154,
+            "sha256": "3dacd2d55ba59676686dd23b5ea109e5b6ba8aea7dfe89d75fd885ae66d887c7"
+          },
+          {
+            "rect": [
+              768,
+              677,
+              192,
+              169
+            ],
+            "bodyBounds": [
+              810,
+              684,
+              929,
+              840
+            ],
+            "pivot": [
+              101.5,
+              163
+            ],
+            "bodyHeight": 156,
+            "sha256": "a27eeaaef3b82e8c10f3625dcbc7a572b9a864d0179b74b8786ab7e38eed6dbb"
+          },
+          {
+            "rect": [
+              768,
+              846,
+              192,
+              178
+            ],
+            "bodyBounds": [
+              807,
+              853,
+              930,
+              1000
+            ],
+            "pivot": [
+              100.5,
+              154
+            ],
+            "bodyHeight": 147,
+            "sha256": "89f8d43672fbcbb9ff5be229c549310485d5d0d9f25de0da9f7065c55a56b2a4"
+          }
+        ],
+        "SW": [
+          {
+            "rect": [
+              960,
+              0,
+              192,
+              173
+            ],
+            "bodyBounds": [
+              1016,
+              10,
+              1138,
+              169
+            ],
+            "pivot": [
+              117.0,
+              169
+            ],
+            "bodyHeight": 159,
+            "sha256": "6fca6102113b86ff9b6bc18a16385678d5a9d88fa6424e775ea1cdf9267d803c"
+          },
+          {
+            "rect": [
+              960,
+              173,
+              192,
+              167
+            ],
+            "bodyBounds": [
+              1012,
+              183,
+              1141,
+              336
+            ],
+            "pivot": [
+              116.5,
+              163
+            ],
+            "bodyHeight": 153,
+            "sha256": "69352ed1f9a7a427a14290515ef64a719ad972be7cc0ef24fc0d7ab02463bad8"
+          },
+          {
+            "rect": [
+              960,
+              340,
+              192,
+              170
+            ],
+            "bodyBounds": [
+              1007,
+              348,
+              1142,
+              485
+            ],
+            "pivot": [
+              114.5,
+              145
+            ],
+            "bodyHeight": 137,
+            "sha256": "f64293a934d1f4f912c77f9b7ee475386b9ce5ce2b6dee4955e9282b85daf603"
+          },
+          {
+            "rect": [
+              960,
+              510,
+              192,
+              167
+            ],
+            "bodyBounds": [
+              1005,
+              523,
+              1139,
+              671
+            ],
+            "pivot": [
+              112.0,
+              161
+            ],
+            "bodyHeight": 148,
+            "sha256": "789b8c6743c34fc0e7f40536eefb66332524d72c7c483e924f0d235adb56a3f9"
+          },
+          {
+            "rect": [
+              960,
+              677,
+              192,
+              169
+            ],
+            "bodyBounds": [
+              1004,
+              687,
+              1137,
+              840
+            ],
+            "pivot": [
+              110.5,
+              163
+            ],
+            "bodyHeight": 153,
+            "sha256": "3105f499808f0f854fbe1b507277ebdcd668f8d5b202e5226a008bfa97e7980a"
+          },
+          {
+            "rect": [
+              960,
+              846,
+              192,
+              178
+            ],
+            "bodyBounds": [
+              1007,
+              859,
+              1144,
+              1006
+            ],
+            "pivot": [
+              115.5,
+              160
+            ],
+            "bodyHeight": 147,
+            "sha256": "b1a01b32650d88b99da5bcc8ba222cae2d545c40558a83e07077f96ffbc1c74c"
+          }
+        ],
+        "W": [
+          {
+            "rect": [
+              1152,
+              0,
+              192,
+              173
+            ],
+            "bodyBounds": [
+              1199,
+              10,
+              1337,
+              168
+            ],
+            "pivot": [
+              116.0,
+              168
+            ],
+            "bodyHeight": 158,
+            "sha256": "3ba8bedad9c035840712df9e98808314f99ca7e989c2f7820f7cba319f0014fd"
+          },
+          {
+            "rect": [
+              1152,
+              173,
+              192,
+              167
+            ],
+            "bodyBounds": [
+              1191,
+              179,
+              1340,
+              336
+            ],
+            "pivot": [
+              113.5,
+              163
+            ],
+            "bodyHeight": 157,
+            "sha256": "13b453172d5efad7f56031e4f751bcd0720a4f86bc294071cc76c9a358643a43"
+          },
+          {
+            "rect": [
+              1152,
+              340,
+              192,
+              170
+            ],
+            "bodyBounds": [
+              1183,
+              347,
+              1339,
+              501
+            ],
+            "pivot": [
+              109.0,
+              161
+            ],
+            "bodyHeight": 154,
+            "sha256": "071ff571857a10201f361198e546bde76aa94b6cf70690fa4291f6f0da6c5b53"
+          },
+          {
+            "rect": [
+              1152,
+              510,
+              192,
+              167
+            ],
+            "bodyBounds": [
+              1188,
+              521,
+              1334,
+              671
+            ],
+            "pivot": [
+              109.0,
+              161
+            ],
+            "bodyHeight": 150,
+            "sha256": "ba57e8fdcbdc2540d22bd8a34a704610b5f650204ff4a48156c8bcfb4e2239ec"
+          },
+          {
+            "rect": [
+              1152,
+              677,
+              192,
+              169
+            ],
+            "bodyBounds": [
+              1190,
+              686,
+              1334,
+              839
+            ],
+            "pivot": [
+              110.0,
+              162
+            ],
+            "bodyHeight": 153,
+            "sha256": "924084fc5c091c772abd3a7c4d38433aab0a9d230d08ba7b23e0f3764cf300c0"
+          },
+          {
+            "rect": [
+              1152,
+              846,
+              192,
+              178
+            ],
+            "bodyBounds": [
+              1186,
+              857,
+              1343,
+              1008
+            ],
+            "pivot": [
+              112.5,
+              162
+            ],
+            "bodyHeight": 151,
+            "sha256": "cb567505a7011c10108a2de71f0b80b707411fc46616bc5c889acb1bbebd93e7"
+          }
+        ],
+        "NW": [
+          {
+            "rect": [
+              1344,
+              0,
+              192,
+              173
+            ],
+            "bodyBounds": [
+              1393,
+              8,
+              1514,
+              169
+            ],
+            "pivot": [
+              109.5,
+              169
+            ],
+            "bodyHeight": 161,
+            "sha256": "d9c3d63e90690c589a0b0dee8718dc06c725194798d4f41ee0a0cb54411c9bd5"
+          },
+          {
+            "rect": [
+              1344,
+              173,
+              192,
+              167
+            ],
+            "bodyBounds": [
+              1387,
+              180,
+              1508,
+              336
+            ],
+            "pivot": [
+              103.5,
+              163
+            ],
+            "bodyHeight": 156,
+            "sha256": "3a178e699d6f6ca47d6210db604cb8aa3025a1f7ed3aefaf5d0f1e8565bd2152"
+          },
+          {
+            "rect": [
+              1344,
+              340,
+              192,
+              170
+            ],
+            "bodyBounds": [
+              1382,
+              346,
+              1514,
+              504
+            ],
+            "pivot": [
+              104.0,
+              164
+            ],
+            "bodyHeight": 158,
+            "sha256": "4035d77e8aee5fac15d8d5fe4254b51051571a90b74325cc8bc40db9d2527a10"
+          },
+          {
+            "rect": [
+              1344,
+              510,
+              192,
+              167
+            ],
+            "bodyBounds": [
+              1388,
+              518,
+              1509,
+              672
+            ],
+            "pivot": [
+              104.5,
+              162
+            ],
+            "bodyHeight": 154,
+            "sha256": "89a8ca91a7e56ff74cea1c0a31bd50a0f888afd4b8d3942bfa893ec0630151e6"
+          },
+          {
+            "rect": [
+              1344,
+              677,
+              192,
+              169
+            ],
+            "bodyBounds": [
+              1388,
+              683,
+              1514,
+              840
+            ],
+            "pivot": [
+              107.0,
+              163
+            ],
+            "bodyHeight": 157,
+            "sha256": "2056d0326d14942d26089b45a8a549d2beab6daa84a67c944fc29abd4a078e7f"
+          },
+          {
+            "rect": [
+              1344,
+              846,
+              192,
+              178
+            ],
+            "bodyBounds": [
+              1385,
+              856,
+              1519,
+              1009
+            ],
+            "pivot": [
+              108.0,
+              163
+            ],
+            "bodyHeight": 153,
+            "sha256": "f6c76ece6f13fcf58375e46cb28d1f5d0a9245ecb2f3e832667913be3e1ca966"
+          }
+        ]
+      },
+      "issues": [
+        "NE: source silhouette height varies 12.6% (includes pose change)",
+        "S: source silhouette height varies 10.2% (includes pose change)",
+        "SW: source silhouette height varies 16.1% (includes pose change)",
+        "W frame 5: less than 2px alpha margin; inspect clipping"
+      ]
+    }
+  },
+  "rendering": "Common pixel scale across frames; measured ground pivots. No per-frame height normalization.",
+  "limitations": [
+    "Distinct hashes do not certify correct gait or anatomy.",
+    "Stationary GIFs do not certify absence of foot sliding during world movement.",
+    "Candidates are not integrated into gameplay."
+  ]
+}

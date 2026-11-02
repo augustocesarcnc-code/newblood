@@ -1,30 +1,20 @@
-# ASSET STATUS — Fase A do novo Caçador
+# Asset status — Caçador / Fase B
 
-**O padrão humano anterior está REPROVADO.** Os relatórios anteriores não equivalem
-à aprovação deste novo candidato. Foram preservados em docs/archive para histórico.
-Direção vigente: DIRECAO-DEFINITIVA.md. Estado: **DEV · AGUARDANDO APROVAÇÃO DO USUÁRIO**.
+| ASSET | CRIADO | INTEGRADO | USADO ONDE | STATUS |
+|---|---|---|---|---|
+| Hunter Sprite Master, oito direções | Sim | Sim | Player e auditoria neutra | APROVADO pelo usuário; commit 69a8bf8 |
+| Hunter Walk v4, 8 frames × 8 direções | Sim, candidato | Apenas auditoria | GIF v4 e hunter-motion.html | Correção de orientação NE/NW passou no teste específico; aprovação visual completa pendente |
+| Hunter Walk v3 | Histórico | Não no gameplay | GIF v3 preservado | Reprovado por deriva NE/NW; substituído na auditoria pela v4 |
+| GIF Walk v4 | Sim | Auditoria | docs/reviews/hunter-motion/walk-v4-8-directions.gif | Reprodução, arquivo e teste específico NE/NW passam; sem aprovação artística completa |
+| Walk v1/v2 | Histórico | Não no gameplay | Pastas rejected-v1/rejected-v2 | REPROVADOS; não usar como ciclo aprovado |
+| Hunter Idle, 4 frames × 8 direções | Candidato anterior | Apenas auditoria | GIF Idle | DEV; margem inferior insuficiente, não corrigido nesta etapa |
+| Hunter Run, 6 frames × 8 direções | Candidato anterior | Apenas auditoria | GIF Run | DEV; revisar perspectiva, passada e recorte, não corrigido nesta etapa |
+| Guias de articulação | Sim | Não são assets do jogo | tools/art/hunter-walk-guides | Somente autoria e referência de poses |
+| Hunter Attack/Hit/Death novos | Não | Não | Nenhum | Fase C ainda não autorizada |
+| Camadas de equipamento do novo Hunter | Não | Não | Nenhum | Aguardando etapa própria |
+| Hunter antigo | Sim, histórico | Somente NPCs legados existentes | assets/deprecated/hunter | REPROVADO para novo Player; rollback preservado |
+| Outros personagens, NPCs, mapas e HUD | Legado preservado | Integração anterior | Jogo existente | Sem alterações nesta etapa |
 
-| ASSET | CRIADO | INTEGRADO | TESTADO | STATUS |
-| --- | --- | --- | --- | --- |
-| Novo Caçador Sprite Master | Sim, desenho independente | Player/preview de escala | PNG carregado, pivô e dimensões | CANDIDATO, NÃO APROVADO |
-| Norte / Nordeste / Leste / Sudeste | Sim, uma vista de cada | Renderer 2D | Auditoria de limites e imagem neutra | AGUARDANDO APROVAÇÃO |
-| Sul / Sudoeste / Oeste / Noroeste | Sim, uma vista de cada | Renderer 2D | Auditoria de limites e imagem neutra | AGUARDANDO APROVAÇÃO |
-| Caçador na Vila atual | Sim, mesma Master | Conta comum, mundo real | Login/Socket.IO/render da nova Master | ESCALA EM REVISÃO |
-| Idle/Walk/Run/Attack/Hit/Death novos | Não | Não | Não | BLOQUEADOS ATÉ APROVAÇÃO |
-| GIFs de animação novos | Não | Não | Não | FASE B OU POSTERIOR |
-| Camadas novas de equipamento | Não | Não | Dados lógicos antigos preservados | FASE POSTERIOR |
-| Vampiro / Lobisomem / NPCs novos | Não | Não | Não | NÃO PRODUZIDOS |
-| Mapas / HUD / UI novos | Não | Não | Arquivos preservados | NÃO MODIFICADOS |
-| Caçador antigo | Arquivado, 12 pranchas idênticas ao checkpoint | Somente NPC legado por flag; não Player | Hashes de rollback conferidos | REPROVADO, NÃO É REFERÊNCIA |
-| GONKEN UI Pro | Anexado pelo usuário | Não | Download bloqueado por tamanho >32 MiB | INSPEÇÃO PENDENTE PARA FASE J |
+Um GIF salvo não constitui animação integrada no jogo. O Player continua com uma pose estática por direção da Master aprovada. Aprovação visual do usuário, revisão final de detalhes e teste da passada no mapa ainda pendentes.
 
-A auditoria técnica mede oito recortes distintos, corpos dentro dos retângulos e pivôs
-nos pés. Ela não aprova anatomia ou direção artística automaticamente. O PNG original
-não foi repintado, recortado ou regravado por scripts; o renderer usa metadados de atlas.
-
-Evidência atual: reviews/hunter-master/eight-directions.png, village-scale.png,
-audit.json e integration.json. Os NPCs, casas, árvores e HUD vistos na captura da Vila
-continuam sendo o material anterior: **somente o novo Caçador está sob avaliação**.
-
-Após a apresentação dessas duas imagens, parar. Nenhuma aprovação artística foi
-registrada nesta fase, e não se deve avançar para animação ou publicação final.
+Detalhes: [auditoria de movimento](reviews/hunter-motion/README.md). Histórico anterior: docs/archive/ASSET_STATUS-before-rejection.md.

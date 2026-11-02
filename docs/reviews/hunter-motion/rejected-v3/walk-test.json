@@ -1,0 +1,226 @@
+{
+  "technicalResult": "PASS",
+  "technicalIssues": [],
+  "visualResult": "FAIL",
+  "file": "walk-8-directions.gif",
+  "sha256": "81221765e3429a0a0877c8d35f82de7ec04005ecad4f10bf605b870e5b57aa42",
+  "decode": "PASS: Pillow and FFmpeg",
+  "dimensions": [
+    1536,
+    361
+  ],
+  "frames": 8,
+  "uniquePixelFrames": 8,
+  "infiniteLoop": true,
+  "durationsMs": [
+    130,
+    120,
+    130,
+    120,
+    130,
+    120,
+    130,
+    130
+  ],
+  "loopDurationMs": 1010,
+  "heightSpreadPxPerDirection": {
+    "N": 3,
+    "NE": 4,
+    "E": 1,
+    "SE": 3,
+    "S": 7,
+    "SW": 6,
+    "W": 3,
+    "NW": 0
+  },
+  "transitions": {
+    "N": {
+      "meanAbsolutePixelDifferencesIncludingLoop": [
+        6.5092,
+        7.9399,
+        5.7581,
+        8.1945,
+        7.4983,
+        7.814,
+        7.8683,
+        5.8328
+      ],
+      "loopToMedianRatio": 0.762
+    },
+    "NE": {
+      "meanAbsolutePixelDifferencesIncludingLoop": [
+        9.27,
+        7.8272,
+        8.3375,
+        9.3185,
+        6.9459,
+        7.1698,
+        8.1662,
+        6.6515
+      ],
+      "loopToMedianRatio": 0.832
+    },
+    "E": {
+      "meanAbsolutePixelDifferencesIncludingLoop": [
+        8.9589,
+        7.2909,
+        6.7732,
+        12.1138,
+        11.3018,
+        7.2844,
+        8.0036,
+        10.4651
+      ],
+      "loopToMedianRatio": 1.234
+    },
+    "SE": {
+      "meanAbsolutePixelDifferencesIncludingLoop": [
+        8.6376,
+        10.0157,
+        10.4796,
+        5.6294,
+        8.0432,
+        7.1492,
+        11.5639,
+        7.9832
+      ],
+      "loopToMedianRatio": 0.957
+    },
+    "S": {
+      "meanAbsolutePixelDifferencesIncludingLoop": [
+        4.1706,
+        5.9451,
+        6.3129,
+        4.4647,
+        5.0387,
+        5.0133,
+        7.6841,
+        5.3839
+      ],
+      "loopToMedianRatio": 1.033
+    },
+    "SW": {
+      "meanAbsolutePixelDifferencesIncludingLoop": [
+        9.4736,
+        6.7721,
+        8.273,
+        9.5922,
+        8.7069,
+        9.3509,
+        9.9155,
+        6.413
+      ],
+      "loopToMedianRatio": 0.71
+    },
+    "W": {
+      "meanAbsolutePixelDifferencesIncludingLoop": [
+        10.5818,
+        5.7216,
+        10.2973,
+        6.5322,
+        10.4552,
+        6.116,
+        11.0577,
+        7.5488
+      ],
+      "loopToMedianRatio": 0.846
+    },
+    "NW": {
+      "meanAbsolutePixelDifferencesIncludingLoop": [
+        6.8835,
+        5.348,
+        7.8563,
+        8.3628,
+        6.7651,
+        8.3548,
+        9.0014,
+        7.5928
+      ],
+      "loopToMedianRatio": 0.983
+    }
+  },
+  "southContactBootExtentsFrames1And5": [
+    [
+      281,
+      261
+    ],
+    [
+      260,
+      281
+    ]
+  ],
+  "visualReviewMatches": true,
+  "visualReview": {
+    "gifSHA256": "81221765e3429a0a0877c8d35f82de7ec04005ecad4f10bf605b870e5b57aa42",
+    "scope": "Retest of decoded GIF frame strips in all eight directions. Supersedes the earlier limited PASS labels. No image regeneration.",
+    "evidence": {
+      "N": "frames-N.png",
+      "NE": "frames-NE.png",
+      "E": "frames-E.png",
+      "S": "frames-S.png",
+      "SE": "frames-SE.png",
+      "SW": "frames-SW.png",
+      "W": "frames-W.png",
+      "NW": "frames-NW.png",
+      "NW_contactComparison": "retest-NW-frames-1-5.png"
+    },
+    "directions": {
+      "N": {
+        "result": "NEEDS_VISUAL_REVIEW",
+        "previousLimitedObservation": "Sequ\u00eancia reordenada pelas poses observadas: fonte 2,4,7,8,5,1,3,6. Os apoios e as solas vis\u00edveis mudam de lado; bra\u00e7os t\u00eam amplitude discreta.",
+        "observation": "Earlier leg-motion observation does not certify full anatomy, appearance, or direction continuity."
+      },
+      "NE": {
+        "result": "FAIL_ORIENTATION_CONTINUITY",
+        "previousLimitedObservation": "Poses de passagem e apoio distintas nas duas metades. Perna de apoio refeita na fonte ap\u00f3s reprovar a primeira exporta\u00e7\u00e3o por altura.",
+        "observation": "Back three-quarter facing drifts toward side profile across the strip, especially toward frame 8. Requires pose/camera consistency review."
+      },
+      "E": {
+        "result": "PASS_GAIT_ONLY",
+        "previousLimitedObservation": "Bra\u00e7o pr\u00f3ximo recua no primeiro contato e avan\u00e7a no contato oposto; joelhos de passagem diferentes nos frames 3/7.",
+        "observation": "Arm counter-swing and distinct passing poses visible. Anatomical consistency is not fully certified."
+      },
+      "S": {
+        "result": "PASS_GAIT_ONLY",
+        "previousLimitedObservation": "P\u00e9 direito anat\u00f4mico (esquerda do observador) \u00e0 frente no frame 1; p\u00e9 esquerdo (direita do observador) \u00e0 frente no frame 5. Regress\u00e3o confirmada tamb\u00e9m nos pixels do GIF.",
+        "observation": "Opposite foreground boots confirmed at frames 1 and 5. This does not certify all anatomy or cloth continuity."
+      },
+      "SE": {
+        "result": "NEEDS_VISUAL_REVIEW",
+        "previousLimitedObservation": "Duas metades com bra\u00e7os em oposi\u00e7\u00e3o e poses de joelho distintas; transi\u00e7\u00e3o de fechamento sem salto excessivo na m\u00e9trica de pixels.",
+        "observation": "Earlier leg-motion observation does not certify full anatomy, appearance, or direction continuity."
+      },
+      "SW": {
+        "result": "NEEDS_VISUAL_REVIEW",
+        "previousLimitedObservation": "Altern\u00e2ncia das poses de apoio/passagem e mudan\u00e7a do bra\u00e7o \u00e0 frente entre metades; c\u00e2mera permanece no quadrante frontal esquerdo.",
+        "observation": "Earlier leg-motion observation does not certify full anatomy, appearance, or direction continuity."
+      },
+      "W": {
+        "result": "NEEDS_VISUAL_REVIEW",
+        "previousLimitedObservation": "Bra\u00e7o pr\u00f3ximo alterna entre atr\u00e1s e \u00e0 frente; poses de joelho e recorte do sobretudo distinguem as duas metades.",
+        "observation": "Visible waist accessories and torso presentation change across poses; occlusion versus drawing inconsistency has not been resolved."
+      },
+      "NW": {
+        "result": "FAIL_ORIENTATION_CONTINUITY",
+        "previousLimitedObservation": "Perna de apoio refeita; poses de passagem e mudan\u00e7a dos bra\u00e7os verificadas nas duas metades; sem redu\u00e7\u00e3o de escala por frame.",
+        "observation": "Frames 1 and 5 change from back three-quarter to near side profile; visible back/torso width changes. Evidence: retest-NW-frames-1-5.png."
+      }
+    },
+    "remainingReview": [
+      "User visual approval is pending.",
+      "Detailed costume/accessory continuity, subtle head/shoulder yaw and cloth motion still need final art review.",
+      "No in-world stride-to-speed or equipment-layer validation has been performed; no gameplay integration in Phase B."
+    ],
+    "result": "FAIL_VISUAL"
+  },
+  "overall": "FAIL_VISUAL",
+  "issues": [
+    "At least one direction failed or lacks visual gait review"
+  ],
+  "gameplayIntegration": false,
+  "limitations": [
+    "Pixel differences do not certify anatomical left/right or absence of foot sliding.",
+    "Manual review is author QA, not user art approval.",
+    "Movement in the game is not exercised by this stationary GIF."
+  ]
+}

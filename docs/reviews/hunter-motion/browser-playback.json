@@ -1,0 +1,8 @@
+{
+  "gifSHA256": "a5a3a8560da283263f2caef2a1dfd70df876e4cc02d485895e9e2043687b1a33",
+  "captures": 8,
+  "uniquePlaybackCaptures": 7,
+  "captureIntervalMs": 140,
+  "result": "PASS_ACTUAL_GIF_PLAYBACK",
+  "pageErrors": []
+}

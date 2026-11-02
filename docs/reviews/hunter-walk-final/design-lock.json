@@ -1,0 +1,46 @@
+{
+  "status": "USER_APPROVED_DESIGN_FROZEN_WALK_ONLY",
+  "referenceVersion": 4,
+  "approvedDesignOnly": true,
+  "animationApproved": false,
+  "directions": {
+    "N": {
+      "asset": "/assets/characters/hunter/animation-review/walk-v3/N.png",
+      "sha256": "db942f553d812dc33606eaa13c1f37f64f1096bedb2c77b87e66b7b6d732aa0d"
+    },
+    "NE": {
+      "asset": "/assets/characters/hunter/animation-review/walk-v4/NE.png",
+      "sha256": "9c00c9b176adc2b8b56c2807d21e9c3f2868f97bab9ba70f9c8ea542b7b9dfbe"
+    },
+    "E": {
+      "asset": "/assets/characters/hunter/animation-review/walk-v3/E.png",
+      "sha256": "88a2b247eeddb5189c615f4daa0cfb89491a959adc12e8e3fe8358d90bbd1706"
+    },
+    "SE": {
+      "asset": "/assets/characters/hunter/animation-review/walk-v3/SE.png",
+      "sha256": "debcb003befbe4098975f12b7e4babf84e0bae996d5590891476f9c3d9ab5d14"
+    },
+    "S": {
+      "asset": "/assets/characters/hunter/animation-review/walk-v3/S.png",
+      "sha256": "e3b8bd5d440af4e6b969184ffcb19afda90f7658e5cc6ce6c5dce88a553327d6"
+    },
+    "SW": {
+      "asset": "/assets/characters/hunter/animation-review/walk-v3/SW.png",
+      "sha256": "34e6ac07eef77604a7df13af4f56e2a01b6f76978eb563c4af0ab04cd81ff774"
+    },
+    "W": {
+      "asset": "/assets/characters/hunter/animation-review/walk-v3/W.png",
+      "sha256": "00bff7a9ab11525f853af30c79d8166b67cc1d713985a205e2bc6ef075f32a54"
+    },
+    "NW": {
+      "asset": "/assets/characters/hunter/animation-review/walk-v4/NW.png",
+      "sha256": "fdcbfa50e53c8d0c7af92d608596aa8bce446f228cd44283cf0512bc63f8f19d"
+    }
+  },
+  "rules": [
+    "No redesign, no outfit/hat/palette changes.",
+    "Only WALK, 8 frames per direction at existing speed.",
+    "No RUN, ATTACK, additional IDLE, classes, NPCs, map/HUD changes.",
+    "Preview only in existing village at unmodified gameplay scale; no permanent integration."
+  ]
+}

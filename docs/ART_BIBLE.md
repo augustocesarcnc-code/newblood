@@ -1,3 +1,5 @@
+> Atualização: usuário aprovou explicitamente esta Sprite Master. Fase B autorizada: Idle, Walk, Run e GIFs em oito direções. Aprovação das animações ainda pendente. As anotações abaixo documentam a revisão original da Fase A.
+
 # ECLIPSE — direção definitiva · Fase A em revisão
 
 A direção em [DIRECAO-DEFINITIVA.md](DIRECAO-DEFINITIVA.md) substitui as anteriores

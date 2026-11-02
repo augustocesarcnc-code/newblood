@@ -1,0 +1,164 @@
+{
+  "technicalResult": "PASS",
+  "technicalIssues": [],
+  "visualResult": "PENDING",
+  "file": "walk-8-directions.gif",
+  "sha256": "a5a3a8560da283263f2caef2a1dfd70df876e4cc02d485895e9e2043687b1a33",
+  "decode": "PASS: Pillow and FFmpeg",
+  "dimensions": [
+    1536,
+    361
+  ],
+  "frames": 8,
+  "uniquePixelFrames": 8,
+  "infiniteLoop": true,
+  "durationsMs": [
+    130,
+    120,
+    130,
+    120,
+    130,
+    120,
+    130,
+    130
+  ],
+  "loopDurationMs": 1010,
+  "heightSpreadPxPerDirection": {
+    "N": 3,
+    "NE": 4,
+    "E": 1,
+    "SE": 3,
+    "S": 7,
+    "SW": 6,
+    "W": 3,
+    "NW": 0
+  },
+  "transitions": {
+    "N": {
+      "meanAbsolutePixelDifferencesIncludingLoop": [
+        6.5102,
+        7.9486,
+        5.7602,
+        8.1988,
+        7.5066,
+        7.8227,
+        7.8738,
+        5.8385
+      ],
+      "loopToMedianRatio": 0.762
+    },
+    "NE": {
+      "meanAbsolutePixelDifferencesIncludingLoop": [
+        8.1516,
+        6.6834,
+        7.8001,
+        9.0414,
+        7.5566,
+        7.0786,
+        7.7557,
+        8.8381
+      ],
+      "loopToMedianRatio": 1.136
+    },
+    "E": {
+      "meanAbsolutePixelDifferencesIncludingLoop": [
+        8.9625,
+        7.2953,
+        6.7757,
+        12.1193,
+        11.3076,
+        7.2882,
+        8.0098,
+        10.4693
+      ],
+      "loopToMedianRatio": 1.234
+    },
+    "SE": {
+      "meanAbsolutePixelDifferencesIncludingLoop": [
+        8.6333,
+        10.0107,
+        10.4761,
+        5.6316,
+        8.045,
+        7.152,
+        11.5635,
+        7.9851
+      ],
+      "loopToMedianRatio": 0.958
+    },
+    "S": {
+      "meanAbsolutePixelDifferencesIncludingLoop": [
+        4.1735,
+        5.9542,
+        6.3205,
+        4.4728,
+        5.0457,
+        5.0188,
+        7.6942,
+        5.3875
+      ],
+      "loopToMedianRatio": 1.033
+    },
+    "SW": {
+      "meanAbsolutePixelDifferencesIncludingLoop": [
+        9.4791,
+        6.779,
+        8.282,
+        9.5911,
+        8.7069,
+        9.3459,
+        9.9257,
+        6.416
+      ],
+      "loopToMedianRatio": 0.711
+    },
+    "W": {
+      "meanAbsolutePixelDifferencesIncludingLoop": [
+        10.5882,
+        5.7268,
+        10.3017,
+        6.5416,
+        10.4611,
+        6.1254,
+        11.0635,
+        7.5505
+      ],
+      "loopToMedianRatio": 0.846
+    },
+    "NW": {
+      "meanAbsolutePixelDifferencesIncludingLoop": [
+        6.6276,
+        5.4774,
+        8.1606,
+        8.4667,
+        7.1388,
+        8.7235,
+        9.1506,
+        7.3885
+      ],
+      "loopToMedianRatio": 0.95
+    }
+  },
+  "southContactBootExtentsFrames1And5": [
+    [
+      281,
+      261
+    ],
+    [
+      260,
+      281
+    ]
+  ],
+  "visualReviewMatches": false,
+  "visualReview": "PENDING for current checksum",
+  "overall": "FAIL_OR_PENDING",
+  "issues": [
+    "Current GIF has no matching visual gait review"
+  ],
+  "gameplayIntegration": false,
+  "limitations": [
+    "Pixel differences do not certify anatomical left/right or absence of foot sliding.",
+    "Manual review is author QA, not user art approval.",
+    "Movement in the game is not exercised by this stationary GIF."
+  ]
+}

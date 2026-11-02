@@ -1,0 +1,21 @@
+{
+  "gif": "walk-v4-8-directions.gif",
+  "gifSHA256": "a5a3a8560da283263f2caef2a1dfd70df876e4cc02d485895e9e2043687b1a33",
+  "scope": "NE/NW orientation repair only",
+  "technicalResult": "PASS",
+  "visualMethod": "Author inspection of all 16 frames extracted from the final GIF. These are manual observations, not automatic camera-angle classification.",
+  "reviewedDirectionFrames": 16,
+  "unchangedOtherDirections": [
+    "N",
+    "E",
+    "SE",
+    "S",
+    "SW",
+    "W"
+  ],
+  "actualBrowserPlayback": "PASS_ACTUAL_GIF_PLAYBACK",
+  "result": "PASS_TARGETED_ORIENTATION_REPAIR",
+  "issues": [],
+  "fullVisualApproval": "PENDING",
+  "gameplayIntegration": false
+}

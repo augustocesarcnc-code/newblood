@@ -1,0 +1,56 @@
+[
+  {
+    "file": "idle-8-directions.gif",
+    "frames": 4,
+    "uniqueFrames": 4,
+    "durationsMs": [
+      330,
+      340,
+      330,
+      330
+    ],
+    "loop": 0,
+    "size": [
+      1536,
+      361
+    ]
+  },
+  {
+    "file": "walk-8-directions.gif",
+    "frames": 8,
+    "uniqueFrames": 8,
+    "durationsMs": [
+      130,
+      120,
+      130,
+      120,
+      130,
+      120,
+      130,
+      130
+    ],
+    "loop": 0,
+    "size": [
+      1536,
+      361
+    ]
+  },
+  {
+    "file": "run-8-directions.gif",
+    "frames": 6,
+    "uniqueFrames": 6,
+    "durationsMs": [
+      80,
+      90,
+      80,
+      80,
+      90,
+      80
+    ],
+    "loop": 0,
+    "size": [
+      1536,
+      361
+    ]
+  }
+]
