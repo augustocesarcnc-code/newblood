@@ -1,0 +1,20 @@
+node_modules/
+*.log
+
+.data/
+.data-demo/
+.env
+.env.*
+!.env.example
+
+__pycache__/
+*.py[cod]
+
+# Generated previews remain local; publish only the playable delivery bundle.
+dist/*
+!dist/Eclipse-Blood-Moon.zip
+
+*.sqlite
+*.sqlite-*
+prisma/*.db
+.data-dev/
