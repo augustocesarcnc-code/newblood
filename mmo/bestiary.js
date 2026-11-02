@@ -12,5 +12,5 @@ export const monsterTypes={
  necromancer:type('Necromante',1500,30,300,120,700,{armor:12,boss:true,miniBoss:true,respawnMs:60000,art:'necromancer'}),
  executioner:type('O Carrasco da Lua',6000,45,1000,250,650,{armor:20,boss:true,respawnMs:180000,art:'executioner',leash:10})
 };
-export const mapPopulation={cinzaveu:['bat','wolf'],floresta:['wolf','bat','skeleton','ghost','ghoul','witch','troll','minotaur'],cripta:['skeleton','ghoul','cultist','elite','necromancer'],caverna:['spider','antlion','ghoul','elite'],ruinas:['bandit','cultist','vampire','elite'],castelo:['werewolf','vampire','elite','executioner']};
+export const mapPopulation={cinzaveu:['bat','wolf'],floresta:['wolf','bat','skeleton','zombie','ghoul','goblin'],cripta:['skeleton','zombie','ghoul','necromancer'],caverna:['spider','antlion','skeleton','goblin'],ruinas:['bandit','cultist','vampire','elite'],castelo:['werewolf','vampire','elite','executioner']};
 export function monsterFor(map,index){const list=mapPopulation[map];if(!list)throw Error('Mapa de monstros desconhecido.');const species=list[index%list.length];return {species,...monsterTypes[species]};}

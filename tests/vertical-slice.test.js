@@ -6,8 +6,8 @@ import {updateMonster} from '../mmo/monster-ai.js';
 import {monsterTypes} from '../mmo/bestiary.js';
 
 test('slice encounters match the current visual brief and keep both routes connected',()=>{
- const species=new Set();for(const map of ['cinzaveu','floresta'])for(const spawn of mapObjects(map,'monsters')){assert.ok(['wolf','bat','skeleton','ghost','ghoul','witch','troll','minotaur'].includes(spawn.species));species.add(spawn.species);}
- assert.deepEqual([...species].sort(),['bat','ghost','ghoul','minotaur','skeleton','troll','witch','wolf']);
+ const species=new Set();for(const map of ['cinzaveu','floresta'])for(const spawn of mapObjects(map,'monsters')){assert.ok(['wolf','bat','skeleton','zombie','ghoul','goblin'].includes(spawn.species));species.add(spawn.species);}
+ assert.deepEqual([...species].sort(),['bat','ghoul','goblin','skeleton','wolf','zombie']);
  for(const [from,to] of [['cinzaveu','floresta'],['floresta','cinzaveu']]){const links=portals.filter(p=>p.map===from&&p.to===to);assert.ok(links.length);for(const p of links){assert.ok(walkable(p.x,p.y,from));assert.ok(walkable(p.tx,p.ty,to));}}
 });
 
@@ -26,7 +26,7 @@ test('player movement rejects every solid edge and diagonal corner in both slice
 });
 
 test('all eight slice monsters stay on walkable cells during chase, attack and return',()=>{
- for(const species of ['wolf','bat','skeleton','ghost','ghoul','witch','troll','minotaur'])for(const map of ['cinzaveu','floresta']){
+ for(const species of ['wolf','bat','skeleton','zombie','ghoul','goblin'])for(const map of ['cinzaveu','floresta']){
   const spawn=mapObjects(map,'monsters').find(s=>s.species===species)||mapObjects(map,'monsters')[0];
   const m={...monsterTypes[species],species,map,x:spawn.x,y:spawn.y,homeX:spawn.x,homeY:spawn.y,maxHP:monsterTypes[species].hp,lastMove:0,lastAttack:0,state:'IDLE'};
   // Match the runtime's relocation of authored spawns that land on a solid tile.

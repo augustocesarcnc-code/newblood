@@ -1,0 +1,35 @@
+{
+  "licenseFile": "../flare/LICENSE.txt",
+  "creditsFile": "../flare/CREDITS.txt",
+  "attributionFile": "ATTRIBUTION.txt",
+  "assets": [
+    {
+      "asset": "goblin.png",
+      "source": "https://raw.githubusercontent.com/flareteam/flare-game/af6eee6d339ac98011864bfe89da837fe7769c28/mods/fantasycore/images/enemies/goblin.png",
+      "sha256": "98c7849e51ce78a0e97c0ff50cd0827fb6c2c41ba83da3caf60ea7c9f776c73f",
+      "license": "CC-BY-SA-3.0",
+      "status": "MVP_LICENSED_PLACEHOLDER"
+    },
+    {
+      "asset": "skeleton.png",
+      "source": "https://raw.githubusercontent.com/flareteam/flare-game/af6eee6d339ac98011864bfe89da837fe7769c28/mods/fantasycore/images/enemies/skeleton.png",
+      "sha256": "cac5395ac62a611e0f9bf2b6a8d8ae58347562f13dd847bafc215b35a2cf53d4",
+      "license": "CC-BY-SA-3.0",
+      "status": "MVP_LICENSED_PLACEHOLDER"
+    },
+    {
+      "asset": "zombie.png",
+      "source": "https://raw.githubusercontent.com/flareteam/flare-game/af6eee6d339ac98011864bfe89da837fe7769c28/mods/fantasycore/images/enemies/zombie.png",
+      "sha256": "2477c47f395352935bd8a5cd8fed6e08e0508c1a048ac1fa0aaa89849dd8ab3a",
+      "license": "CC-BY-SA-3.0",
+      "status": "MVP_LICENSED_PLACEHOLDER"
+    },
+    {
+      "asset": "antlion.png",
+      "source": "https://raw.githubusercontent.com/flareteam/flare-game/af6eee6d339ac98011864bfe89da837fe7769c28/mods/fantasycore/images/enemies/antlion.png",
+      "sha256": "c64d27d5f986a4816ae7471d5a854c95b6952f7205c66b2addc8eb19922fe38b",
+      "license": "CC-BY-SA-3.0",
+      "status": "MVP_LICENSED_PLACEHOLDER"
+    }
+  ]
+}

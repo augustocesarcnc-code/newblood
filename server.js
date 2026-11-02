@@ -10,7 +10,7 @@ const publicModules=new Set([
  'client','world','items','sprites','progression','village','auth-ui','appearance',
  'sprite-lab','directions','bestiary','monster-sprites','terrain','scenery','bot-ui',
  'skillbook','skills-ui','skill-effects','map-renderer','game-ui','clan-ui','inventory',
- 'inventory-ui','bank-ui','loot-ui','attributes','social-ui','map-data','environment-ui','audio','window-ui','eclipse-sprites','hunter-master','human-sprites','human-rig','art-review','picking'
+ 'inventory-ui','bank-ui','loot-ui','attributes','social-ui','map-data','environment-ui','audio','window-ui','eclipse-sprites','hunter-master','human-sprites','human-rig','flare-monsters','art-review','picking'
 ]);
 const mime={svg:'image/svg+xml',png:'image/png',jpg:'image/jpeg',json:'application/json',
  txt:'text/plain; charset=utf-8',md:'text/plain; charset=utf-8',js:'text/javascript',
@@ -26,6 +26,7 @@ app.use(async(req,res)=>{
   else if(['/packages/shared/src/events.js','/packages/shared/src/tiled.js'].includes(path))file=path.slice(1);
   else if(/^\/assets\/(?:flare|original|animations|bases|audio|maps|monsters|terrain|concepts|skills|ui|eclipse|characters|deprecated)\/(?:[a-zA-Z0-9_-]+\/)?[a-zA-Z0-9_.-]+\.(png|jpg|svg|json|txt|md|ogg|wav|mp3)$/.test(path))file=path.slice(1);
   else if(path==='/')file='index.html';
+  else if(path==='/credits')file='credits.html';
   else if(path==='/hunter-master')file='hunter-master.html';
   else if(path==='/sprites')file='sprites.html';
   else if(path==='/art'||path==='/art.html')file='art.html';
