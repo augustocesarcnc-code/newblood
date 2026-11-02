@@ -1,41 +1,47 @@
 import * as T from 'three';
 // Original ECLIPSE miniature models. Coordinates are model-space, not rotated bitmaps.
-const geometry={sphere:new T.SphereGeometry(1,10,8),box:new T.BoxGeometry(1,1,1),cone:new T.ConeGeometry(1,1,8),cylinder:new T.CylinderGeometry(1,1,1,10),torus:new T.TorusGeometry(1,.12,6,24)};
+const geometry={sphere:new T.SphereGeometry(1,18,14),box:new T.BoxGeometry(1,1,1),cone:new T.ConeGeometry(1,1,8),cylinder:new T.CylinderGeometry(1,1,1,10),torus:new T.TorusGeometry(1,.12,6,24)};
 const materials=new Map();
-function material(color,glow=false){const key=color+glow;if(!materials.has(key))materials.set(key,new T.MeshLambertMaterial({color,emissive:glow?color:0,emissiveIntensity:glow?.65:0,flatShading:true}));return materials.get(key);}
+function material(color,glow=false){const key=color+glow;if(!materials.has(key))materials.set(key,new T.MeshLambertMaterial({color,emissive:glow?color:0,emissiveIntensity:glow?.65:0,flatShading:false}));return materials.get(key);}
 function node(parent,x=0,y=0,z=0){const group=new T.Group();group.position.set(x,y,z);parent.add(group);return group;}
 function part(parent,type,pos,size,color,rotation=[0,0,0],layer='body',glow=false){const mesh=new T.Mesh(geometry[type],material(color,glow));mesh.position.set(...pos);mesh.scale.set(...size);mesh.rotation.set(...rotation);mesh.userData.layer=layer;parent.add(mesh);return mesh;}
 const ell=(p,pos,size,c,r=[0,0,0],layer='body',glow=false)=>part(p,'sphere',pos,size,c,r,layer,glow);
 const box=(p,pos,size,c,r=[0,0,0],layer='body')=>part(p,'box',pos,size,c,r,layer);
 function bone(parent,a,b,r,color,layer='body'){const A=new T.Vector3(...a),B=new T.Vector3(...b),mid=A.clone().add(B).multiplyScalar(.5),mesh=part(parent,'cylinder',mid.toArray(),[r,A.distanceTo(B),r],color,[0,0,0],layer);mesh.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),B.sub(A).normalize());return mesh;}
 function spike(parent,pos,length,color,rotation=[0,0,0],layer='body'){return part(parent,'cone',pos,[length*.17,length,length*.17],color,rotation,layer);}
-function cape(parent,color,length=1.1,width=.45){const group=node(parent,0,.2,-.21);for(let i=0;i<6;i++){const left=(i/6-.5)*width*2,right=((i+1)/6-.5)*width*2,hem=-length+(i%2)*.055,points=[[left,0,0],[right,0,0],[left*1.4,hem,-.16-(i%2)*.035],[right*1.4,hem,-.16-(i%2)*.035]],geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute([...points[0],...points[2],...points[1],...points[1],...points[2],...points[3]],3));geo.computeVertexNormals();const mesh=new T.Mesh(geo,new T.MeshLambertMaterial({color,side:T.DoubleSide,flatShading:true}));mesh.userData.layer='body';group.add(mesh);bone(group,points[2],points[3],.009,'#987654');}return group;}
+function cape(parent,color,length=1.1,width=.45,layer='body'){const group=node(parent,0,.2,-.21);for(let i=0;i<6;i++){const left=(i/6-.5)*width*2,right=((i+1)/6-.5)*width*2,hem=-length+(i%2)*.055,points=[[left,0,0],[right,0,0],[left*1.4,hem,-.16-(i%2)*.035],[right*1.4,hem,-.16-(i%2)*.035]],geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute([...points[0],...points[2],...points[1],...points[1],...points[2],...points[3]],3));geo.computeVertexNormals();const mesh=new T.Mesh(geo,new T.MeshLambertMaterial({color,side:T.DoubleSide,flatShading:false}));mesh.userData.layer=layer;group.add(mesh);bone(group,points[2],points[3],.009,'#987654',layer);}return group;}
+function coatPanel(parent,side,color,trim,layer='body'){
+ const g=node(parent,side*.18,-.03,.04),points=[[side*-.04,.12,.15],[side*.19,.09,.09],[side*-.01,-.69,.15],[side*.3,-.72,.02]],geo=new T.BufferGeometry();
+ geo.setAttribute('position',new T.Float32BufferAttribute([...points[0],...points[2],...points[1],...points[1],...points[2],...points[3]],3));geo.computeVertexNormals();
+ const mesh=new T.Mesh(geo,new T.MeshLambertMaterial({color,side:T.DoubleSide}));mesh.userData.layer=layer;g.add(mesh);bone(g,points[0],points[2],.012,trim,layer);bone(g,points[2],points[3],.012,trim,layer);return g;
+}
 function sword(parent,heavy=false,color='#bcc5c7',layer='body'){const group=node(parent,0,-.34,.03);box(group,[0,-.45,0],[heavy?.23:.075,heavy?1.05:.78,.045],color,[0,0,-.05],layer);box(group,[0,-.02,0],[.38,.065,.08],'#a88c57',[0,0,0],layer);bone(group,[0,-.07,0],[0,.18,0],.045,'#4a2930',layer);ell(group,[0,.19,0],[.06,.06,.06],'#bf6370',[0,0,0],layer);if(heavy){box(group,[.06,-.4,.03],[.23,.1,.02],'#673242',[0,0,-.3],layer);spike(group,[-.14,-.92,0],.28,color,[Math.PI,0,0],layer);}return group;}
 function bow(parent,layer='body'){const g=node(parent,0,-.14,.12);for(let i=0;i<8;i++){const a=-1.1+i*2.2/8,b=-1.1+(i+1)*2.2/8;bone(g,[Math.cos(a)*.34,Math.sin(a)*.72,0],[Math.cos(b)*.34,Math.sin(b)*.72,0],.025,'#a28658',layer);}bone(g,[.15,-.64,0],[.15,.64,0],.006,'#d4cbaa',layer);return g;}
 function staff(parent,layer='body',color='#7b527e'){const g=node(parent,0,-.3,0);bone(g,[0,-.9,0],[0,.8,0],.035,'#65505b',layer);part(g,'torus',[0,.78,0],[.14,.18,.12],'#b59b69',[0,0,0],layer);ell(g,[0,.79,0],[.075,.13,.075],color,[0,0,0],layer,true);return g;}
-function human(model){const root=new T.Group(),bones={},human=['hunter','vampire-human','wolf-human'].includes(model),wolf=['werewolf','wild-werewolf'].includes(model),vamp=['vampire-form','wild-vampire'].includes(model),boss=model==='executioner',skeleton=['skeleton','elite','necromancer'].includes(model),ghoul=model==='ghoul',bandit=model==='bandit',cultist=model==='cultist',necro=model==='necromancer';
- const broad=wolf?1.35:boss?1.5:model==='wolf-human'?1.08:1,skin=wolf?'#6b6863':vamp?'#928a9e':skeleton?'#d0c8b2':ghoul?'#77857a':model==='vampire-human'?'#c4b3ab':'#b49b85',cloth=model==='hunter'?'#48443c':model==='wolf-human'?'#3a4540':model==='bandit'?'#493934':necro?'#2c263c':cultist?'#382e3e':'#382938',metal=boss?'#4d5965':'#64727b';
+function human(model){const root=new T.Group(),bones={},human=['hunter','vampire-human','wolf-human'].includes(model),wolf=['werewolf','wild-werewolf'].includes(model),vamp=['vampire-form','wild-vampire'].includes(model),boss=model==='executioner',skeleton=['skeleton','elite','necromancer'].includes(model),ghoul=model==='ghoul',bandit=model==='bandit',cultist=model==='cultist',necro=model==='necromancer',ghost=model==='ghost',witch=model==='witch',troll=model==='troll',minotaur=model==='minotaur';
+ const broad=minotaur?1.45:troll?1.5:wolf?1.35:boss?1.5:model==='wolf-human'?1.08:1,skin=ghost?'#94adc2':troll?'#586b56':minotaur?'#6b5c51':wolf?'#354453':vamp?'#82788d':skeleton?'#d0c8b2':ghoul?'#77857a':model==='vampire-human'?'#c4b3ab':'#b49b85',cloth=ghost?'#354659':witch?'#332b40':troll?'#373b34':minotaur?'#3e353d':model==='hunter'?'#48443c':model==='wolf-human'?'#3a4540':model==='bandit'?'#493934':necro?'#2c263c':cultist?'#382e3e':'#382938',metal=boss?'#4d5965':'#64727b';
  bones.hips=node(root,0,1.02,0);bones.spine=node(bones.hips,0,.32,0);bones.head=node(bones.spine,0,.69,0);
- ell(bones.hips,[0,0,0],[.27*broad,.2,.18],wolf?skin:cloth);if(!skeleton)ell(bones.spine,[0,.2,0],[.33*broad,.4,.19],wolf||vamp?skin:cloth);
+ ell(bones.hips,[0,0,0],[.27*broad,.2,.18],wolf?skin:cloth);if(!skeleton)ell(bones.spine,[0,.2,0],[.33*broad,.4,.19],wolf||vamp||troll||minotaur?skin:cloth);
  if(skeleton){for(let j=0;j<5;j++){const y=.01+j*.105;for(const side of [-1,1])bone(bones.spine,[0,y,.18],[side*.28,y+.04,.04],.022,'#d5cdb8');}bone(bones.spine,[0,-.12,0],[0,.57,0],.04,'#b9af9a');}
  if(!wolf&&!skeleton){box(bones.spine,[0,.17,.188],[.15,.53,.026],model==='hunter'?'#7c6451':'#6e283b');for(let i=0;i<4;i++)ell(bones.spine,[.025,-.02+i*.12,.217],[.018,.018,.01],'#c5aa73');bone(bones.spine,[-.26,.43,.16],[.25,-.13,.21],.035,'#8c7354');box(bones.hips,[0,.08,.025],[.62,.085,.37],'#393039');box(bones.hips,[.06,.08,.22],[.1,.09,.035],'#ad9164');}
  for(const side of [-1,1]){const upper=node(bones.hips,side*.16*broad,-.08,0),knee=node(upper,0,-.42,0),foot=node(knee,0,-.42,0);bones['thigh'+side]=upper;bones['knee'+side]=knee;bones['foot'+side]=foot;
   bone(upper,[0,0,0],[0,-.42,0],wolf?.14:skeleton?.043:.105,skin===cloth?skin:skeleton||wolf||ghoul?skin:'#33353b');bone(knee,[0,0,0],[0,-.42,0],wolf?.11:skeleton?.035:.085,wolf||skeleton||ghoul?skin:'#35353a');ell(foot,[0,-.06,.09],[wolf?.14:.105,.09,wolf?.23:.19],wolf?skin:skeleton?'#b3aa98':'#292a30');
   if(wolf){for(let n=0;n<3;n++)spike(foot,[(n-1)*.08,-.045,.28],.14,'#d3c6ac',[Math.PI/2,0,0]);spike(knee,[0,.03,-.1],.21,skin,[.5,0,0]);}
   const shoulder=node(bones.spine,side*.39*broad,.39,0),elbow=node(shoulder,0,-.34,.015),hand=node(elbow,0,-.31,.035);bones['arm'+side]=shoulder;bones['elbow'+side]=elbow;bones['hand'+side]=hand;
-  ell(shoulder,[0,-.04,0],[wolf?.22:.14,wolf?.24:.17,wolf?.2:.14],wolf||vamp||skeleton||ghoul?skin:cloth);bone(shoulder,[0,-.04,0],[0,-.34,.015],wolf?.145:skeleton?.035:.09,skeleton||wolf||vamp||ghoul?skin:cloth);bone(elbow,[0,0,0],[0,-.31,.035],wolf?.12:skeleton?.03:.075,skin);ell(hand,[0,-.045,.025],[wolf?.12:.07,.1,.07],skin);
+  ell(shoulder,[0,-.04,0],[wolf?.175:.14,wolf?.22:.17,wolf?.155:.14],wolf||vamp||skeleton||ghoul||troll||minotaur?skin:cloth);bone(shoulder,[0,-.04,0],[0,-.34,.015],wolf?.145:skeleton?.035:.09,skeleton||wolf||vamp||ghoul||troll||minotaur?skin:cloth);bone(elbow,[0,0,0],[0,-.31,.035],wolf?.12:skeleton?.03:.075,skin);ell(hand,[0,-.045,.025],[wolf?.12:.07,.1,.07],skin);
   if(wolf||vamp||ghoul)for(let n=0;n<3;n++)bone(hand,[(n-1)*.055,-.06,.01],[(n-1)*.075,-.23,.08],.018,'#cbbfa9');
   if(boss||model==='elite'){ell(shoulder,[side*.03,.04,0],[.24,.17,.21],metal);for(let k=0;k<3;k++)spike(shoulder,[side*(.04+k*.08),.19,.01],.25,'#b8a894',[0,0,-side*.4]);}
  }
  const head=bones.head;
- if(wolf){ell(head,[0,.07,0],[.235,.27,.19],skin);ell(head,[0,-.02,.23],[.15,.105,.25],'#777575');ell(head,[0,.005,.43],[.085,.06,.055],'#222731');for(const side of [-1,1]){spike(head,[side*.18,.3,-.015],.31,skin,[0,0,-side*.25]);ell(head,[side*.14,.12,.17],[.046,.025,.022],'#e5b05d',[0,side*.4,0],'body',true);spike(head,[side*.11,-.06,.34],.12,'#e2d4ba',[Math.PI,0,0]);spike(bones.spine,[side*.29,.48,-.13],.32,'#494c51',[0,0,-side*.8]);}bones.tail=node(bones.hips,0,-.08,-.15);bone(bones.tail,[0,0,0],[0,-.3,-.5],.095,'#484c51');spike(bones.tail,[0,-.3,-.58],.38,'#636569',[-1.7,0,0]);}
+ if(minotaur){ell(head,[0,.06,0],[.24,.29,.2],skin);ell(head,[0,-.055,.23],[.22,.13,.2],'#7a6b60');ell(head,[0,-.02,.38],[.18,.07,.07],'#2b2930');for(const side of [-1,1]){ell(head,[side*.16,.14,.16],[.035,.018,.03],'#bd7458');bone(head,[side*.15,.32,0],[side*.39,.49,-.04],.065,'#c6baa4');bone(head,[side*.39,.49,-.04],[side*.44,.7,.04],.04,'#d4c9b3');spike(head,[side*.44,.76,.05],.19,'#d4c9b3');spike(head,[side*.28,.17,-.03],.23,skin,[0,0,-side*1.3]);}}
+ else if(wolf){ell(head,[0,.07,0],[.235,.27,.19],skin);ell(head,[0,-.025,.27],[.115,.085,.31],'#56606a');ell(head,[0,.005,.54],[.072,.045,.055],'#121c28');for(const side of [-1,1]){spike(head,[side*.18,.3,-.015],.31,skin,[0,0,-side*.25]);ell(head,[side*.14,.12,.17],[.04,.012,.022],'#d9b66d',[0,side*.4,0],'body',true);spike(head,[side*.11,-.06,.34],.12,'#e2d4ba',[Math.PI,0,0]);spike(bones.spine,[side*.29,.48,-.13],.32,'#494c51',[0,0,-side*.8]);}bones.tail=node(bones.hips,0,-.08,-.15);bone(bones.tail,[0,0,0],[0,-.3,-.5],.095,'#484c51');spike(bones.tail,[0,-.3,-.58],.38,'#636569',[-1.7,0,0]);}
  else {ell(head,[0,.04,0],[skeleton?.175:.17,.235,.16],skin);ell(head,[0,-.12,.055],[.12,.12,.12],skin);ell(head,[0,.01,.165],[.035,.05,.065],skeleton?'#463e3b':skin);
   for(const side of [-1,1]){ell(head,[side*.076,.08,.145],[skeleton?.048:.03,skeleton?.055:.018,.022],skeleton?'#201e28':vamp||ghoul?'#d56375':'#252631',[0,side*.15,0],'body',vamp);if(vamp){spike(head,[side*.18,.17,0],.25,skin,[0,0,-side*.9]);spike(head,[side*.06,-.14,.17],.06,'#e2d2bb',[Math.PI,0,0]);}}
   if(!skeleton){ell(head,[0,.21,-.045],[.185,.12,.16],model==='wolf-human'?'#584736':'#252630');if(model==='vampire-human'||vamp)for(const side of [-1,1])ell(head,[side*.14,.035,-.05],[.065,.28,.12],'#242430',[0,0,side*.13]);if(model==='wolf-human')ell(head,[0,-.15,.12],[.125,.065,.05],'#5b493c');}
  }
- if(vamp){bones.wings=[];for(const side of [-1,1]){const wing=node(bones.spine,side*.2,.4,-.17);bones.wings.push(wing);bone(wing,[0,0,0],[side*.75,.63,-.12],.035,'#90818e');bone(wing,[side*.75,.63,-.12],[side*1.2,.06,-.2],.025,'#8a7687');for(let k=0;k<3;k++){const end=[side*(.5+k*.28),-.48+k*.12,-.17];bone(wing,[side*.75,.63,-.12],end,.021,'#7e6878');const points=[[0,0,0],[side*.75,.63,-.12],end];const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(points.flat(),3));geo.computeVertexNormals();const mesh=new T.Mesh(geo,new T.MeshLambertMaterial({color:'#542b45',side:T.DoubleSide,flatShading:true}));mesh.userData.layer='body';wing.add(mesh);}}}
- if(human||bandit||cultist||necro||vamp||boss){bones.cape=cape(bones.spine,model==='hunter'?'#4c4140':model==='wolf-human'?'#3d4940':boss?'#752d3b':necro?'#42334d':'#592b3e',boss?1.5:necro?1.5:human?.88:1.15,boss?.65:.43);}
- if(cultist||necro||model==='hunter'){ell(head,[0,.12,-.11],[.23,.28,.09],cloth);ell(head,[0,.31,-.02],[.22,.1,.19],cloth);for(const side of [-1,1])ell(head,[side*.18,.13,.015],[.065,.23,.15],cloth);ell(head,[0,.05,.135],[.145,.19,.09],skin);for(const side of [-1,1])ell(head,[side*.076,.1,.205],[.025,.017,.012],necro?'#c873d3':'#2a2530');}
+ if(vamp){bones.wings=[];for(const side of [-1,1]){const wing=node(bones.spine,side*.2,.4,-.17);bones.wings.push(wing);bone(wing,[0,0,0],[side*.75,.63,-.12],.035,'#90818e');bone(wing,[side*.75,.63,-.12],[side*1.2,.06,-.2],.025,'#8a7687');for(let k=0;k<3;k++){const end=[side*(.5+k*.28),-.48+k*.12,-.17];bone(wing,[side*.75,.63,-.12],end,.021,'#7e6878');const points=[[0,0,0],[side*.75,.63,-.12],end];const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(points.flat(),3));geo.computeVertexNormals();const mesh=new T.Mesh(geo,new T.MeshLambertMaterial({color:'#542b45',side:T.DoubleSide,flatShading:false}));mesh.userData.layer='body';wing.add(mesh);}}}
+ if(human||bandit||cultist||necro||vamp||boss||ghost||witch){bones.cape=cape(bones.spine,model==='hunter'?'#4c4140':model==='wolf-human'?'#3d4940':boss?'#752d3b':necro?'#42334d':'#592b3e',boss?1.5:necro?1.5:human?.88:1.15,boss?.65:.43);}
+ if(cultist||necro||ghost||witch||model==='hunter'){ell(head,[0,.12,-.11],[.23,.28,.09],cloth);ell(head,[0,.31,-.02],[.22,.1,.19],cloth);for(const side of [-1,1])ell(head,[side*.18,.13,.015],[.065,.23,.15],cloth);ell(head,[0,.05,.135],[.145,.19,.09],skin);for(const side of [-1,1])ell(head,[side*.076,.1,.205],[.025,.017,.012],necro?'#c873d3':'#2a2530');}
  if(human){ell(bones.spine,[-.26,.4,.2],[.055,.055,.025],'#b8a579');for(const side of [-1,1]){for(let i=0;i<3;i++)bone(bones['elbow'+side],[-.07,-.1-i*.05,.06],[.07,-.1-i*.05,.06],.014,model==='wolf-human'?'#a8a293':'#77675c');box(bones['foot'+side],[0,-.02,.2],[.1,.05,.035],'#8c795a');}if(model==='vampire-human'){for(const side of [-1,1])spike(bones.spine,[side*.18,.52,-.07],.25,'#5c2d40',[0,0,-side*.7]);}}
  if(bandit){box(head,[0,-.075,.155],[.3,.13,.05],'#302833');bone(head,[-.17,.17,.1],[.17,.17,.1],.032,'#8e484e');sword(bones.hand1);}
  if(cultist||necro)staff(bones.hand1,'body',necro?'#c273d8':'#bd445e');
@@ -43,11 +49,89 @@ function human(model){const root=new T.Group(),bones={},human=['hunter','vampire
  if(boss){ell(head,[0,.08,.05],[.23,.28,.21],'#525765');box(head,[0,.01,.24],[.29,.25,.045],'#b6afa0');box(head,[0,.1,.27],[.27,.035,.02],'#b73b52');for(const side of [-1,1])spike(head,[side*.23,.34,0],.58,'#a09585',[0,0,-side*.6]);ell(bones.spine,[0,.18,.01],[.49,.43,.27],metal);bone(bones.spine,[-.3,.43,.26],[0,-.1,.3],.025,'#b6a681');bone(bones.spine,[.3,.43,.26],[0,-.1,.3],.025,'#b6a681');const axe=sword(bones.hand1,true);axe.scale.set(1.5,1.35,1.3);part(bones.spine,'torus',[0,.45,-.35],[.8,.8,.3],'#9a3b51',[0,0,0],'body',true);}
  if(model==='elite'){box(head,[0,.12,-.025],[.43,.3,.34],metal);spike(head,[0,.44,-.02],.52,'#a29475');sword(bones.hand1,true);}
  if(ghoul){bones.spine.rotation.x=.3;for(let j=0;j<3;j++)box(bones.spine,[(j-1)*.09,.2,.2],[.025,.22,.025],'#6c343c',[0,0,.2]);}
+ // Four deliberately distinct silhouettes, using the same fixed camera and frame contract.
+ if(ghost){
+  bones.hips.position.y+=.18;bones.head.scale.setScalar(.88);
+  for(const side of [-1,1]){bones['thigh'+side].traverse(o=>{if(o.isMesh)o.userData.layer='hidden';});bones['arm'+side].scale.y=1.22;}
+  bones.coat=[-1,1].map(side=>coatPanel(bones.hips,side,'#56677c','#91a7c1'));
+  if(bones.cape){bones.cape.scale.y=1.45;bones.cape.scale.x=1.12;}
+  for(const side of [-1,1])ell(head,[side*.07,.1,.22],[.032,.018,.02],'#b5d5ed',[0,0,0],'body',true);
+ }
+ if(witch){
+  bones.head.scale.setScalar(.84);part(head,'cone',[0,.55,-.055],[.32,.58,.32],'#302839',[0,0,-.22]);part(head,'cylinder',[0,.29,0],[.4,.04,.35],'#3f3045');staff(bones.hand1,'body','#9c738f');
+  bones.coat=[-1,1].map(side=>coatPanel(bones.hips,side,'#342b40','#8f8194'));for(const side of [-1,1])bone(bones.spine,[side*.25,.42,.2],[side*.06,-.08,.23],.02,'#9a8f83');
+ }
+ if(troll){
+  bones.spine.scale.set(1.1,1.07,1.08);bones.head.scale.set(1.07,.94,1.04);bones.spine.rotation.x=.2;
+  for(const side of [-1,1]){bones['arm'+side].scale.set(1.3,1.25,1.3);spike(head,[side*.11,-.1,.2],.18,'#b8b496');spike(head,[side*.22,.15,0],.27,skin,[0,0,-side*1.2]);}
+  const club=node(bones.hand1,0,-.18,0);bone(club,[0,.1,0],[0,-.85,0],.085,'#584b3f');ell(club,[0,-.85,0],[.22,.3,.2],'#5e5a55');for(let j=0;j<3;j++)box(club,[0,-.69-j*.12,0],[.45,.055,.4],'#555962');
+ }
+ if(minotaur){
+  bones.head.scale.setScalar(.93);bones.spine.rotation.x=.13;
+  for(const side of [-1,1]){ell(bones.spine,[side*.39,.43,0],[.22,.13,.2],'#626878');bone(bones.spine,[side*.32,.4,.24],[0,-.1,.24],.025,'#9e8c73');}
+  const axe=node(bones.hand1,0,-.15,0);bone(axe,[0,.28,0],[0,-1,0],.05,'#665249');box(axe,[.02,-.7,0],[.58,.31,.075],'#919a9d',[0,0,-.18]);spike(axe,[-.29,-.62,0],.36,'#a4adae',[0,0,1.3]);
+ }
+ // Art Bible revision: common adult proportions, class silhouettes and articulated clothing.
+ if(human){
+  bones.head.scale.setScalar(.82);
+  for(const side of [-1,1]){
+   const arm=bones['arm'+side];arm.scale.x=.88;arm.scale.z=.88;
+   box(bones['elbow'+side],[0,-.18,.045],[.145,.21,.13],model==='hunter'?'#292c31':'#37353b');
+   box(bones['foot'+side],[0,.07,0],[.16,.29,.15],'#262a30');
+   bone(bones['foot'+side],[-.075,.1,.09],[.075,.1,.09],.012,'#a7a9a6');
+  }
+  const trim=model==='hunter'?'#929b9e':model==='vampire-human'?'#9c7b79':'#7d8d89';
+  bones.coat=[-1,1].map(side=>coatPanel(bones.hips,side,model==='hunter'?'#282e35':model==='vampire-human'?'#30202e':'#303c39',trim));
+  for(const side of [-1,1]){
+   // Angular lapels, instead of round knight pauldrons.
+   box(bones.spine,[side*.19,.34,.175],[.14,.32,.035],model==='hunter'?'#343e48':'#542c3c',[0,0,side*-.32]);
+   bone(bones.spine,[side*.24,.48,.2],[side*.12,.19,.22],.013,trim);
+  }
+  ell(bones.spine,[0,.32,.227],[.038,.054,.014],'#bdc4c2');
+  if(model==='hunter'){
+   // Weathered leather duster, low-crowned field hat, silver clasps and tool belt.
+   part(head,'cylinder',[0,.31,-.01],[.36,.035,.31],'#20272f');
+   part(head,'cylinder',[0,.39,-.045],[.205,.15,.19],'#29313b');
+   bone(head,[-.19,.345,.12],[.19,.345,.12],.014,'#8d999f');
+   for(let i=0;i<3;i++){box(bones.hips,[-.24+i*.075,.08,.22],[.05,.12,.045],'#7e898c');}
+   if(bones.cape){bones.cape.scale.x=.82;bones.cape.scale.y=1.27;}
+  }
+  if(model==='vampire-human'){
+   for(const side of [-1,1])box(bones.spine,[side*.21,.5,-.01],[.12,.3,.09],'#442537',[.2,0,side*-.38]);
+   bone(bones.spine,[-.18,.26,.22],[.18,.26,.22],.009,'#a9948f');
+   if(bones.cape){bones.cape.scale.y=1.3;bones.cape.scale.x=.9;}
+  }
+  if(model==='wolf-human'){
+   bones.spine.scale.x=1.08;
+   for(const side of [-1,1])for(let j=0;j<4;j++)spike(bones.spine,[side*(.19+j*.055),.48,-.02],.15,'#606c67',[0,0,-side*.8]);
+   bone(head,[.08,.1,.16],[.14,-.06,.18],.008,'#87635e');
+  }
+ }
+ if(wolf){
+  bones.head.scale.set(.88,1.07,1.12);bones.spine.rotation.x=.18;
+  for(const side of [-1,1]){
+   bones['arm'+side].scale.y=1.16;bones['arm'+side].rotation.z=side*-.1;
+   bone(head,[side*.06,.175,.2],[side*.18,.145,.19],.032,'#202d3c');
+   box(head,[side*.07,-.075,.36],[.02,.045,.2],'#1a202c');
+   for(let j=0;j<3;j++)spike(head,[side*.065,-.09,.28+j*.075],j===0?.14:.09,'#d3cfbd',[Math.PI,0,0]);
+   spike(head,[side*.22,.015,-.01],.28,'#2d3b4a',[0,0,-side*1.15]);
+   spike(head,[side*.17,.31,-.01],.38,'#283846',[0,0,-side*.2]);
+  }
+  for(const side of [-1,1])for(let j=0;j<5;j++)spike(bones.spine,[side*(.25+j*.03),.42-j*.055,-.11],.22,'#454e56',[.2,0,-side*(.6+j*.12)]);
+  for(const side of [-1,1])bone(bones.spine,[side*.11,.37,.2],[side*.25,.1,.18],.015,'#864f52');
+ }
+ if(vamp){
+  bones.head.scale.set(.8,1.07,.94);
+  for(const side of [-1,1]){bones['arm'+side].scale.y=1.14;bone(head,[side*.035,.14,.17],[side*.12,.11,.16],.025,'#382d43');spike(head,[side*.065,-.14,.18],.095,'#d3cebc',[Math.PI,0,0]);}
+
+  for(const side of [-1,1])for(let j=0;j<3;j++)bone(bones.spine,[side*.08,.3-j*.07,.2],[side*.25,.22-j*.07,.15],.016,'#9a6e82');
+ }
  // Independent equipment meshes use exactly the same joints for every human base.
  if(human){
   for(const [base,color]of [['couro','#6f5845'],['cota','#7b8590'],['placas','#77788b'],['manto','#58354e']]){const g=node(bones.spine);g.userData.equipment=base;ell(g,[0,.17,.03],[.355,.4,.23],color,[0,0,0],base);box(g,[0,.16,.256],[.13,.36,.025],'#b39c72',[0,0,0],base);for(const side of [-1,1])ell(g,[side*.35,.46,0],[.18,.095,.18],color,[0,0,side*.25],base);}
   for(const side of [-1,1]){ell(bones['foot'+side],[0,-.04,.09],[.117,.11,.2],'#677886',[0,0,0],'botas');ell(bones['thigh'+side],[0,-.2,0],[.12,.26,.12],'#7b8189',[0,0,0],'calcas');ell(bones['hand'+side],[0,-.04,.02],[.09,.115,.09],'#6d747c',[0,0,0],'luvas');}
-  sword(bones.hand1,false,'#cad4d5','espada');bow(bones['hand-1'],'arco');bow(bones['hand-1'],'besta');staff(bones.hand1,'cetro','#c55369');for(const side of [-1,1])for(let j=0;j<3;j++)spike(bones['hand'+side],[(j-1)*.05,-.17,.07],.26,'#b3bec3',[Math.PI,0,0],'garra');
+  {const cloak=cape(bones.spine,'#672c43',1.24,.55,'capa');cloak.position.z=-.29;bones.equippedCape=cloak;}
+  sword(bones.hand1,false,'#cad4d5','espada');bow(bones['hand-1'],'arco');{const cross=node(bones.hand1,0,-.2,.14);bone(cross,[0,-.4,0],[0,.25,0],.045,'#3d3438','besta');bone(cross,[-.3,-.24,0],[.3,-.24,0],.023,'#b5bdc0','besta');bone(cross,[-.3,-.24,0],[0,.07,.025],.007,'#b1a28a','besta');bone(cross,[.3,-.24,0],[0,.07,.025],.007,'#b1a28a','besta');}staff(bones.hand1,'cetro','#c55369');for(const side of [-1,1])for(let j=0;j<3;j++)spike(bones['hand'+side],[(j-1)*.05,-.17,.07],.26,'#b3bec3',[Math.PI,0,0],'garra');
   ell(head,[0,.16,-.02],[.2,.28,.19],'#62616e',[0,0,0],'capuz');ell(bones.spine,[0,.25,.245],[.035,.05,.025],'#c5ac7b',[0,0,0],'amuleto');ell(bones['arm-1'],[0,-.16,.12],[.21,.34,.04],'#6c7480',[0,0,-.1],'escudo');
  }
  root.userData.kind=model;return {root,bones,humanoid:true,model,human,wolf,vamp,boss};
@@ -62,19 +146,22 @@ function beast(model){const root=new T.Group(),bones={},rat=model==='rat',bat=mo
  if(corrupt){for(let i=0;i<5;i++)spike(bones.hips,[0,.34,-.4+i*.2],.3+(i%2)*.13,'#ae9d96',[0,0,-.2]);for(const side of [-1,1]){ell(bones.hips,[side*.28,.16,.2],[.11,.22,.2],'#512b41');spike(bones.head,[side*.18,.3,-.1],.4,'#b7a89b',[0,0,-side*.5]);}box(bones.head,[.1,0,.19],[.025,.16,.025],'#ba4c65',[0,0,-.4]);}
  return {root,bones,model,humanoid:false,bat,spider};
 }
-export const models=['hunter','vampire-human','vampire-form','wolf-human','werewolf','rat','bat','wolf','corrupted-wolf','spider','skeleton','ghoul','cultist','bandit','wild-vampire','wild-werewolf','necromancer','elite','executioner','goblin','antlion','zombie'];
-export const states=['idle','walk','run','jump','attack','shoot','hit','death','cast','transform','special'];
+export const models=['hunter','vampire-human','vampire-form','wolf-human','werewolf','rat','bat','wolf','corrupted-wolf','spider','skeleton','ghoul','cultist','bandit','wild-vampire','wild-werewolf','necromancer','elite','executioner','goblin','antlion','zombie','ghost','witch','troll','minotaur'];
+export const states=['idle','walk','run','jump','attack','shoot','hit','death','cast','transform','special','attack2'];
 export function makeModel(name){const normalized=name==='goblin'?'ghoul':name==='zombie'?'ghoul':name;const rig=['rat','bat','wolf','corrupted-wolf','spider','antlion'].includes(normalized)?beast(normalized):human(normalized);rig.model=name;rig.base=[];rig.root.traverse(o=>{rig.base.push({o,position:o.position.clone(),rotation:o.rotation.clone(),scale:o.scale.clone()});});return rig;}
 export function pose(rig,state,index){for(const value of rig.base){value.o.position.copy(value.position);value.o.rotation.copy(value.rotation);value.o.scale.copy(value.scale);}const b=rig.bones,t=index/8,cycle=Math.sin(t*Math.PI*2),opposite=-cycle,travel=state==='walk'||state==='run',running=state==='run',swing=[0,.12,.35,.9,1,.65,.25,.05][index],jump=[-.11,-.2,.18,.5,.64,.45,.1,-.13][index],death=t/.875;
  if(rig.humanoid){if(travel){b.hips.position.y+=(running?.07:.035)*Math.abs(cycle);b.spine.rotation.x+=running?.2:.06;for(const side of [-1,1]){const stride=cycle*side;b['thigh'+side].rotation.x=stride*(running?.85:.48);b['knee'+side].rotation.x=Math.max(0,-stride)*(running?1.1:.55)+Math.max(0,Math.cos(t*6.283)*side)*.2;b['arm'+side].rotation.x=-stride*(running?.9:.45);b['elbow'+side].rotation.x=-.18-(running?.6:.1);}}
   if(state==='idle'){b.spine.scale.y=1+cycle*.016;b['arm1'].rotation.z=-.025+cycle*.02;b['arm-1'].rotation.z=.025-cycle*.02;b.head.rotation.y=Math.sin(t*6.28)*.035;}
   if(state==='attack'||state==='special'){b.spine.rotation.y=-.6+swing*1.1;b.spine.rotation.x+=swing*.16;b['arm1'].rotation.x=-2.3+swing*3.4;b['arm1'].rotation.z=-.65+swing*.6;b['elbow1'].rotation.x=-.45+swing*.25;b['arm-1'].rotation.x=-.4-swing*.4;b['thigh1'].rotation.x=.2-swing*.45;b['knee-1'].rotation.x=.25;if(state==='special'){b['arm-1'].rotation.x=-2.2+swing*2.4;b.hips.position.y-=swing*.15;}}
+  if(state==='attack2'){b.spine.rotation.y=.55-swing*.95;b['arm1'].rotation.x=-.8-swing*1.15;b['arm1'].rotation.z=.3-swing*.7;b['elbow1'].rotation.x=-.9+swing*.7;b['arm-1'].rotation.x=-.5;b.hips.position.z+=swing*.13;b['thigh-1'].rotation.x=-swing*.3;}
   if(state==='shoot'){b['arm-1'].rotation.x=-Math.PI/2;b['arm-1'].rotation.y=-.45;b['arm1'].rotation.x=-Math.PI/2;b['arm1'].rotation.y=.3+swing*.7;b['elbow1'].rotation.x=-swing*.9;b.spine.rotation.y=.35;}
   if(state==='cast'||state==='transform'){b['arm1'].rotation.z=-.5-swing*.9;b['arm-1'].rotation.z=.5+swing*.9;b['elbow1'].rotation.x=-.8;b['elbow-1'].rotation.x=-.8;b.head.rotation.x=-.1-swing*.15;b.spine.rotation.x=-swing*.15;if(state==='transform'&&(rig.wolf||rig.vamp)){const growth=.6+index/7*.4;b.hips.scale.setScalar(growth);b.spine.rotation.x=.5*(1-index/7);}}
   if(state==='jump'){b.hips.position.y+=jump;b['thigh1'].rotation.x=.4+Math.max(0,jump);b['thigh-1'].rotation.x=-.3;b['knee1'].rotation.x=.7+Math.max(0,jump);b['knee-1'].rotation.x=.5;b['arm1'].rotation.z=-.5-Math.max(0,jump);b['arm-1'].rotation.z=.5+Math.max(0,jump);b.spine.rotation.x=-jump*.2;}
   if(state==='hit'){b.spine.rotation.x=-.35*Math.sin(t*Math.PI);b.head.rotation.z=.25*Math.sin(t*Math.PI);b['arm1'].rotation.z=-.3;b.hips.position.z=-.12*Math.sin(t*Math.PI);}
   if(state==='death'){b.hips.position.y-=death*.78;b.hips.rotation.x=-death*1.45;b.head.rotation.x=-.4*death;b['arm1'].rotation.z=-.8*death;b['arm-1'].rotation.z=.5*death;for(const side of [-1,1])b['knee'+side].rotation.x=.5*death;}
+  if(b.coat)for(let i=0;i<b.coat.length;i++){b.coat[i].rotation.x=(travel?(running?.36:.12):0)+cycle*.055;b.coat[i].rotation.z=(i===0?-1:1)*Math.abs(cycle)*.055;}
   if(b.cape){b.cape.rotation.x=travel?(running?.45:.18)+cycle*.08:Math.sin(t*6.28)*.025;b.cape.rotation.z=cycle*.035;}
+  if(b.equippedCape){b.equippedCape.rotation.x=travel?(running?.45:.18)+cycle*.08:cycle*.025;b.equippedCape.rotation.z=cycle*.04;}
   if(b.tail)b.tail.rotation.y=cycle*.3;
  }else{if(travel){b.hips.position.y+=Math.abs(cycle)*(running?.08:.035);for(const {leg,knee,side,index:i}of b.legs||[]){leg.rotation.x=cycle*side*(i%2?-1:1)*(running?.75:.45);knee.rotation.x=Math.max(0,-cycle*side)*.45+Math.max(0,Math.cos(t*6.283)*side)*.2;}}else if(state==='idle'){b.hips.scale.y=1+cycle*.025;b.head.rotation.y=cycle*.08;}
   if(state==='attack'||state==='special'){b.hips.position.z+=swing*.26;b.head.rotation.x=-.2+swing*.6;b.hips.rotation.x=-swing*.15;}
@@ -87,5 +174,5 @@ export function pose(rig,state,index){for(const value of rig.base){value.o.posit
  if(b.wings)for(let i=0;i<b.wings.length;i++){const side=i===0?-1:1;b.wings[i].rotation.z=side*(.1+cycle*(rig.bat?.65:.12));b.wings[i].rotation.y=side*(state==='transform'?(1-index/7)*1.4:.15);if(state==='death')b.wings[i].rotation.y=side*death*1.5;}
  if(rig.model==='goblin'){b.head.scale.set(1.15,.9,1.05);b.head.rotation.z+=.1;}
 }
-export const equipment=['couro','cota','placas','manto','botas','calcas','luvas','espada','arco','besta','cetro','garra','capuz','amuleto','escudo'];
+export const equipment=['couro','cota','placas','manto','botas','calcas','luvas','espada','arco','besta','cetro','garra','capuz','amuleto','escudo','capa'];
 export function selectLayer(rig,layer='body'){rig.root.traverse(o=>{if(!o.isMesh)return;const own=o.userData.layer||'body';o.renderOrder=own==='body'?0:1;o.visible=own==='body'||own===layer;if(own==='body'&&layer!=='body'){o.material=o.material.clone();o.material.colorWrite=false;o.material.depthWrite=true;}else if(o.material.colorWrite===false){o.material=o.material.clone();o.material.colorWrite=true;}});}

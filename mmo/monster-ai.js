@@ -2,11 +2,13 @@ import {distance,line,safe,walkable} from './world.js';
 import {pathStep} from './automation.js';
 export function updateMonster(m,players,now,{occupied,onHit,onWarning}){
  const home={x:m.homeX,y:m.homeY};if(m.hp<=0){m.state='DEAD';if(now>=m.deadUntil&&!occupied(home.x,home.y,m.map)){m.hp=m.maxHP;m.x=home.x;m.y=home.y;m.state='IDLE';m.charging=null;}return;}
+ if(m.regenerate&&m.hp<m.maxHP&&now-(m.lastRegen||0)>=1000){m.hp=Math.min(m.maxHP,m.hp+m.regenerate);m.lastRegen=now;}
  const canFight=p=>p.hp>0&&p.map===m.map&&!safe(p.x,p.y,p.map);
- if(m.charging&&now>=m.charging.at){for(const p of players.filter(canFight))if(distance(p,m.charging)<=2)onHit(p,m.damage*1.8,m);m.charging=null;m.specialAt=now;m.nextSpecial=now+8000;}
+ if(m.charging&&now>=m.charging.at){if(m.charge){for(let n=0;n<3;n++){const step=pathStep(m,q=>distance(q,m.charging)<=1,(x,y)=>occupied(x,y,m.map),6);if(!step)break;m.x+=step.dx;m.y+=step.dy;m.facing=[step.dx,step.dy];}m.lastMove=now;}for(const p of players.filter(canFight))if(distance(p,m.charging)<=2&&(!m.charge||distance(p,m)<=2&&line(m,p)))onHit(p,m.damage*1.8,m);m.charging=null;m.specialAt=now;m.nextSpecial=now+8000;if(m.charge){m.lastAttack=now;return;}}
  const candidates=players.filter(p=>canFight(p)&&distance(m,p)<=(m.aggro||7)&&distance(home,p)<=(m.leash||12));const target=candidates.sort((a,b)=>distance(m,a)-distance(m,b))[0];
  if(distance(m,home)>(m.leash||12)||(!target&&['CHASE','ATTACK','RETURN'].includes(m.state))){m.state='RETURN';m.charging=null;if(distance(m,home)===0){m.hp=m.maxHP;m.state='IDLE';return;}if(now-m.lastMove>m.moveMs){const step=pathStep(m,q=>distance(q,home)===0,(x,y)=>occupied(x,y,m.map),m.leash||12);if(step){m.x+=step.dx;m.y+=step.dy;m.facing=[step.dx,step.dy];}m.lastMove=now;}return;}
- if(target){const range=m.attackRange||1;m.state='CHASE';if(m.boss&&!m.charging&&now>=(m.nextSpecial||0)){m.charging={x:target.x,y:target.y,at:now+900};onWarning(m,m.charging);}
+ if(target){if(m.blink&&distance(m,target)<=2&&now>=(m.nextBlink||0)){for(const [dx,dy]of [[2,0],[-2,0],[0,2],[0,-2]]){const x=m.x+dx,y=m.y+dy;if(walkable(x,y,m.map)&&walkable(m.x+dx/2,m.y+dy/2,m.map)&&!safe(x,y,m.map)&&!occupied(x,y,m.map)&&distance({x,y},home)<=(m.leash||12)){m.x=x;m.y=y;m.lastMove=now;m.blinkAt=now;m.nextBlink=now+8000;break;}}}
+  const range=m.attackRange||1;m.state='CHASE';if((m.boss||m.charge&&distance(m,target)>1)&&!m.charging&&now>=(m.nextSpecial||0)){m.charging={x:target.x,y:target.y,at:now+900};onWarning(m,m.charging);}
   if(distance(m,target)<=range&&line(m,target)){m.state='ATTACK';if(now-m.lastAttack>1300){m.facing=[Math.sign(target.x-m.x),Math.sign(target.y-m.y)];m.lastAttack=now;onHit(target,m.damage,m);}}
   else if(now-m.lastMove>m.moveMs&&!m.charging){const step=pathStep(m,q=>distance(q,target)<=range&&line({...q,map:m.map},target),(x,y)=>occupied(x,y,m.map),m.aggro||7);if(step){m.x+=step.dx;m.y+=step.dy;m.facing=[step.dx,step.dy];}m.lastMove=now;}return;
  }

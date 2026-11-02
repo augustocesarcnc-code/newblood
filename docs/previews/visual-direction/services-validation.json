@@ -1,0 +1,15 @@
+{
+  "checks": [
+    "bank UI deposits real gold and an unequipped item",
+    "dragged bank window restores its saved position",
+    "tavern food purchase uses normal inventory and gold",
+    "notice board opens the actual quest log",
+    "guild hall opens the actual clan system",
+    "bank rejects remote withdrawals",
+    "SQLite restart preserves bank currency, item identity and custody",
+    "bank UI withdrawal returns custody exactly once",
+    "inventory remains usable at mobile viewport without document overflow"
+  ],
+  "errors": [],
+  "missingAssets": []
+}

@@ -32,11 +32,14 @@ after modifying PNGs; tests verify its checksums and zero clipping. Overlays can
 have a wider cell than bodies while sharing projected scale and foot alignment.
 Preserve Node 24 LTS restriction: Windows/Node 26 native SQLite failures were observed.
 
-## Current delivery constraint
+## Current visual direction
 
-Stop art generation and expansion. The current user priority is one integrated vertical
-slice: Vila de Eclipse + Floresta Amaldiçoada, Hunter first, and only wolf/bat/skeleton
-encounters in those regions. Preserve other existing content without expanding it.
-Read docs/ASSET_STATUS.md. Measure gameplay integration and run
-`python3 tools/qa/vertical-slice.py` (Playwright/Chromium) for real screenshots.
-Do not execute art/tiles/map generation scripts to make more unused assets.
+Read docs/DIRECAO-VISUAL-2D-25D.md and docs/ART_BIBLE.md. The latest user direction
+supersedes the older art freeze only for targeted, integrated improvements. Keep
+runtime 2D Canvas sprites, fixed three-quarter perspective, authoritative gameplay,
+and existing systems. Start with the five player forms, Hunter first. Never bulk
+create unused assets. Reuse the source rigs for reproducible frame exports, audit
+all changed PNGs, integrate and run the actual game before expanding content.
+Vila de Eclipse and Floresta Amaldiçoada remain the reference regions. Do not
+expand maps or publish artwork merely because files exist. Maintain
+ASSET_STATUS.md with created/integrated/tested status and real screenshots.

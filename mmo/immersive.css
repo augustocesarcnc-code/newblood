@@ -192,3 +192,23 @@ dialog#modal.is-maximized{left:18px!important;top:18px!important;transform:none!
 .boss-health{position:absolute;top:185px;left:50%;transform:translateX(-50%);z-index:4;width:380px;padding:14px 25px;text-align:center;background:linear-gradient(#201321e6,#101521cc);border:1px solid #ae6c7b77;box-shadow:0 0 35px #350f2d44}.boss-health>small{font-size:7px;letter-spacing:2px;color:#b89777}.boss-health h2{font:24px Georgia;margin:8px 0;color:#e4c6c7}.boss-track{height:8px;border:1px solid #a9786c66;background:#070a12;transform:skewX(-12deg)}.boss-track>i{display:block;height:100%;background:linear-gradient(90deg,#5b1937,#b1405c,#d07d87);transition:width .15s}.boss-health>span{display:block;margin:6px 0 0;font:10px Georgia;color:#cfb0b8}.boss-health.enraged{border-color:#e96b85;box-shadow:0 0 30px #ab294344}@media(max-width:700px){.boss-health{top:270px;width:240px;padding:10px 15px}.boss-health h2{font-size:17px}}
 
 .auth-screen .auth-art[data-pact]{background:linear-gradient(90deg,#07101b08,#07101b00 70%,#080d1677)}
+
+/* Shared item artwork in shops, consumable shortcuts and the existing inventory. */
+.item-icon .item-art{width:32px;height:32px;margin:auto}.skillbar .item-art{width:28px;height:28px;margin:auto}.hud-identity #activeBuffs{display:block;min-height:9px;margin-top:7px;max-width:180px;font:8px/1.4 Georgia;color:var(--lunar)}
+.equipment-comparison{color:var(--lunar);border-left:2px solid #86a9cd66;padding-left:10px}.inventory-cell.filled{border-color:var(--rarity);box-shadow:inset 0 0 12px color-mix(in srgb,var(--rarity) 9%,transparent)}
+/* Keep the existing inventory: paper doll centered, real equipment slots around it. */
+@media(min-width:901px){
+ .inventory-layout{grid-template-columns:330px minmax(0,1fr)}
+ .inventory-loadout{display:grid;grid-template-columns:86px minmax(0,1fr) 86px;grid-template-rows:auto auto repeat(6,62px);gap:6px;align-content:start}
+ .inventory-loadout>small,.inventory-loadout>h3{grid-column:1/-1;text-align:center;margin:0}
+ .inventory-loadout>canvas{grid-column:2;grid-row:3/9;align-self:center;width:100%;height:auto;max-width:150px}
+ .inventory-loadout>.equipment-grid{display:contents}
+ .equipment-slot[data-equipment=head]{grid-column:1;grid-row:3}.equipment-slot[data-equipment=chest]{grid-column:3;grid-row:3}
+ .equipment-slot[data-equipment=cape]{grid-column:1;grid-row:4}.equipment-slot[data-equipment=legs]{grid-column:3;grid-row:4}
+ .equipment-slot[data-equipment=boots]{grid-column:1;grid-row:5}.equipment-slot[data-equipment=gloves]{grid-column:3;grid-row:5}
+ .equipment-slot[data-equipment=weapon]{grid-column:1;grid-row:6}.equipment-slot[data-equipment=offhand]{grid-column:3;grid-row:6}
+ .equipment-slot[data-equipment=charm]{grid-column:1;grid-row:7}.equipment-slot[data-equipment=ring]{grid-column:3;grid-row:7}.equipment-slot[data-equipment=belt]{grid-column:1;grid-row:8}
+ .equipment-slot{min-height:0;padding:5px 3px}.equipment-slot>span{font-size:8px}.equipment-slot>small{font-size:7px}
+}
+
+.hud-glyph{width:12px;height:12px;vertical-align:middle;fill:none;stroke:currentColor;stroke-width:2}

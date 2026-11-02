@@ -66,7 +66,7 @@ with tempfile.TemporaryDirectory(prefix='eclipse-slice-') as data:
     place('cinzaveu',15,16);action({'type':'move','dx':1,'dy':0});assert state()['self']['map']=='floresta';page.wait_for_timeout(800);results.append('walk through portal Village -> Forest');time.sleep(.4);action({'type':'move','dx':-1,'dy':0});assert state()['self']['map']=='cinzaveu';results.append('walk through portal Forest -> Village');time.sleep(.4);action({'type':'move','dx':1,'dy':0});assert state()['self']['map']=='floresta';place('floresta',12,15);shot('02-floresta')
     # Fight the three requested species. DEV spawn supplies a reproducible test encounter;
     # damage, death, XP, physical drop and pickup are ordinary server gameplay.
-    admin('/heal');kills=state()['self']['kills'];xp=state()['self']['xp'];mana=state()['self']['mana']
+    admin('/setlevel 10');admin('/heal');kills=state()['self']['kills'];xp=state()['self']['xp'];mana=state()['self']['mana']
     for species in ['wolf','bat','skeleton']:
      place('floresta',12,15);admin('/spawn '+species);monster=next(m for m in state()['monsters'] if m['id'].startswith('dev-') and m['species']==species and m['hp']>0)
      action({'type':'target','id':monster['id']})

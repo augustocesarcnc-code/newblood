@@ -7,30 +7,32 @@ transformação no nível 10 e três personagens por conta**.
 
 **[Baixar o projeto jogável (ZIP)](https://github.com/augustocesarcnc-code/newblood/raw/refs/heads/main/dist/Eclipse-Blood-Moon.zip)**
 
-## Vertical slice atual: Vila + Floresta
+## Direção visual atual e vertical slice
 
-A geração de novas artes está suspensa. Esta etapa reutiliza os atlas existentes e
-concentra os encontros da Vila de Eclipse e da Floresta Amaldiçoada em Lobo Sombrio,
-Morcego Sangrento e Esqueleto. Outras regiões anteriores são preservadas, sem expansão.
+O jogo permanece **2D com visão 3/4 e sensação 2.5D**, sem conversão do runtime para 3D.
+A [Art Bible](docs/ART_BIBLE.md) define escala, perspectiva, paleta, luz, sprites,
+camadas de equipamento e o pipeline de validação. A [auditoria](docs/ASSET_STATUS.md)
+separa criado, integrado, testado e pendente; não confunde atlas salvo com gameplay.
 
-[Auditoria de assets](docs/ASSET_STATUS.md) ·
-[Capturas reais e validação](docs/previews/vertical-slice/README.md).
+Caçador, Vampiro humano/transformado e Lobisomem humano/transformado usam o padrão
+revisto. Ataques corpo a corpo alternam dois golpes reais; capas têm slot próprio,
+compra e sincronização multiplayer. Na Vila e Floresta estão Lobo Sombrio, Morcego
+Sangrento, Esqueleto, Fantasma, Ghoul, Bruxa, Troll e Minotauro. As quatro criaturas
+novas foram integradas e enfrentadas uma por vez antes da seguinte.
 
-O fluxo foi exercitado no Chromium: oito direções, corrida/stamina, NPC/compra,
-missão/XP/nível, combate/skill, drop/coleta, inventário/equipamento visível,
-portais nos dois sentidos, mapa/minimapa e relogin. Corrigida a colisão das cercas;
-acrescentados comparação de equipamentos, mapa ampliado, tracker de missão ativa,
-ambiente sonoro sintetizado por região e transparência de copas que ocultam o jogador.
-Nenhuma nova sprite foi gerada. Os testes visuais usam fixture DEV isolada, sem
-alterar saves normais. Arte final e trilha gravada ainda precisam de avaliação.
+A Vila ganhou serviços conectados: banco/armazém pessoal com ouro e itens persistentes,
+taverna, salão dos clãs e mural de contratos. O inventário existente tem organização
+pelo servidor, comparação e personagem entre os slots. Lua em órbita no fundo do mundo,
+Lunar Power, luz fria/quente, sombra, oclusão e névoa mantêm a apresentação 2D.
+Áudio é sintetizado e opcional, com ambiente/motivo musical por região.
 
-## Arte e interface integradas
+[Capturas dos personagens e encontros](docs/previews/visual-direction/README.md) ·
+[Jornada Vila/Floresta](docs/previews/vertical-slice/README.md).
 
-A nova versão usa [sprites, monstros, cenários e login originais integrados](docs/ARTE-INTEGRADA.md).
-Há cinco modelos de jogador, 306 atlas em oito direções, camadas equipáveis,
-criaturas/elite/Carrasco, 32 cenários e 12 terrenos. As capturas e o relatório de
-validação estão no documento. O jogo continua 2D: as miniaturas são pré-renderizadas,
-não modelos 3D desenhados ao vivo no navegador.
+Validação: 126 testes, check/TypeScript, build, Chromium com observador multiplayer,
+colisões, combate/loot, serviços, reinício SQLite e inventário móvel. Isso não constitui
+aprovação artística final nem certificação de produção. As demais regiões e sistemas
+anteriores são preservados, sem nova expansão de mapas.
 
 ## Instalar e executar
 
@@ -74,7 +76,7 @@ veja [automação VIP](docs/AUTOMACAO-VIP.md).
 - Vampiro/lobisomem humanos no início; R transforma a partir do nível 10. A forma
   altera arte/dano e libera habilidades específicas. Lobisomem transformado pode saltar.
 - Loot físico persistente, proteção inicial de dono/grupo, coleta, stacks, divisão,
-  uso, drop, drag and drop, 40 posições e dez slots de equipamento com atributos reais.
+  uso, drop, drag and drop, 40 posições e onze slots de equipamento com atributos reais.
 - Mercadora, ferreiro, curandeira, alquimista, guarda, mestre e guardiã dos portais;
   proximidade validada, compra/venda, refino e reciclagem.
 - Mercado entre jogadores, trocas com revisão de oferta e confirmação dos dois lados,

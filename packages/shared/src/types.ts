@@ -1,6 +1,6 @@
 export type CharacterClass='cacador'|'vampiro'|'lobisomem';
 export type Rarity='comum'|'incomum'|'raro'|'epico'|'lendario'|'mitico';
-export type EquipmentSlot='head'|'chest'|'legs'|'boots'|'gloves'|'weapon'|'offhand'|'charm'|'ring'|'belt';
+export type EquipmentSlot='head'|'chest'|'cape'|'legs'|'boots'|'gloves'|'weapon'|'offhand'|'charm'|'ring'|'belt';
 export interface Position {x:number;y:number;map:string;}
 export interface ItemDefinition {name:string;description:string;type:'equipment'|'consumable'|'material';slot?:EquipmentSlot;kind?:CharacterClass;requiredLevel:number;icon:string;value:number;stackable:boolean;maxStack:number;attack?:number;armor?:number;strength?:number;dexterity?:number;intelligence?:number;vitality?:number;}
 export interface InventoryItem {id:string;base:string;rarity:Rarity;quantity?:number;slot?:number;upgrade?:number;}

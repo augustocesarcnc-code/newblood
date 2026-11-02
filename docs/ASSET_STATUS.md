@@ -1,212 +1,172 @@
-# ASSET STATUS — ECLIPSE · Blood & Moon
+# ASSET STATUS — ECLIPSE · revisão visual 2D/2.5D
 
-## Regra vigente
+## Critério
 
-Geração de artes suspensa. Nenhum PNG novo nesta etapa. Não executar exportadores de arte nem ampliar bestiário, equipamentos ou mapas. Foco: **Vila de Eclipse + Floresta Amaldiçoada**, **Caçador**, **Lobo Sombrio / Morcego Sangrento / Esqueleto**.
+Criado não significa integrado. Integrado não significa aprovado artisticamente. A coluna TESTADO distingue auditoria de atlas, gameplay no Chromium e verificações estruturais. Esta revisão mantém Canvas 2D, visão 3/4 fixa e os sistemas existentes; não é conversão do jogo para 3D. Direção: [ART_BIBLE.md](ART_BIBLE.md).
 
-“Criado” significa arquivo existente e identificado; “integrado” significa ligado ao renderer/sistema. O status distingue validação nesta etapa de integração apenas identificada no código. Atlas salvo não equivale a gameplay concluído.
+O pedido atual autoriza melhorias direcionadas e substitui o congelamento anterior para esses assets. Não há geração em massa de conteúdo sem uso. Novas criaturas foram exportadas, colocadas na Floresta, enfrentadas, derrotadas e saqueadas uma por vez antes da próxima.
 
-## Recuperação da base
+## Personagens e ações
 
-O commit `8330419200fe3f55c333370065504ac1d14e6e20` de newblood recebeu somente arquivos da raiz: faltavam 576 dos 592 caminhos do inventário `ARQUIVOS-SHA256.json`. Foram recuperados **576/576** da origem indicada no próprio README, commit `60f5a6e4f27e414bc9baf4b29f26b852037b82c8` de `bloodmoon`, branch `visual/eclipse-redesign`. **Todos os 576 SHA-256 coincidiram antes das alterações desta etapa**. Os arquivos recuperados foram restaurados neste checkout para publicação junto da vertical slice no repositório newblood.
-
-## Personagens e animações
-
-Renderer ativo: `mmo/sprites.js` → `mmo/eclipse-sprites.js`. Cada ação abaixo tem oito direções e oito quadros. A auditoria lê pixels e bounds: 9.024 quadros de corpos e 10.560 de equipamentos; zero recortes detectados, zero linhas de poses repetidas detectadas. Isso não é aprovação artística humana.
-
-| ASSET | CRIADO | INTEGRADO | USADO ONDE | STATUS |
+| ASSET | CRIADO | INTEGRADO | TESTADO | STATUS |
 | --- | --- | --- | --- | --- |
-| hunter · idle | Sim | Sim, renderer | Caçador / NPCs | Integrado na slice; atlas auditado |
-| hunter · walk | Sim | Sim, renderer | Caçador / NPCs | Integrado na slice; atlas auditado |
-| hunter · run | Sim | Sim, renderer | Caçador / NPCs | Integrado na slice; atlas auditado |
-| hunter · jump | Sim | Sim, renderer | Caçador / NPCs | Preservado; expansão PARADA |
-| hunter · attack | Sim | Sim, renderer | Caçador / NPCs | Integrado na slice; atlas auditado |
-| hunter · shoot | Sim | Sim, renderer | Caçador / NPCs | Integrado na slice; atlas auditado |
-| hunter · hit | Sim | Sim, renderer | Caçador / NPCs | Integrado na slice; atlas auditado |
-| hunter · death | Sim | Sim, renderer | Caçador / NPCs | Integrado na slice; atlas auditado |
-| hunter · cast | Sim | Sim, renderer | Caçador / NPCs | Integrado na slice; atlas auditado |
-| hunter · transform | Sim | Sim, renderer | Caçador / NPCs | Preservado; expansão PARADA |
-| hunter · special | Sim | Sim, renderer | Caçador / NPCs | Preservado; expansão PARADA |
-| vampire-human · idle | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| vampire-human · walk | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| vampire-human · run | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| vampire-human · jump | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| vampire-human · attack | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| vampire-human · shoot | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| vampire-human · hit | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| vampire-human · death | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| vampire-human · cast | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| vampire-human · transform | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| vampire-human · special | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| vampire-form · idle | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| vampire-form · walk | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| vampire-form · run | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| vampire-form · jump | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| vampire-form · attack | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| vampire-form · shoot | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| vampire-form · hit | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| vampire-form · death | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| vampire-form · cast | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| vampire-form · transform | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| vampire-form · special | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| wolf-human · idle | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| wolf-human · walk | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| wolf-human · run | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| wolf-human · jump | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| wolf-human · attack | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| wolf-human · shoot | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| wolf-human · hit | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| wolf-human · death | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| wolf-human · cast | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| wolf-human · transform | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| wolf-human · special | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| werewolf · idle | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| werewolf · walk | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| werewolf · run | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| werewolf · jump | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| werewolf · attack | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| werewolf · shoot | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| werewolf · hit | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| werewolf · death | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| werewolf · cast | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| werewolf · transform | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
-| werewolf · special | Sim | Sim, renderer | Outras classes / NPCs | Preservado; expansão PARADA |
+| hunter · idle · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Movimento/combate/equipamento no Chromium | ATIVO — sem aceite artístico final |
+| hunter · walk · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Movimento/combate/equipamento no Chromium | ATIVO — sem aceite artístico final |
+| hunter · run · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Movimento/combate/equipamento no Chromium | ATIVO — sem aceite artístico final |
+| hunter · jump · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Movimento/combate/equipamento no Chromium | ATIVO — sem aceite artístico final |
+| hunter · attack · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Movimento/combate/equipamento no Chromium | ATIVO — sem aceite artístico final |
+| hunter · shoot · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Movimento/combate/equipamento no Chromium | ATIVO — sem aceite artístico final |
+| hunter · hit · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Movimento/combate/equipamento no Chromium | ATIVO — sem aceite artístico final |
+| hunter · death · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Movimento/combate/equipamento no Chromium | ATIVO — sem aceite artístico final |
+| hunter · cast · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Movimento/combate/equipamento no Chromium | ATIVO — sem aceite artístico final |
+| hunter · transform · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Movimento/combate/equipamento no Chromium | ATIVO — sem aceite artístico final |
+| hunter · special histórico | Sim | Sem ação atual do jogador | Fora do escopo visual atual | PRESERVADO / SEM USO ATUAL |
+| hunter · attack2 · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Movimento/combate/equipamento no Chromium | ATIVO — sem aceite artístico final |
+| vampire-human · idle · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| vampire-human · walk · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| vampire-human · run · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| vampire-human · jump · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| vampire-human · attack · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| vampire-human · shoot · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| vampire-human · hit · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| vampire-human · death · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| vampire-human · cast · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| vampire-human · transform · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| vampire-human · special histórico | Sim | Sem ação atual do jogador | Fora do escopo visual atual | PRESERVADO / SEM USO ATUAL |
+| vampire-human · attack2 · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| vampire-form · idle · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| vampire-form · walk · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| vampire-form · run · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| vampire-form · jump · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| vampire-form · attack · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| vampire-form · shoot · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| vampire-form · hit · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| vampire-form · death · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| vampire-form · cast · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| vampire-form · transform · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| vampire-form · special histórico | Sim | Sem ação atual do jogador | Fora do escopo visual atual | PRESERVADO / SEM USO ATUAL |
+| vampire-form · attack2 · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| wolf-human · idle · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| wolf-human · walk · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| wolf-human · run · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| wolf-human · jump · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| wolf-human · attack · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| wolf-human · shoot · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| wolf-human · hit · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| wolf-human · death · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| wolf-human · cast · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| wolf-human · transform · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| wolf-human · special histórico | Sim | Sem ação atual do jogador | Fora do escopo visual atual | PRESERVADO / SEM USO ATUAL |
+| wolf-human · attack2 · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| werewolf · idle · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| werewolf · walk · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| werewolf · run · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| werewolf · jump · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| werewolf · attack · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| werewolf · shoot · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| werewolf · hit · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| werewolf · death · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| werewolf · cast · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| werewolf · transform · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
+| werewolf · special histórico | Sim | Sem ação atual do jogador | Fora do escopo visual atual | PRESERVADO / SEM USO ATUAL |
+| werewolf · attack2 · 8 direções × 8 quadros | Sim | Renderer real do Player/NPC | Atlas auditado; Humano/transformação/forma no jogo no Chromium | ATIVO — sem aceite artístico final |
 
-## Monstros
+## Equipamentos
 
-| ASSET | CRIADO | INTEGRADO | USADO ONDE | STATUS |
+| ASSET | CRIADO | INTEGRADO | TESTADO | STATUS |
 | --- | --- | --- | --- | --- |
-| rat · idle, walk, attack, hit, death | Sim | Sim, renderer; spawn: não | Nenhum spawn ativo identificado | PARADO — fora da slice, sem expansão |
-| bat · idle, walk, attack, hit, death | Sim | Sim, renderer; spawn: sim | cinzaveu, floresta | Foco da slice; estados idle/walk/attack/hit/death |
-| wolf · idle, walk, attack, hit, death | Sim | Sim, renderer; spawn: sim | cinzaveu, floresta | Foco da slice; estados idle/walk/attack/hit/death |
-| corrupted-wolf · idle, walk, attack, hit, death | Sim | Sim, renderer; spawn: não | Nenhum spawn ativo identificado | PARADO — fora da slice, sem expansão |
-| spider · idle, walk, attack, hit, death | Sim | Sim, renderer; spawn: sim | caverna | PARADO — fora da slice, sem expansão |
-| skeleton · idle, walk, attack, hit, death | Sim | Sim, renderer; spawn: sim | cripta, floresta | Foco da slice; estados idle/walk/attack/hit/death |
-| ghoul · idle, walk, attack, hit, death | Sim | Sim, renderer; spawn: sim | caverna, cripta | PARADO — fora da slice, sem expansão |
-| cultist · idle, walk, attack, hit, death | Sim | Sim, renderer; spawn: sim | cripta, ruinas | PARADO — fora da slice, sem expansão |
-| bandit · idle, walk, attack, hit, death | Sim | Sim, renderer; spawn: sim | ruinas | PARADO — fora da slice, sem expansão |
-| wild-vampire · idle, walk, attack, hit, death | Sim | Sim, renderer; spawn: sim | castelo, ruinas | PARADO — fora da slice, sem expansão |
-| wild-werewolf · idle, walk, attack, hit, death | Sim | Sim, renderer; spawn: sim | castelo | PARADO — fora da slice, sem expansão |
-| necromancer · idle, walk, attack, hit, death | Sim | Sim, renderer; spawn: sim | cripta | PARADO — fora da slice, sem expansão |
-| elite · idle, walk, attack, hit, death | Sim | Sim, renderer; spawn: sim | castelo, caverna, cripta, ruinas | PARADO — fora da slice, sem expansão |
-| executioner · idle, walk, attack, hit, death, special | Sim | Sim, renderer; spawn: sim | castelo | PARADO — fora da slice, sem expansão |
-| goblin · idle, walk, attack, hit, death | Sim | Sim, renderer; spawn: não | Nenhum spawn ativo identificado | PARADO — fora da slice, sem expansão |
-| antlion · idle, walk, attack, hit, death | Sim | Sim, renderer; spawn: sim | caverna | PARADO — fora da slice, sem expansão |
-| zombie · idle, walk, attack, hit, death | Sim | Sim, renderer; spawn: não | Nenhum spawn ativo identificado | PARADO — fora da slice, sem expansão |
+| couro · camadas de animação | Sim | appearance, inventário e renderer | Atlas/pivô auditados; arco/espada/couro no percurso real | ATIVO |
+| cota · camadas de animação | Sim | appearance, inventário e renderer | Atlas/pivô auditados; arco/espada/couro no percurso real | ATIVO |
+| placas · camadas de animação | Sim | appearance, inventário e renderer | Atlas/pivô auditados; arco/espada/couro no percurso real | ATIVO |
+| manto · camadas de animação | Sim | appearance, inventário e renderer | Atlas/pivô auditados; arco/espada/couro no percurso real | ATIVO |
+| botas · camadas de animação | Sim | appearance, inventário e renderer | Atlas/pivô auditados; arco/espada/couro no percurso real | ATIVO |
+| calcas · camadas de animação | Sim | appearance, inventário e renderer | Atlas/pivô auditados; arco/espada/couro no percurso real | ATIVO |
+| luvas · camadas de animação | Sim | appearance, inventário e renderer | Atlas/pivô auditados; arco/espada/couro no percurso real | ATIVO |
+| espada · camadas de animação | Sim | appearance, inventário e renderer | Atlas/pivô auditados; arco/espada/couro no percurso real | ATIVO |
+| arco · camadas de animação | Sim | appearance, inventário e renderer | Atlas/pivô auditados; arco/espada/couro no percurso real | ATIVO |
+| besta · camadas de animação | Sim | appearance, inventário e renderer | Atlas/pivô auditados; arco/espada/couro no percurso real | ATIVO |
+| cetro · camadas de animação | Sim | appearance, inventário e renderer | Atlas/pivô auditados; arco/espada/couro no percurso real | ATIVO |
+| garra · camadas de animação | Sim | appearance, inventário e renderer | Atlas/pivô auditados; arco/espada/couro no percurso real | ATIVO |
+| capuz · camadas de animação | Sim | appearance, inventário e renderer | Atlas/pivô auditados; arco/espada/couro no percurso real | ATIVO |
+| amuleto · camadas de animação | Sim | appearance, inventário e renderer | Atlas/pivô auditados; arco/espada/couro no percurso real | ATIVO |
+| escudo · camadas de animação | Sim | appearance, inventário e renderer | Atlas/pivô auditados; arco/espada/couro no percurso real | ATIVO |
+| capa · camadas de animação | Sim | appearance, inventário e renderer | Compra, equip/unequip e visual público observado por outra conta | ATIVO |
+| Anel/cinto: overlay visual | Não | Apenas atributos e slots lógicos | Lógica existente preservada | NÃO INTEGRADO visualmente |
+| Cabelo/cabeça: troca estética independente | Embutidos no rig | Sem editor/slot de cabelo separado | Formas/headgear verificados | PARCIAL — não alegar personalização modular de cabelo |
 
-## Equipamentos visuais
+A Capa da Vigília é agora um item real no slot cape, vendido por Mara. A roupa-base não concede arma ou defesa. Equipamento permanece logicamente equipado e fica oculto nas formas sobrenaturais. Attack 2 usa um segundo atlas e é alternado pelo servidor nos ataques corpo a corpo; não é só outro botão ou arquivo salvo.
 
-As camadas usam o mesmo frame/direção/pivô do corpo. Anel e cinto têm atributos e slots lógicos, mas não possuem overlays visuais: **não são contabilizados como equipamento visual concluído**.
+## Criaturas da vertical slice
 
-| ASSET | CRIADO | INTEGRADO | USADO ONDE | STATUS |
+| ASSET | CRIADO | INTEGRADO | TESTADO | STATUS |
 | --- | --- | --- | --- | --- |
-| couro · 11 ações | Sim | Sim, appearance/equipment | Player e inventário | Foco: couro/arco/espada |
-| cota · 11 ações | Sim | Sim, appearance/equipment | Player e inventário | Preservado; sem expansão |
-| placas · 11 ações | Sim | Sim, appearance/equipment | Player e inventário | Preservado; sem expansão |
-| manto · 11 ações | Sim | Sim, appearance/equipment | Player e inventário | Preservado; sem expansão |
-| botas · 11 ações | Sim | Sim, appearance/equipment | Player e inventário | Preservado; sem expansão |
-| calcas · 11 ações | Sim | Sim, appearance/equipment | Player e inventário | Preservado; sem expansão |
-| luvas · 11 ações | Sim | Sim, appearance/equipment | Player e inventário | Preservado; sem expansão |
-| espada · 11 ações | Sim | Sim, appearance/equipment | Player e inventário | Foco: couro/arco/espada |
-| arco · 11 ações | Sim | Sim, appearance/equipment | Player e inventário | Foco: couro/arco/espada |
-| besta · 11 ações | Sim | Sim, appearance/equipment | Player e inventário | Preservado; sem expansão |
-| cetro · 11 ações | Sim | Sim, appearance/equipment | Player e inventário | Preservado; sem expansão |
-| garra · 11 ações | Sim | Sim, appearance/equipment | Player e inventário | Preservado; sem expansão |
-| capuz · 11 ações | Sim | Sim, appearance/equipment | Player e inventário | Preservado; sem expansão |
-| amuleto · 11 ações | Sim | Sim, appearance/equipment | Player e inventário | Preservado; sem expansão |
-| escudo · 11 ações | Sim | Sim, appearance/equipment | Player e inventário | Preservado; sem expansão |
-| Anel/cinto: overlay visual | Não | Não | Slots lógicos apenas | NÃO INTEGRADO visualmente |
+| Lobo Sombrio · idle/walk/attack/hit/death | Sim | Spawns reais da Floresta; lobo/morcego também na Vila | Combate, morte e loot: previews/vertical-slice/validation.json | ATIVO |
+| Morcego Sangrento · idle/walk/attack/hit/death | Sim | Spawns reais da Floresta; lobo/morcego também na Vila | Combate, morte e loot: previews/vertical-slice/validation.json | ATIVO |
+| Esqueleto · idle/walk/attack/hit/death | Sim | Spawns reais da Floresta; lobo/morcego também na Vila | Combate, morte e loot: previews/vertical-slice/validation.json | ATIVO |
+| Fantasma · idle/walk/attack/hit/death | Sim | Spawns reais da Floresta; lobo/morcego também na Vila | Combate, morte e loot: previews/visual-direction/ghost-validation.json | ATIVO |
+| Ghoul · idle/walk/attack/hit/death | Sim | Spawns reais da Floresta; lobo/morcego também na Vila | Combate, morte e loot: previews/visual-direction/ghoul-validation.json | ATIVO |
+| Bruxa do Véu · idle/walk/attack/hit/death | Sim | Spawns reais da Floresta; lobo/morcego também na Vila | Combate, morte e loot: previews/visual-direction/witch-validation.json | ATIVO |
+| Troll das Raízes · idle/walk/attack/hit/death | Sim | Spawns reais da Floresta; lobo/morcego também na Vila | Combate, morte e loot: previews/visual-direction/troll-validation.json | ATIVO |
+| Minotauro do Pacto · idle/walk/attack/hit/death | Sim | Spawns reais da Floresta; lobo/morcego também na Vila | Combate, morte e loot: previews/visual-direction/minotaur-validation.json | ATIVO |
 
-## Tiles e cenografia
+- Fantasma: translucidez, robe flutuante e ataque espectral.
+- Bruxa: cajado, projétil de maldição e blink curto com destino/caminho intermediário válidos.
+- Troll: silhueta e clava próprias, regeneração limitada a 3 HP/segundo e ao máximo de HP; não revive pelo efeito.
+- Minotauro: anatomia bovina, chifres e machado próprios; investida sinalizada, deslocamento por caminho válido e atordoamento curto. Impacto não acumula ataque básico no mesmo tick.
+- A auditoria detectou recortes na clava do Troll. O enquadramento foi corrigido e o tamanho no mundo compensado; todos os quadros voltaram a passar.
 
-| ASSET | CRIADO | INTEGRADO | USADO ONDE | STATUS |
+## Tiles, cenários e mapas
+
+| ASSET | CRIADO | INTEGRADO | TESTADO | STATUS |
 | --- | --- | --- | --- | --- |
-| tile-castle.svg | Sim | Sim, terrain.js | Regiões anteriores fora da slice | PARADO |
-| tile-cave.svg | Sim | Sim, terrain.js | Regiões anteriores fora da slice | PARADO |
-| tile-cemetery.svg | Sim | Sim, terrain.js | Regiões anteriores fora da slice | PARADO |
-| tile-cursed.svg | Sim | Sim, terrain.js | Vila/Floresta | Integrado na slice |
-| tile-dirt.svg | Sim | Sim, terrain.js | Vila/Floresta | Integrado na slice |
-| tile-forest.svg | Sim | Sim, terrain.js | Vila/Floresta | Integrado na slice |
-| tile-grass.svg | Sim | Sim, terrain.js | Vila/Floresta | Integrado na slice |
-| tile-road.svg | Sim | Sim, terrain.js | Vila/Floresta | Integrado na slice |
-| tile-ruins.svg | Sim | Sim, terrain.js | Regiões anteriores fora da slice | PARADO |
-| tile-village.svg | Sim | Sim, terrain.js | Vila/Floresta | Integrado na slice |
-| tile-water.svg | Sim | Sim, terrain.js | Vila/Floresta | Integrado na slice |
-| tile-wood.svg | Sim | Sim, terrain.js | Vila/Floresta | Integrado na slice |
-| Cenário: house | Sim | Sim | cinzaveu | Integrado na slice |
-| Cenário: temple | Sim | Sim | cinzaveu | Integrado na slice |
-| Cenário: tower | Sim | Sim | castelo | PARADO — fora da slice/sem uso comprovado |
-| Cenário: castle-gate | Sim | Sim | castelo | PARADO — fora da slice/sem uso comprovado |
-| Cenário: wall | Sim | Sim | cinzaveu, floresta | Integrado na slice |
-| Cenário: fence | Sim | Sim | cinzaveu, cripta | Integrado na slice |
-| Cenário: lamp | Sim | Sim | cinzaveu, floresta | Integrado na slice |
-| Cenário: fountain | Sim | Sim | cinzaveu | Integrado na slice |
-| Cenário: stall | Sim | Sim | cinzaveu | Integrado na slice |
-| Cenário: forge | Sim | Sim | cinzaveu | Integrado na slice |
-| Cenário: oak | Sim | Sim | cinzaveu, floresta | Integrado na slice |
-| Cenário: pine | Sim | Sim | cinzaveu, floresta | Integrado na slice |
-| Cenário: dead-tree | Sim | Sim | cripta | PARADO — fora da slice/sem uso comprovado |
-| Cenário: bush | Sim | Sim | floresta | Integrado na slice |
-| Cenário: roots | Sim | Sim | floresta | Integrado na slice |
-| Cenário: boulder | Sim | Sim | caverna, floresta, ruinas | Integrado na slice |
-| Cenário: bridge | Sim | Sim | floresta | Integrado na slice |
-| Cenário: grave | Sim | Sim | cripta | PARADO — fora da slice/sem uso comprovado |
-| Cenário: cross | Sim | Sim | cripta | PARADO — fora da slice/sem uso comprovado |
-| Cenário: mausoleum | Sim | Sim | cripta | PARADO — fora da slice/sem uso comprovado |
-| Cenário: candles | Sim | Sim | castelo, cripta | PARADO — fora da slice/sem uso comprovado |
-| Cenário: crystal | Sim | Sim | caverna | PARADO — fora da slice/sem uso comprovado |
-| Cenário: bones | Sim | Sim | caverna, cripta, floresta | Integrado na slice |
-| Cenário: pillar | Sim | Sim | castelo | PARADO — fora da slice/sem uso comprovado |
-| Cenário: stairs | Sim | Sim | castelo, caverna | PARADO — fora da slice/sem uso comprovado |
-| Cenário: stained-glass | Sim | Sim | castelo | PARADO — fora da slice/sem uso comprovado |
-| Cenário: bars | Sim | Sim | castelo | PARADO — fora da slice/sem uso comprovado |
-| Cenário: ruined-arch | Sim | Sim | floresta, ruinas | Integrado na slice |
-| Cenário: column | Sim | Sim | ruinas | PARADO — fora da slice/sem uso comprovado |
-| Cenário: statue | Sim | Sim | ruinas | PARADO — fora da slice/sem uso comprovado |
-| Cenário: altar | Sim | Sim | castelo, caverna, floresta, ruinas | Integrado na slice |
-| Cenário: moss | Sim | Sim | ruinas | PARADO — fora da slice/sem uso comprovado |
+| 12 terrenos SVG existentes | Sim, preservados | terrain.js / mapas | Carga real, zero requests ausentes | ATIVO, sem novos tilesets em massa |
+| 32 modelos de cenografia existentes | Sim, preservados | scenery.js / Y-sort / luzes | Percurso Vila/Floresta e colisões | ATIVO; regiões antigas fora da revisão visual |
+| Casas da Taverna e Salão dos Clãs | Arte existente reutilizada | Dois pontos reais da Vila, com footprint sólido | Serviços e colisão automatizados | INTEGRADO |
+| Mural da Vigília | Vetor Canvas original | NPC-objeto selecionável no mundo, abre contratos reais | Tecla E → contratos | INTEGRADO |
+| Vila de Eclipse | Sim | Praça, fonte, templo, ferreiro, mercadora, alquimista, banco/armazém, taverna, clãs e mural | Jornadas no Chromium; banco reiniciado com SQLite | ATIVO |
+| Floresta Amaldiçoada | Sim | Oito famílias, trilhas, ruínas, água/ponte, entradas/saídas | Combate/loot, portais, colisão e IA | ATIVO |
+| Cemitério/Caverna/Ruínas/Castelo anteriores | Sim | Sistemas anteriores preservados | Regressão automatizada; sem polimento novo nesta revisão | SEM EXPANSÃO |
+| Novas regiões/pântano/dungeons | Não nesta etapa | Não | Não | NÃO CRIADO |
 
-## Mapas, HUD, ícones, efeitos e áudio
+A perspectiva e as dimensões 40×30 foram preservadas para não quebrar o mundo existente. Os JSONs continuam usando suas camadas semânticas compatíveis (terrain, collision, spawn, npcs, teleports, monsters, decor). Nem todas as doze camadas de autoria desejadas estão materializadas como layers Tiled separados: roof/foreground, por exemplo, ainda são tratados por Y-sort/oclusão no renderer. Não alegar migração completa do formato de mapas.
 
-| ASSET | CRIADO | INTEGRADO | USADO ONDE | STATUS |
+## HUD, ícones, efeitos e som
+
+| ASSET | CRIADO | INTEGRADO | TESTADO | STATUS |
 | --- | --- | --- | --- | --- |
-| Mapa: cripta | Sim | Sim, Tiled/servidor/renderer | cripta | PARADO — preservado sem expansão |
-| Mapa: ruinas | Sim | Sim, Tiled/servidor/renderer | ruinas | PARADO — preservado sem expansão |
-| Mapa: castelo | Sim | Sim, Tiled/servidor/renderer | castelo | PARADO — preservado sem expansão |
-| Mapa: cinzaveu | Sim | Sim, Tiled/servidor/renderer | cinzaveu | FOCO — colisão/portais/NPCs/spawns |
-| Mapa: floresta | Sim | Sim, Tiled/servidor/renderer | floresta | FOCO — colisão/portais/NPCs/spawns |
-| Mapa: caverna | Sim | Sim, Tiled/servidor/renderer | caverna | PARADO — preservado sem expansão |
-| HUD HP/Mana/Stamina/XP/Nível/Portrait/Target/Hotbar/Chat | Sim | Sim | index.html + client.js | Dados reais de snapshots e ações |
-| Minimapa | Sim | Sim | game-ui.js / HUD | Posição, NPCs, portais e landmarks reais |
-| Mapa ampliado | Sim | Sim | Painel M, regionMap | Adicionado à janela existente, sem novo HUD |
-| Quest Tracker | Sim | Sim | HUD / quests.js | Missão ativa e progresso do servidor |
-| Inventário | Sim | Sim | inventory-ui.js | Drag/drop, equip/unequip, stacks, tooltip e comparação |
-| Login/seleção | Sim | Sim | auth-ui.js + login-castle.png | UI integrada; nenhuma nova arte |
-| Ícones de itens | Sim | Sim | assets/ui/item-icons.svg | Inventário e equipamento |
-| Ícones de skills | Sim | Sim | assets/skills/icons.svg | Hotbar / grimório |
-| Efeitos de skills: caçador/vampiro/lobisomem | Sim | Sim | assets/skills/*-effects.png + skill-effects.js | Caçador no foco; demais preservados |
-| Dano / crítico / level-up / morte | Sim | Sim | skill-effects.js | Eventos reais do servidor; desenho Canvas |
-| Sons de ataque/hit/morte/loot/level/UI | Sim | Sim | audio.js + assets/audio/manifest.json | Síntese Web Audio; não há gravações finais |
-| Ambiente Vila / Floresta | Sim | Sim | audio.js | Ambiente tonal sintetizado por região, opt-in SOM ON; sem novos arquivos de áudio |
-| Trilha musical gravada final | Não | Não | nenhum arquivo identificado | NÃO CRIADA / NÃO INTEGRADA |
+| HUD HP/Mana/Stamina/XP/Level/Portrait/Target/Buffs/Hotbar/Chat | Sim | Snapshots e comandos reais | Jornada e screenshots reais | ATIVO, HUD existente refinado |
+| Inventário 40 posições | Sim | Drag/drop, stack/split, sort, comparação, equip/unequip | Regressão e Chromium | ATIVO |
+| Personagem no centro dos slots | Sim | Janela existente; carregamento assíncrono de aparência completo | Desktop e viewport móvel | ATIVO |
+| Ícones de itens/consumíveis | SVGs existentes reutilizados | Inventário, lojas, atalhos e loot no chão | Carga/render reais | ATIVO, sem emoji como ícone de item |
+| Ícones de skills | Sim | Hotbar/skills existentes | Combate no jogo | ATIVO |
+| Minimap e mapa ampliado | Sim | Player/party/NPC/quest/boss/portais reais | Jornada e screenshots | ATIVO |
+| Janelas arrastáveis | Sim | Posição por painel salva no localStorage | Arrastar, fechar e reabrir banco | ATIVO |
+| Transformação visual | Sim | Humano → forma, mistura de quadros, crescimento, partículas e áudio por raça | Ambas as transformações no Chromium | ATIVO |
+| Lua no fundo do mundo | Canvas 2D | Órbita e fase vindas do servidor; objetos desenhados na frente | Relógio/eventos em testes; mundo no Chromium | ATIVO |
+| Lunar Power | Sim | Descida a partir de metade da fase, +5% real de dano | Testes determinísticos de relógio/dano | ATIVO |
+| Lua de Sangue / Eclipse | Sim | Iluminação/cor/fase distinta; eventos por ciclo do servidor | Relógio unitário e renderer | PARCIAL — sem novo boss/loot exclusivo desses eventos |
+| Som de UI/combate/transformação | Síntese Web Audio | Eventos reais; timbres de transformação distintos | Ativação opt-in no Chromium | ATIVO |
+| Ambiente e motivo musical Vila/Floresta | Síntese Web Audio original | Troca por região, liga/desliga e logout | Ativação e transição verificadas | ATIVO — não é trilha gravada final |
 
-## Históricos e material sem uso
+## Mecânicas conectadas aos cenários
 
-- Metadados e licenças Flare estão preservados; os PNGs históricos Flare/transformações não constam do pacote recuperado. **NÃO INTEGRADOS nesta build ativa**; o renderer atual usa assets/eclipse.
-- `assets/terrain` e `assets/monsters` preservam atribuição/metadados históricos; não contar como novos cenários ou criaturas em uso.
-- Existir em `/art` ou `/sprites` não valida uso no mundo. Esses laboratórios não substituem as capturas de gameplay.
+| ASSET | CRIADO | INTEGRADO | TESTADO | STATUS |
+| --- | --- | --- | --- | --- |
+| Banco/armazém pessoal | Sim | Mirela, 40 posições, ouro e itens privados do personagem | Antidupe/capacidade + UI + reinício SQLite | ATIVO |
+| Taverna | Sim | Elara vende comida/poções pelo pipeline de loja | Compra real com débito de ouro | ATIVO |
+| Salão dos Clãs | Sim | Hector abre o sistema existente de clãs | UI e regressão de clãs | ATIVO |
+| Mural de contratos | Sim | Abre missões reais; Valen/Oren continuam entregando/recompensando | UI e quest completa com XP/nível | ATIVO |
 
-## Validação desta etapa
+## Evidência e limites
 
-- `npm ci`: instalação concluída com lockfile existente.
-- Baseline recuperada: 110 testes passaram. Após as mudanças: **114 testes passaram**; sintaxe/TypeScript e build passaram.
-- Auditoria dos atlas existentes: 9.024 quadros de corpos, 10.560 de equipamento; sem problemas de bounds ou repetição de poses por linha detectados.
-- Nova cobertura: encontros restritos, rotas Vila/Floresta, tentativa de atravessar todas as bordas sólidas/quinas dos dois mapas, IA dos três monstros e sólidos de cerca/pedra.
-- Defeitos encontrados no navegador: cercas da Vila atravessáveis e copas ocultando o Caçador. Corrigida a camada collision das cercas; cenografia próxima fica translúcida quando cobre o jogador.
-- QA reproduzível: `python3 tools/qa/vertical-slice.py` com Playwright e Chromium. O script inicia servidor/banco temporários e usa fixture DEV para posição/reset/spawn; combate, recompensas, compras, loot e equipamento usam ações normais.
-- QA Chromium aprovado: 20 verificações, zero erros JavaScript e zero requests de assets ausentes. Resultados de navegador e capturas atuais: `docs/previews/vertical-slice/validation.json` e PNGs no mesmo diretório. Só considerar essas verificações aprovadas quando o JSON da execução atual existir.
-- Testes por teclado são automatizados no Chromium; não alegam uma sessão manual realizada por uma pessoa.
+- **126 testes passaram**, além de sintaxe/TypeScript e build Vite.
+- Auditoria: **10,688 quadros de corpos** e **12,224 de equipamento**, 0 recortes, 0 linhas de poses repetidas, 0 problemas de recorte de equipamento.
+- Bundle de produção também validado com cadastro comum, seleção, Socket.IO e personagem desenhado no inventário, sem administrador DEV.
+- Chromium: jornada completa, cinco formas, observador multiplayer, oito encontros, serviços, reinício SQLite e layout móvel. Ver previews/visual-direction/README.md e arquivos *validation.json.
+- Esses são testes automatizados e inspeção de screenshots, não uma certificação artística humana, teste em Windows ou teste de carga/produção.
+- Não foi implementado um novo login pintado, novo boss exclusivo de evento, mapas adicionais ou um editor separado de cabelos/rostos. Não contar esses pedidos como concluídos.
+- PNGs/metadados históricos fora do renderer ativo são preservados como histórico; não contam como funcionalidades novas.
 
-## Limites
+## Recuperação do envio original
 
-Não há aprovação artística final, trilha gravada final ou certificação de produção/carga. A etapa congela expansão e comprova integração do material existente; quantidade de atlas não é medida de progresso. Nunca confundir teste DEV com credenciais/pagamentos reais.
+O upload inicial de newblood tinha apenas a raiz. Foram recuperados 576 arquivos do commit 60f5a6e4f27e414bc9baf4b29f26b852037b82c8, com todos os SHA-256 coincidindo antes das alterações. O inventário original foi preservado em import/ARQUIVOS-ORIGINAIS-SHA256.json. O inventário ARQUIVOS-SHA256.json da raiz é regenerado para o pacote atual.

@@ -1,0 +1,11 @@
+{
+  "species": "minotaur",
+  "checks": [
+    "actual spawn and rendering",
+    "monster deals server-validated damage",
+    "player combat defeats monster",
+    "physical loot is picked up once"
+  ],
+  "errors": [],
+  "missingAssets": []
+}

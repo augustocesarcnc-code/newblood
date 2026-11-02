@@ -10,7 +10,7 @@ const publicModules=new Set([
  'client','world','items','sprites','progression','village','auth-ui','appearance',
  'sprite-lab','directions','bestiary','monster-sprites','terrain','scenery','bot-ui',
  'skillbook','skills-ui','skill-effects','map-renderer','game-ui','clan-ui','inventory',
- 'inventory-ui','loot-ui','attributes','social-ui','map-data','environment-ui','audio','window-ui','eclipse-sprites','art-review','picking'
+ 'inventory-ui','bank-ui','loot-ui','attributes','social-ui','map-data','environment-ui','audio','window-ui','eclipse-sprites','art-review','picking'
 ]);
 const mime={svg:'image/svg+xml',png:'image/png',jpg:'image/jpeg',json:'application/json',
  txt:'text/plain; charset=utf-8',md:'text/plain; charset=utf-8',js:'text/javascript',

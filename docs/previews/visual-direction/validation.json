@@ -1,0 +1,15 @@
+{
+  "checks": [
+    "cape purchase/equip/unequip synchronizes to an ordinary second player without inventory IDs",
+    "server-side inventory sorting preserves occupied slots",
+    "hunter front and actual back use authoritative facing",
+    "hunter run uses the actual running state",
+    "actual melee server combat broadcasts attack2 after attack1",
+    "vampiro: actual human form, transition and transformed form at level 10",
+    "lobisomem: actual human form, transition and transformed form at level 10",
+    "no JavaScript errors, missing asset requests or sprite load failures"
+  ],
+  "errors": [],
+  "missingAssets": [],
+  "fixture": "isolated DEV account, actual gameplay actions; second ordinary observer"
+}

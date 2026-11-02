@@ -2,6 +2,7 @@ export const rarities={comum:{name:'Comum',color:'#aaa6a1',mult:1},incomum:{name
 export const definitions={garra:{name:'Garras do exílio',slot:'weapon',kind:'lobisomem',icon:'爪',attack:6,range:1},cetro:{name:'Cetro carmesim',slot:'weapon',kind:'vampiro',icon:'♜',attack:6,range:3},besta:{name:'Besta de prata',slot:'weapon',kind:'cacador',icon:'⌖',attack:6,range:5},manto:{name:'Manto da noite',slot:'chest',icon:'♟',armor:3},amuleto:{name:'Amuleto lunar',slot:'charm',icon:'☽',attack:2,armor:1}};
 Object.assign(definitions,{arco:{name:'Arco de guerra',slot:'weapon',kind:'cacador',icon:'⌖',attack:7,range:6},espada:{name:'Espada de ferro',slot:'weapon',icon:'⚔',attack:8,range:1},couro:{name:'Armadura de couro',slot:'chest',icon:'⛨',armor:5},cota:{name:'Cota de malha',slot:'chest',icon:'⛨',armor:8},placas:{name:'Armadura de placas',slot:'chest',icon:'⛨',armor:12}});
 Object.assign(definitions,{
+ capa:{name:'Capa da Vigília',slot:'cape',type:'equipment',icon:'♟',armor:1,value:55},
  capuz:{name:'Capuz da vigília',slot:'head',type:'equipment',icon:'⛨',armor:2,requiredLevel:1},
  calcas:{name:'Grevas da vigília',slot:'legs',type:'equipment',icon:'⛨',armor:3},
  botas:{name:'Botas do errante',slot:'boots',type:'equipment',icon:'⛨',armor:2,dexterity:2},

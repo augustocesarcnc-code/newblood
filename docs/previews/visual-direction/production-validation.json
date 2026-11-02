@@ -1,0 +1,11 @@
+{
+  "checks": [
+    "hashed production bundle served",
+    "ordinary account registration and character selection",
+    "Socket.IO connection without DEV admin",
+    "new hunter begins without free equipment",
+    "40-slot inventory and asynchronously painted paper doll"
+  ],
+  "errors": [],
+  "missingAssets": []
+}
