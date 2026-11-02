@@ -32,14 +32,16 @@ after modifying PNGs; tests verify its checksums and zero clipping. Overlays can
 have a wider cell than bodies while sharing projected scale and foot alignment.
 Preserve Node 24 LTS restriction: Windows/Node 26 native SQLite failures were observed.
 
-## Current visual direction
+## Definitive visual direction — approval gate
 
-Read docs/DIRECAO-VISUAL-2D-25D.md and docs/ART_BIBLE.md. The latest user direction
-supersedes the older art freeze only for targeted, integrated improvements. Keep
-runtime 2D Canvas sprites, fixed three-quarter perspective, authoritative gameplay,
-and existing systems. Start with the five player forms, Hunter first. Never bulk
-create unused assets. Reuse the source rigs for reproducible frame exports, audit
-all changed PNGs, integrate and run the actual game before expanding content.
-Vila de Eclipse and Floresta Amaldiçoada remain the reference regions. Do not
-expand maps or publish artwork merely because files exist. Maintain
-ASSET_STATUS.md with created/integrated/tested status and real screenshots.
+Read docs/DIRECAO-DEFINITIVA.md. It supersedes conflicting visual instructions.
+The previous human miniatures/rig are REJECTED. Do not refine them or use that body
+as the base for new art. Preserve gameplay systems, maps and HUD.
+
+Phase A Hunter Master was explicitly approved by the user. Current task is Phase B:
+Idle, Walk, Run with real frames and eight-direction GIF audits. Stop for approval
+after these GIFs. No attack, other classes, NPCs, maps or HUD work yet.
+The approved reference is assets/characters/hunter/sprite-master.png. Never use
+archived rigs as its base. Keep the approved design and gameplay unchanged.
+Commit the accepted Phase A before animation work. Phase B remains review material
+until explicit approval; do not promote it as final art.

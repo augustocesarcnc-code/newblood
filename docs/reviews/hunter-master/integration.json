@@ -1,0 +1,24 @@
+{
+  "phase": "A",
+  "approval": "PENDING_USER",
+  "newDirections": 8,
+  "newAnimationFrames": 0,
+  "playerState": "one static master pose per direction",
+  "worldCharacterHeightPx": 77.58947368421053,
+  "worldTileSizePx": 52,
+  "characterHeightInTiles": 1.4921052631578948,
+  "sourceImageSHA256": "3d7119a54901a13bf3c278910786ae37e21bf7cb09d563573ef0e5cbaf640a18",
+  "checks": [
+    "neutral side-by-side audit: only eight Hunter views, no map/HUD/effects",
+    "ordinary account enters the real village with the new master renderer",
+    "same generated PNG is used by the audit and game renderer",
+    "legacy hunter is bypassed for the player and preserved only for existing NPCs",
+    "no new animations are advertised by the art laboratories"
+  ],
+  "errors": [],
+  "missingAssets": [],
+  "limitations": [
+    "Static master only; equipment overlays and animations are intentionally deferred until approval.",
+    "Existing NPCs, maps and HUD are unchanged and are context only, not newly approved art."
+  ]
+}

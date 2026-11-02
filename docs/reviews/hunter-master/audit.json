@@ -1,0 +1,140 @@
+{
+  "phase": "A",
+  "status": "AWAITING_USER_APPROVAL",
+  "imageSize": [
+    2172,
+    724
+  ],
+  "sourceSHA256": "3d7119a54901a13bf3c278910786ae37e21bf7cb09d563573ef0e5cbaf640a18",
+  "directions": [
+    {
+      "direction": "N",
+      "rect": [
+        23,
+        12,
+        247,
+        679
+      ],
+      "pivot": [
+        121.0,
+        674
+      ],
+      "bodyHeight": 669,
+      "sha256": "5b54c8bbcf61b27bff97ed50a650531f3b89eb2de7c3d119293bf823a92c4716"
+    },
+    {
+      "direction": "NE",
+      "rect": [
+        320,
+        10,
+        223,
+        685
+      ],
+      "pivot": [
+        118.5,
+        680
+      ],
+      "bodyHeight": 675,
+      "sha256": "f5a5b4737d47081d2cfacb9104f8703f8dee356df472f2d26acd1a17744c1a4c"
+    },
+    {
+      "direction": "E",
+      "rect": [
+        581,
+        12,
+        181,
+        683
+      ],
+      "pivot": [
+        93.0,
+        678
+      ],
+      "bodyHeight": 673,
+      "sha256": "13d9104f2daadd14acb6b12a7f04f0eaaa96ea32fbf52dc2905e17ff865f47b1"
+    },
+    {
+      "direction": "SE",
+      "rect": [
+        815,
+        11,
+        230,
+        684
+      ],
+      "pivot": [
+        125.5,
+        679
+      ],
+      "bodyHeight": 674,
+      "sha256": "5ac19c9a66f4f168d88809510b11a21c05ba45c3c79ccd74c5e52bda595935e2"
+    },
+    {
+      "direction": "S",
+      "rect": [
+        1093,
+        12,
+        270,
+        683
+      ],
+      "pivot": [
+        134.5,
+        678
+      ],
+      "bodyHeight": 673,
+      "sha256": "014b1620aa91b6f2c5b32c7aee7cf4f0ea0b5609ae340dffb6917abeb4efb3e4"
+    },
+    {
+      "direction": "SW",
+      "rect": [
+        1410,
+        11,
+        236,
+        684
+      ],
+      "pivot": [
+        113.5,
+        679
+      ],
+      "bodyHeight": 674,
+      "sha256": "46e749e2fcb91afa1f4325076391422af2d3a46255db047a717a157b947e5347"
+    },
+    {
+      "direction": "W",
+      "rect": [
+        1694,
+        11,
+        185,
+        684
+      ],
+      "pivot": [
+        86.0,
+        679
+      ],
+      "bodyHeight": 674,
+      "sha256": "dc6b85cb897c580ba8be7403936f0000f480696d665782a178b190564b16f851"
+    },
+    {
+      "direction": "NW",
+      "rect": [
+        1919,
+        11,
+        225,
+        684
+      ],
+      "pivot": [
+        105.5,
+        679
+      ],
+      "bodyHeight": 674,
+      "sha256": "8bdd6a214a818e4e3250af83be6f18d86d99353179a7b71938d3dd223e342925"
+    }
+  ],
+  "uniqueViews": 8,
+  "posesPerDirection": 1,
+  "animationsProduced": 0,
+  "issues": [],
+  "notes": [
+    "Body bounds measured from the dominant connected alpha component (alpha >= 32). Very faint isolated generated alpha noise is not treated as anatomy.",
+    "No source pixels were modified.",
+    "Distinct hashes do not prove anatomy or perspective. Human visual approval is still required."
+  ]
+}

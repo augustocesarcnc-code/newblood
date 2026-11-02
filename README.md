@@ -1,5 +1,12 @@
 # ECLIPSE — Blood & Moon
 
+> **Revisão atual: Fase A, DEV, aguardando aprovação.** O padrão humano anterior foi
+> reprovado. Só o novo Caçador Sprite Master está em avaliação, sem novas animações.
+> Veja [as oito direções e a escala na Vila](docs/reviews/hunter-master/README.md).
+> Não avançar para outras classes, NPCs, mapas ou UI antes da aprovação explícita.
+> Os relatórios e o ZIP da versão anterior não representam aprovação deste candidato.
+
+
 MMORPG 2D dark fantasy para navegador. Três classes humanas equipáveis, transformações,
 combate em tempo real e multiplayer autoritativo. Esta versão evolui o projeto
 Bloodmoon com a [especificação atual](docs/ESPECIFICACAO-ECLIPSE.md): **nível máximo 400,

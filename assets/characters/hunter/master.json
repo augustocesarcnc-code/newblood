@@ -1,0 +1,193 @@
+{
+  "version": 1,
+  "asset": "sprite-master.png",
+  "sha256": "3d7119a54901a13bf3c278910786ae37e21bf7cb09d563573ef0e5cbaf640a18",
+  "status": "APPROVED_MASTER",
+  "source": "Original image_gen design; no previous game body or rig used. PNG preserved byte-for-byte.",
+  "phase": "A",
+  "imageSize": [
+    2172,
+    724
+  ],
+  "directionOrder": [
+    "N",
+    "NE",
+    "E",
+    "SE",
+    "S",
+    "SW",
+    "W",
+    "NW"
+  ],
+  "framesPerDirection": 1,
+  "animated": false,
+  "equipmentLayersApproved": false,
+  "targetAdultProportion": "6\u20137 anatomical heads, excluding hat; subject to visual approval",
+  "worldHeightAtScaleOne": 54,
+  "views": {
+    "N": {
+      "rect": [
+        23,
+        12,
+        247,
+        679
+      ],
+      "pivot": [
+        121.0,
+        674
+      ],
+      "bodyBounds": [
+        28,
+        17,
+        265,
+        686
+      ],
+      "opaqueBodyPixels": 110579
+    },
+    "NE": {
+      "rect": [
+        320,
+        10,
+        223,
+        685
+      ],
+      "pivot": [
+        118.5,
+        680
+      ],
+      "bodyBounds": [
+        325,
+        15,
+        538,
+        690
+      ],
+      "opaqueBodyPixels": 99562
+    },
+    "E": {
+      "rect": [
+        581,
+        12,
+        181,
+        683
+      ],
+      "pivot": [
+        93.0,
+        678
+      ],
+      "bodyBounds": [
+        586,
+        17,
+        757,
+        690
+      ],
+      "opaqueBodyPixels": 74319
+    },
+    "SE": {
+      "rect": [
+        815,
+        11,
+        230,
+        684
+      ],
+      "pivot": [
+        125.5,
+        679
+      ],
+      "bodyBounds": [
+        820,
+        16,
+        1040,
+        690
+      ],
+      "opaqueBodyPixels": 104928
+    },
+    "S": {
+      "rect": [
+        1093,
+        12,
+        270,
+        683
+      ],
+      "pivot": [
+        134.5,
+        678
+      ],
+      "bodyBounds": [
+        1098,
+        17,
+        1358,
+        690
+      ],
+      "opaqueBodyPixels": 118971
+    },
+    "SW": {
+      "rect": [
+        1410,
+        11,
+        236,
+        684
+      ],
+      "pivot": [
+        113.5,
+        679
+      ],
+      "bodyBounds": [
+        1415,
+        16,
+        1641,
+        690
+      ],
+      "opaqueBodyPixels": 107644
+    },
+    "W": {
+      "rect": [
+        1694,
+        11,
+        185,
+        684
+      ],
+      "pivot": [
+        86.0,
+        679
+      ],
+      "bodyBounds": [
+        1699,
+        16,
+        1874,
+        690
+      ],
+      "opaqueBodyPixels": 75784
+    },
+    "NW": {
+      "rect": [
+        1919,
+        11,
+        225,
+        684
+      ],
+      "pivot": [
+        105.5,
+        679
+      ],
+      "bodyBounds": [
+        1924,
+        16,
+        2139,
+        690
+      ],
+      "opaqueBodyPixels": 102107
+    }
+  },
+  "logicalCell": [
+    96,
+    128
+  ],
+  "logicalPivot": [
+    48,
+    112
+  ],
+  "logicalBodyHeight": 88,
+  "approved": true,
+  "animations": [],
+  "equipmentLayers": []
+}
