@@ -1,0 +1,6 @@
+// MVP: one anatomy, pivot, scale and frame clock. Skins only change presentation.
+export const humanRig=Object.freeze({id:'hunter-approved-shared-v1',cell:[128,192],anchor:[64,174],bodyHeight:132,worldHeight:54,frames:8,walkMs:125});
+export const humanLayers=Object.freeze(['BODY','HAIR','HEAD','CHEST','COAT','LEGS','BOOTS','GLOVES','WEAPON_MAIN','WEAPON_SECONDARY','ACCESSORY']);
+export const humanSkins=Object.freeze({cacador:{rig:humanRig.id,filter:'none',cape:null},vampiro:{rig:humanRig.id,filter:'hue-rotate(318deg) saturate(.75) brightness(.88)',cape:'#351321'},lobisomem:{rig:humanRig.id,filter:'saturate(.35) brightness(.94)',cape:null}});
+export const humanModels=Object.freeze({hunter:'cacador','vampire-human':'vampiro','wolf-human':'lobisomem'});
+export function humanPose(state='idle',time=0,forced){const requested=state,stateName=({master:'idle',run:'walk',swing:'attack',attack2:'attack',shoot:'attack',cast:'attack',special:'attack',transform:'attack',block:'hit',die:'death',jump:'attack'})[state]||state;state=['idle','walk','attack','hit','death'].includes(stateName)?stateName:'idle';const ms=state==='walk'?(requested==='run'?100:125):state==='hit'?50:100,frame=Number.isInteger(forced)?((forced%8)+8)%8:state==='idle'?0:Math.floor(time/ms)%8;return {state,frame,requested,temporary:!['idle','walk'].includes(state)||requested==='run'};}
