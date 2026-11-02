@@ -1,0 +1,49 @@
+{
+  "checks": [
+    "8 directions: actual keyboard movement and authoritative facing",
+    "run consumes stamina",
+    "collision keyboard: house",
+    "collision keyboard: tree",
+    "collision keyboard: wall",
+    "collision keyboard: water",
+    "collision keyboard: rock",
+    "collision keyboard: fence",
+    "NPC dialogue, accept/complete/claim quest; real XP levels hunter from 1 to 2",
+    "merchant UI purchase debits 80 gold and adds armor",
+    "40-slot inventory, real drag-to-equip, comparison, unequip/re-equip and public appearance",
+    "stack splitting/merging conserves quantity",
+    "walk through portal Village -> Forest",
+    "walk through portal Forest -> Village",
+    "wolf: real attack/death/XP/drop/pickup",
+    "bat: real attack/death/XP/drop/pickup",
+    "skeleton: real attack/death/XP/drop/pickup",
+    "real skill consumes mana against a living high-HP fixture, avoiding an auto-attack kill race",
+    "audio opt-in and region ambience activated",
+    "three ordinary level-one class accounts share identical anatomy/pivot and 5 states x 8 directions; skins rendered in live game",
+    "ordinary werewolf: level requirement fixture then real transform; separate full monster sprite with human gear hidden",
+    "existing Village/Forest/Cemetery/Dungeon portal chain works",
+    "four pinned licensed Flare creatures loaded/drawn in idle/walk/attack/death; original MVP monsters reused",
+    "reload/relogin preserves level, gold and equipment",
+    "no JavaScript errors or missing asset requests"
+  ],
+  "errors": [],
+  "missingAssets": [],
+  "fixture": "isolated DEV hunter for reproducible encounters and progression; three ordinary level-one class accounts; transformation level set by admin fixture; all purchases/rewards/loot/quests/transformation use normal server actions",
+  "sharedHumanClasses": [
+    {
+      "class": "cacador",
+      "rig": "hunter-approved-shared-v1",
+      "statesAndDirections": 40
+    },
+    {
+      "class": "vampiro",
+      "rig": "hunter-approved-shared-v1",
+      "statesAndDirections": 40
+    },
+    {
+      "class": "lobisomem",
+      "rig": "hunter-approved-shared-v1",
+      "statesAndDirections": 40
+    }
+  ]
+}

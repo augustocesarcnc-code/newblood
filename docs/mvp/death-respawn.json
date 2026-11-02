@@ -1,0 +1,18 @@
+{
+  "vampireBuff": {
+    "model": "human-shared",
+    "rig": "hunter-approved-shared-v1",
+    "weaponVisible": true
+  },
+  "result": "PASS",
+  "accountRole": "ordinary player",
+  "class": "vampiro",
+  "level": 1,
+  "damageObserved": true,
+  "serverDeathRecorded": true,
+  "respawnMap": "cinzaveu",
+  "respawnHP": 110,
+  "maxHP": 110,
+  "errors": [],
+  "fixture": "Ordinary player walks through the Village/Forest portal; admin positions itself and spawns an existing boss; damage, death, penalty and respawn are normal authoritative combat. A later vampire-buff check uses DEV level-10 and sword fixtures, then ordinary equip/transform actions."
+}

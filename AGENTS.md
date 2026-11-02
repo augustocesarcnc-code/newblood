@@ -23,7 +23,9 @@ from Flare retains its license and credits. Do not replace actual gameplay with
 mockups. The source specification includes features still tracked as pending;
 report them accurately and do not claim production readiness without load tests.
 
-Current artwork is original ECLIPSE production atlases under assets/eclipse.
+Legacy creature/scenery artwork is under assets/eclipse. Active shared human art is
+assets/characters/human/manifest.json, rendered by mmo/human-sprites.js. Never
+regenerate the approved humans with the rejected rigs.
 Read docs/ARTE-INTEGRADA.md and docs/PEDIDO-ARTE-INTEGRADA.md. mmo/sprites.js
 re-exports eclipse-sprites.js; Flare PNGs are historical, not the active rig.
 Authoring sources are tools/art/rigs.js and props.js. Do not hand-edit manifest
@@ -32,20 +34,20 @@ after modifying PNGs; tests verify its checksums and zero clipping. Overlays can
 have a wider cell than bodies while sharing projected scale and foot alignment.
 Preserve Node 24 LTS restriction: Windows/Node 26 native SQLite failures were observed.
 
-## Definitive visual direction — approval gate
+## Current MVP direction
 
-Read docs/DIRECAO-DEFINITIVA.md. It supersedes conflicting visual instructions.
+Historical visual direction is in docs/DIRECAO-DEFINITIVA.md; apply it only where
+consistent with the latest MVP brief below.
 The previous human miniatures/rig are REJECTED. Do not refine them or use that body
 as the base for new art. Preserve gameplay systems, maps and HUD.
 
-The current Hunter DESIGN is explicitly approved and FROZEN by the user.
-Current scope is WALK ONLY: correct 8 frames in all 8 directions, fixed perspective,
-normal low foot lift, stable body axis, same coat and anatomically attached gear.
-Do not redesign, change outfit/hat/palette or create another character. Preserve
-N/S readability; E/W remain profile and all four diagonals keep fixed 3/4.
-No RUN, ATTACK, additional IDLE, other classes, NPCs, map or HUD changes.
-Deliver 8 individual GIFs, simultaneous 8-direction GIF, complete WALK spritesheet,
-and preview screenshots in existing village at real gameplay scale: HUD off/on,
-door, NPC, tree. No permanent gameplay integration; STOP for WALK approval.
-Frozen references/checksums: docs/reviews/hunter-walk-final/design-lock.json.
-Never reuse rejected rigs. Preserve the approved source artwork and gameplay.
+Read docs/MVP-PRODUCAO-RAPIDA.md: latest explicit user request, overrides the older
+WALK-only approval gate and separate-human-body directions. Current scope is a
+playable MVP: approved Hunter shared human base for all three classes, class skins,
+synchronized equipment, separate full transformed werewolf, 6–10 licensed/reused
+monsters, existing village/forest/cemetery/dungeon, and real gameplay-loop tests.
+Do not redesign the Hunter, anatomy, hat or palette. Do not rewrite stable gameplay.
+TEMP procedural animation/gear and licensed placeholders are allowed, identify them
+honestly. Prioritize integration over further art generation. User explicitly now
+authorizes gameplay integration; do not ask for the superseded WALK approval.
+Keep frozen design checksums and old assets for rollback. Commit small MVP stages.

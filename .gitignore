@@ -12,7 +12,6 @@ __pycache__/
 
 # Generated previews remain local; publish only the playable delivery bundle.
 dist/*
-!dist/Eclipse-Blood-Moon.zip
 
 *.sqlite
 *.sqlite-*
